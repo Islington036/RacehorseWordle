@@ -8,7 +8,7 @@
 }
 
 .wordle-board.tall {
-  min-height: 46px;
+  min-height: 226px;
   max-height: 226px;
   overflow: auto;
   scrollbar-gutter: stable;
@@ -209,6 +209,7 @@
   }
 
   .wordle-board.tall {
+    min-height: 204px;
     max-height: 204px;
   }
 }

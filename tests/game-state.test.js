@@ -57,8 +57,15 @@ assert.strictEqual(game.recordResult(stats, round, question).stats.rounds.length
 let fixedPedigree = game.makeRound(question);
 fixedPedigree = game.submitGuess(fixedPedigree, question, "テストサイアー").round;
 fixedPedigree = game.submitGuess(fixedPedigree, question, "アイウエオ").round;
-assert.strictEqual(fixedPedigree.targets.sire.guesses.length, 1);
+assert.strictEqual(fixedPedigree.targets.sire.guesses.length, 2);
+assert.strictEqual(fixedPedigree.targets.sire.guesses[0].correct, true);
+assert.strictEqual(fixedPedigree.targets.sire.guesses[1].value, "アイウエオ");
 assert.strictEqual(fixedPedigree.targets.horse.guesses.length, 2);
+
+const restoredTarget = game.makeRound(question, { historyTarget: "dam" });
+assert.strictEqual(restoredTarget.historyTarget, "dam");
+const invalidRestoredTarget = game.makeRound(question, { historyTarget: "owner" });
+assert.strictEqual(invalidRestoredTarget.historyTarget, "horse");
 
 let failed = game.makeRound(question);
 for (let i = 0; i < 14; i += 1) {

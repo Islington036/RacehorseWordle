@@ -17,6 +17,7 @@
       horseBoard: document.querySelector("#horse-board"),
       sireBoard: document.querySelector("#sire-board"),
       damBoard: document.querySelector("#dam-board"),
+      historyTabs: document.querySelector("#history-tabs"),
       currentTarget: document.querySelector("#current-target"),
       currentInput: document.querySelector("#current-input"),
       nativeInput: document.querySelector("#native-input"),
@@ -178,17 +179,21 @@
     const { question, round, stats } = state;
     const answers = RHW.getAnswers(question);
     const inputLength = RHW.displayLength(round.currentInput);
+    const historyTarget = getHistoryTarget(round);
+    const historyAnswer = answers[historyTarget];
+    const historyGuesses = round.targets[historyTarget].guesses;
     const sireGuesses = getPedigreeDisplayGuesses(round.targets.sire.guesses, round.targets.sire.solved);
     const damGuesses = getPedigreeDisplayGuesses(round.targets.dam.guesses, round.targets.dam.solved);
 
+    renderHistoryTabs(historyTarget);
     els.currentTarget.textContent = "入力";
     els.currentInput.textContent = round.currentInput || "入力待ち";
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
     els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
 
     renderBoard(els.horseBoard, {
-      answer: answers.horse,
-      guesses: round.targets.horse.guesses,
+      answer: historyAnswer,
+      guesses: historyGuesses,
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: round.currentInput,
       showInput: round.status === "playing",
@@ -258,6 +263,21 @@
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;");
+  }
+
+  function renderHistoryTabs(activeTarget) {
+    if (!els.historyTabs) return;
+    els.historyTabs.querySelectorAll("[data-history-target]").forEach((button) => {
+      const selected = button.dataset.historyTarget === activeTarget;
+      button.setAttribute("aria-selected", String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    });
+    const label = activeTarget === "sire" ? "父名" : activeTarget === "dam" ? "母名" : "馬名";
+    els.horseBoard.setAttribute("aria-label", `${label}ボード`);
+  }
+
+  function getHistoryTarget(round) {
+    return ["horse", "sire", "dam"].includes(round.historyTarget) ? round.historyTarget : "horse";
   }
 
   function getPedigreeDisplayGuesses(guesses, solved) {

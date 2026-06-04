@@ -65,7 +65,13 @@
       focusNativeInput();
     });
 
-    document.querySelector("#next-question").addEventListener("click", nextQuestion);
+    document.querySelector("#history-tabs").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-history-target]");
+      if (!button) return;
+      setHistoryTarget(button.dataset.historyTarget);
+    });
+
+    document.querySelector("#next-question").addEventListener("click", () => nextQuestion());
     document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state, "stats"));
     document.querySelector("#reset-button").addEventListener("click", () => nextQuestion("別の問題を出題しました。"));
     document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
@@ -168,11 +174,19 @@
   function nextQuestion(message) {
     const modal = document.querySelector("#result-modal");
     if (modal.open) modal.close();
+    RHW.ui.setToast("");
     const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id);
     state.question = next;
     state.round = RHW.makeRound(next);
     renderAndSave();
-    if (message) RHW.ui.setToast(message, "neutral");
+    if (typeof message === "string" && message) RHW.ui.setToast(message, "neutral");
+    focusNativeInput();
+  }
+
+  function setHistoryTarget(target) {
+    if (!["horse", "sire", "dam"].includes(target) || state.round.historyTarget === target) return;
+    state.round.historyTarget = target;
+    renderAndSave();
     focusNativeInput();
   }
 

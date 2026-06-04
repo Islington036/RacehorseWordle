@@ -78,6 +78,39 @@
   font-size: 0.86rem;
 }
 
+.history-heading {
+  justify-content: flex-start;
+}
+
+.history-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.history-tabs button {
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.history-tabs button[aria-selected="true"] {
+  border-color: var(--accent);
+  background: #253125;
+  color: var(--text);
+}
+
+.history-tabs button:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
 .input-strip {
   width: min(100%, 760px);
   min-height: 48px;

@@ -25,6 +25,7 @@
       currentInput: "",
       attemptsUsed: 0,
       status: "playing",
+      historyTarget: "horse",
       resultRecorded: false,
       startedAt: new Date().toISOString(),
       targets: {
@@ -40,6 +41,9 @@
       dam: Object.assign(base.targets.dam, restoredTargets.dam || {}),
       horse: Object.assign(base.targets.horse, restoredTargets.horse || {})
     };
+    if (!TARGETS.includes(round.historyTarget)) {
+      round.historyTarget = "horse";
+    }
     round.attemptsUsed = typeof round.attemptsUsed === "number"
       ? round.attemptsUsed
       : Math.max(
@@ -107,11 +111,6 @@
 
     TARGETS.forEach((target) => {
       const wasSolved = Boolean(round.targets[target].solved);
-      if (target !== "horse" && wasSolved) {
-        targetResults[target] = { correct: true, newlySolved: false, skipped: true };
-        return;
-      }
-
       const answer = answers[target];
       const matchedAlias = answer.aliases.includes(guessKey);
       const correct = matchedAlias || isCorrectGuess(guess, answer.display);
