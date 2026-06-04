@@ -11,7 +11,7 @@
   }
 
   function renderBoard(container, options) {
-    const { answer, guesses, limit, currentInput, showInput, minRows, cols, animateAttempt } = options;
+    const { answer, guesses, limit, currentInput, showInput, minRows, cols, animateAttempt, padRows = true } = options;
     container.innerHTML = "";
     const colCount = Math.max(cols || RHW.splitAnswer(answer.display).length || 1, 1);
     container.style.setProperty("--cols", colCount);
@@ -46,7 +46,7 @@
       const rowEl = document.createElement("div");
       const shouldAnimate = row.evaluated && row.attempt === animateAttempt;
       rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${shouldAnimate ? " animate" : " settled"}${row.active ? " active" : ""}`;
-      const rowCols = Math.max(row.cols || colCount, colCount);
+      const rowCols = padRows ? Math.max(row.cols || colCount, colCount) : Math.max(row.cols || colCount, 1);
       rowEl.style.setProperty("--cols", rowCols);
       for (let index = 0; index < rowCols; index += 1) {
         rowEl.append(createTile(row.chars[index], row.states[index], index * 80));

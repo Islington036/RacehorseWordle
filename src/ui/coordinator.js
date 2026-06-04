@@ -14,6 +14,7 @@
       currentTarget: document.querySelector("#current-target"),
       currentInput: document.querySelector("#current-input"),
       inputHint: document.querySelector("#input-hint"),
+      sireHintRow: document.querySelector(".hint-row"),
       sireHintButton: document.querySelector("#sire-hint-button"),
       keyboard: document.querySelector("#keyboard"),
       toast: document.querySelector("#toast"),
@@ -113,7 +114,8 @@
       showInput: false,
       minRows: 0,
       cols: historyCols,
-      animateAttempt: round.justSubmittedAttempt
+      animateAttempt: round.justSubmittedAttempt,
+      padRows: false
     });
 
     renderers.renderBoard(els.sireBoard, {
@@ -218,6 +220,7 @@
   function renderSireHint(round) {
     if (!els.sireHintButton) return;
     const canUse = RHW.canUseSireHint(round);
+    if (els.sireHintRow) els.sireHintRow.hidden = !canUse;
     els.sireHintButton.hidden = !canUse;
     els.sireHintButton.disabled = !canUse;
   }

@@ -38,6 +38,7 @@ assert.ok(indexOfScript("src/ui/coordinator.js") < indexOfScript("src/main.js"),
 assert.ok(indexHtml.includes("native-input"), "native input is present for IME text entry");
 assert.ok(indexHtml.includes("キーボードで直接入力できます"), "native input guidance replaces the waiting placeholder");
 assert.ok(indexHtml.includes("sire-hint-button"), "sire reveal hint button is present");
+assert.ok(indexHtml.includes('class="hint-row" hidden'), "sire hint row should not reserve vertical space before it unlocks");
 assert.ok(indexHtml.includes("confirm-reset-modal"), "reset confirmation dialog is present");
 assert.ok(indexHtml.includes("本当にリセットしますか？"), "reset confirmation copy is present");
 assert.ok(indexHtml.includes("現在の問題を失敗扱い"), "reset confirmation explains forfeit behavior");
@@ -65,6 +66,7 @@ assert.ok(sourceText.includes("horseBoardCols: 9"), "horse board uses nine fixed
 assert.ok(sourceText.includes("pedigreeBoardCols: 18"), "sire and dam boards use eighteen fixed boxes");
 assert.ok(sourceText.includes("showInput: false"), "top history board should only render submitted guesses");
 assert.ok(sourceText.includes("minRows: 0"), "top history board should not render empty placeholder rows");
+assert.ok(sourceText.includes("padRows: false"), "top history board should not pad submitted guesses with empty boxes");
 assert.ok(sourceText.includes("openResetConfirm"), "topbar reset opens a confirmation dialog before forfeit");
 assert.ok(sourceText.includes("closeResetConfirm"), "reset confirmation dialog can be closed before or after reset");
 assert.ok(!sourceText.includes("openNextConfirm"), "result next-question confirmation must not remain");
@@ -78,6 +80,7 @@ assert.ok(!layoutCss.includes(".target-tabs"), "unused target tab styles should 
 assert.ok(!layoutCss.includes(".reveal-line"), "unused reveal line styles should not remain");
 assert.ok(!layoutCss.includes(".section-heading strong"), "unused section heading strong styles should not remain");
 assert.ok(!layoutCss.includes(".legend-panel .legend-note"), "unused legend note styles should not remain");
+assert.ok(layoutCss.includes(".hint-row[hidden]"), "hidden sire hint row should not reserve vertical space");
 assert.ok(wordleCss.includes("align-content: start"), "history rows should stay packed at the top of fixed-height boards");
 assert.ok(wordleCss.includes("grid-auto-rows: max-content"), "history rows should not stretch apart when fewer than five rows exist");
 assert.ok(!wordleCss.includes(".tile-row.reserved"), "unused reserved row styles should not remain");
