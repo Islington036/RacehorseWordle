@@ -3,19 +3,20 @@
 
   const els = {};
   const KANA_ROWS = [
-    ["ワ", "ラ", "ヤ", "マ", "ハ", "ナ", "タ", "サ", "カ", "ア"],
-    ["ヲ", "リ", "ユ", "ミ", "ヒ", "ニ", "チ", "シ", "キ", "イ"],
-    ["ン", "ル", "ヨ", "ム", "フ", "ヌ", "ツ", "ス", "ク", "ウ"],
-    ["ー", "レ", "メ", "ヘ", "ネ", "テ", "セ", "ケ", "エ"],
-    ["消", "ロ", "モ", "ホ", "ノ", "ト", "ソ", "コ", "オ", "決定"]
+    ["ア", "カ", "サ", "タ", "ナ", "ハ", "マ", "ヤ", "ラ", "ワ"],
+    ["イ", "キ", "シ", "チ", "ニ", "ヒ", "ミ", "", "リ", "ヲ"],
+    ["ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル", "ン"],
+    ["エ", "ケ", "セ", "テ", "ネ", "ヘ", "メ", "", "レ", "ー"],
+    ["オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", ""],
+    ["消", "決定"]
   ];
 
   function initElements() {
     Object.assign(els, {
       app: document.querySelector("#app"),
       horseBoard: document.querySelector("#horse-board"),
-      pedigreeBoard: document.querySelector("#pedigree-board"),
-      targetButtons: Array.from(document.querySelectorAll("[data-target]")),
+      sireBoard: document.querySelector("#sire-board"),
+      damBoard: document.querySelector("#dam-board"),
       currentTarget: document.querySelector("#current-target"),
       currentInput: document.querySelector("#current-input"),
       inputHint: document.querySelector("#input-hint"),
@@ -40,10 +41,11 @@
     return tile;
   }
 
-  function renderBoard(container, answer, guesses, limit, currentInput, isActive) {
+  function renderBoard(container, options) {
+    const { answer, guesses, limit, currentInput, showInput, minRows, cols } = options;
     container.innerHTML = "";
-    const cols = Math.max(1, RHW.splitAnswer(answer.display).length);
-    container.style.setProperty("--cols", cols);
+    const colCount = Math.max(cols || 1, RHW.splitAnswer(answer.display).length);
+    container.style.setProperty("--cols", colCount);
     const rows = [];
 
     guesses.forEach((guess) => {
@@ -54,7 +56,7 @@
       });
     });
 
-    if (isActive && guesses.length < limit) {
+    if (showInput && guesses.length < limit) {
       rows.push({
         chars: RHW.splitAnswer(currentInput),
         states: [],
@@ -62,27 +64,36 @@
       });
     }
 
-    while (rows.length < Math.min(limit, 6)) {
+    while (rows.length < minRows) {
       rows.push({ chars: [], states: [] });
     }
 
-    rows.slice(-Math.max(6, Math.min(limit, rows.length))).forEach((row) => {
+    rows.forEach((row) => {
       const rowEl = document.createElement("div");
       rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${row.active ? " active" : ""}`;
-      rowEl.style.setProperty("--cols", cols);
-      for (let index = 0; index < cols; index += 1) {
+      rowEl.style.setProperty("--cols", colCount);
+      for (let index = 0; index < colCount; index += 1) {
         rowEl.append(createTile(row.chars[index], row.states[index], index * 80));
       }
       container.append(rowEl);
     });
+
+    container.scrollTop = container.scrollHeight;
   }
 
   function renderKeyboard() {
     els.keyboard.innerHTML = "";
     KANA_ROWS.forEach((row) => {
       const rowEl = document.createElement("div");
-      rowEl.className = "keyboard-row";
+      rowEl.className = row.length === 2 ? "keyboard-row utility-row" : "keyboard-row kana-row";
       row.forEach((key) => {
+        if (!key) {
+          const spacer = document.createElement("span");
+          spacer.className = "key-spacer";
+          spacer.setAttribute("aria-hidden", "true");
+          rowEl.append(spacer);
+          return;
+        }
         const button = document.createElement("button");
         button.type = "button";
         button.className = key.length > 1 ? "key wide" : "key";
@@ -111,29 +122,43 @@
   function renderStats(stats, currentQuestion, round) {
     const summary = RHW.summarizeStats(stats);
     const recent = summary.recent.length
-      ? summary.recent.map((item) => `<li><span>${escapeHtml(item.horseName)}</span><b>${item.status === "won" ? "成功" : "失敗"}</b></li>`).join("")
+      ? summary.recent.map((item) => {
+        const attempts = item.attemptsUsed ?? item.horseAttemptsUsed ?? item.pedigreeAttemptsUsed ?? "-";
+        return `<li><span>${escapeHtml(item.horseName)}</span><b>${item.status === "won" ? "成功" : "失敗"} ${attempts}</b></li>`;
+      }).join("")
       : "<li><span>まだ出題履歴がありません</span><b>-</b></li>";
     const currentLabel = round.status === "playing" ? "挑戦中" : currentQuestion.nameJa;
+    const attemptsUsed = RHW.getAttemptsUsed(round);
 
     els.statsPanel.innerHTML = `
       <div class="stat-grid">
         <div><span>正答率</span><strong>${summary.successRate}%</strong></div>
         <div><span>失敗率</span><strong>${summary.failureRate}%</strong></div>
         <div><span>総問題</span><strong>${summary.total}</strong></div>
-        <div><span>血統</span><strong>${round.pedigreeAttemptsUsed}/15</strong></div>
+        <div><span>挑戦</span><strong>${attemptsUsed}/${RHW.ATTEMPT_LIMIT}</strong></div>
       </div>
       <div class="current-round">
         <h2>現在の出題</h2>
         <p>${escapeHtml(currentLabel)}</p>
         <dl>
-          <div><dt>馬名</dt><dd>${round.horseAttemptsUsed}/5</dd></div>
-          <div><dt>父</dt><dd>${round.targets.sire.solved ? "正解" : round.pedigreeRevealed ? "開示" : "未正解"}</dd></div>
-          <div><dt>母</dt><dd>${round.targets.dam.solved ? "正解" : round.pedigreeRevealed ? "開示" : "未正解"}</dd></div>
+          <div><dt>馬名</dt><dd>${round.targets.horse.solved ? "正解" : round.status === "lost" ? "失敗" : "未正解"}</dd></div>
+          <div><dt>父</dt><dd>${round.targets.sire.solved ? "正解" : "未正解"}</dd></div>
+          <div><dt>母</dt><dd>${round.targets.dam.solved ? "正解" : "未正解"}</dd></div>
         </dl>
       </div>
       <div class="history-list">
         <h2>出題履歴</h2>
         <ul>${recent}</ul>
+      </div>
+      <div class="legend-panel">
+        <h2>凡例</h2>
+        <div><span class="legend-swatch correct"></span><p>馬名: 位置も文字も正解</p></div>
+        <div><span class="legend-swatch present"></span><p>馬名: 位置違いで含まれる</p></div>
+        <div><span class="legend-swatch sire-correct"></span><p>父: 位置も文字も正解</p></div>
+        <div><span class="legend-swatch sire-present"></span><p>父: 位置違いで含まれる</p></div>
+        <div><span class="legend-swatch dam-correct"></span><p>母: 位置も文字も正解</p></div>
+        <div><span class="legend-swatch dam-present"></span><p>母: 位置違いで含まれる</p></div>
+        <div><span class="legend-swatch absent"></span><p>その対象名には含まれない</p></div>
       </div>
     `;
   }
@@ -141,50 +166,42 @@
   function render(state) {
     const { question, round, stats } = state;
     const answers = RHW.getAnswers(question);
-    const active = round.activeTarget;
-    const activeAnswer = answers[active];
-    const targetLabel = RHW.CONFIG.targets[active].label;
+    const inputLength = RHW.displayLength(round.currentInput);
 
-    els.targetButtons.forEach((button) => {
-      const selected = button.dataset.target === active;
-      button.setAttribute("aria-pressed", String(selected));
-      button.classList.toggle("selected", selected);
-    });
-
-    els.currentTarget.textContent = targetLabel;
+    els.currentTarget.textContent = "入力";
     els.currentInput.textContent = round.currentInput || "入力待ち";
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
+    els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
 
-    const activeLength = RHW.displayLength(activeAnswer.display);
-    const attempts = RHW.getAttemptsUsed(round, active);
-    const limit = active === "horse" ? 5 : 15;
-    els.inputHint.textContent = `${activeLength}文字 / ${attempts}/${limit}`;
+    renderBoard(els.horseBoard, {
+      answer: answers.horse,
+      guesses: round.targets.horse.guesses,
+      limit: RHW.ATTEMPT_LIMIT,
+      currentInput: round.currentInput,
+      showInput: round.status === "playing",
+      minRows: 6,
+      cols: RHW.MAX_INPUT_LENGTH
+    });
 
-    renderBoard(
-      els.horseBoard,
-      answers.horse,
-      round.targets.horse.guesses,
-      5,
-      active === "horse" ? round.currentInput : "",
-      active === "horse" && round.status === "playing"
-    );
+    renderBoard(els.sireBoard, {
+      answer: answers.sire,
+      guesses: round.targets.sire.guesses,
+      limit: RHW.ATTEMPT_LIMIT,
+      currentInput: "",
+      showInput: false,
+      minRows: 3,
+      cols: RHW.MAX_INPUT_LENGTH
+    });
 
-    const pedigreeAnswer = answers[active === "dam" ? "dam" : "sire"];
-    const pedigreeTarget = active === "dam" ? "dam" : "sire";
-    renderBoard(
-      els.pedigreeBoard,
-      pedigreeAnswer,
-      round.targets[pedigreeTarget].guesses,
-      15,
-      active === pedigreeTarget ? round.currentInput : "",
-      active === pedigreeTarget && round.status === "playing" && !round.pedigreeRevealed
-    );
-
-    document.querySelector("#pedigree-title").textContent = `${RHW.CONFIG.targets[pedigreeTarget].label} Wordle`;
-    document.querySelector("#pedigree-count").textContent = `血統 ${round.pedigreeAttemptsUsed}/15`;
-    document.querySelector("#reveal-line").textContent = round.pedigreeRevealed
-      ? `父: ${answers.sire.display} / 母: ${answers.dam.display}`
-      : "父母は15回まで合算で挑戦できます";
+    renderBoard(els.damBoard, {
+      answer: answers.dam,
+      guesses: round.targets.dam.guesses,
+      limit: RHW.ATTEMPT_LIMIT,
+      currentInput: "",
+      showInput: false,
+      minRows: 3,
+      cols: RHW.MAX_INPUT_LENGTH
+    });
 
     renderStats(stats, question, round);
   }
@@ -204,8 +221,8 @@
         <span>母</span><strong>${escapeHtml(answers.dam.display)}</strong>
       </div>
       <div class="stat-grid modal-grid">
-        <div><span>馬名</span><strong>${round.horseAttemptsUsed}/5</strong></div>
-        <div><span>血統</span><strong>${round.pedigreeAttemptsUsed}/15</strong></div>
+        <div><span>挑戦</span><strong>${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}</strong></div>
+        <div><span>父母</span><strong>${round.targets.sire.solved ? "父" : "-"} / ${round.targets.dam.solved ? "母" : "-"}</strong></div>
         <div><span>正答率</span><strong>${summary.successRate}%</strong></div>
         <div><span>失敗率</span><strong>${summary.failureRate}%</strong></div>
       </div>

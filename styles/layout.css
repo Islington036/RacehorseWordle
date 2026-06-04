@@ -18,7 +18,7 @@
 .topbar h1 {
   margin: 0;
   text-align: center;
-  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-size: 2rem;
   line-height: 1;
   letter-spacing: 0;
 }
@@ -82,7 +82,7 @@
   width: min(100%, 760px);
   min-height: 48px;
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr) auto;
+  grid-template-columns: 62px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
   padding: 10px 12px;
@@ -94,7 +94,7 @@
 .input-strip > span {
   display: grid;
   place-items: center;
-  width: 34px;
+  width: 48px;
   height: 34px;
   border-radius: 4px;
   background: var(--accent);
@@ -119,8 +119,8 @@
 }
 
 .target-tabs {
+  display: none;
   width: min(100%, 760px);
-  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
@@ -192,6 +192,7 @@
 
 .current-round h2,
 .history-list h2,
+.legend-panel h2,
 .wins h3 {
   margin: 0 0 10px;
   font-size: 0.95rem;
@@ -234,6 +235,68 @@
   gap: 10px;
   color: var(--muted);
   font-size: 0.86rem;
+}
+
+.legend-panel {
+  display: grid;
+  gap: 8px;
+}
+
+.legend-panel > div {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.legend-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--absent);
+}
+
+.legend-swatch.correct {
+  background: var(--correct);
+  border-color: var(--correct);
+}
+
+.legend-swatch.present {
+  background: var(--present);
+  border-color: var(--present);
+}
+
+.legend-swatch.sire-correct {
+  background: var(--sire-correct);
+  border-color: var(--sire-correct);
+}
+
+.legend-swatch.sire-present {
+  background: var(--sire-present);
+  border-color: var(--sire-present);
+}
+
+.legend-swatch.dam-correct {
+  background: var(--dam-correct);
+  border-color: var(--dam-correct);
+}
+
+.legend-swatch.dam-present {
+  background: var(--dam-present);
+  border-color: var(--dam-present);
+}
+
+.legend-swatch.absent {
+  background: var(--absent);
+  border-color: var(--absent);
 }
 
 .toast {
@@ -349,10 +412,14 @@
   }
 
   .input-strip {
-    grid-template-columns: 42px minmax(0, 1fr);
+    grid-template-columns: 54px minmax(0, 1fr);
   }
 
   .input-strip small {
     grid-column: 2;
+  }
+
+  .topbar h1 {
+    font-size: 1.45rem;
   }
 }

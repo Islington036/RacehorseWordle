@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
-  <link rel="stylesheet" href="styles/base.css?v=20260604b">
-  <link rel="stylesheet" href="styles/layout.css?v=20260604b">
-  <link rel="stylesheet" href="styles/wordle.css?v=20260604b">
-  <script defer src="data/questions.embedded.js?v=20260604b"></script>
-  <script defer src="src/config.js?v=20260604b"></script>
-  <script defer src="src/normalize.js?v=20260604b"></script>
-  <script defer src="src/evaluator.js?v=20260604b"></script>
-  <script defer src="src/storage.js?v=20260604b"></script>
-  <script defer src="src/question-picker.js?v=20260604b"></script>
-  <script defer src="src/game-state.js?v=20260604b"></script>
-  <script defer src="src/ui.js?v=20260604b"></script>
-  <script defer src="src/main.js?v=20260604b"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260605a">
+  <link rel="stylesheet" href="styles/layout.css?v=20260605a">
+  <link rel="stylesheet" href="styles/wordle.css?v=20260605a">
+  <script defer src="data/questions.embedded.js?v=20260605a"></script>
+  <script defer src="src/config.js?v=20260605a"></script>
+  <script defer src="src/normalize.js?v=20260605a"></script>
+  <script defer src="src/evaluator.js?v=20260605a"></script>
+  <script defer src="src/storage.js?v=20260605a"></script>
+  <script defer src="src/question-picker.js?v=20260605a"></script>
+  <script defer src="src/game-state.js?v=20260605a"></script>
+  <script defer src="src/ui.js?v=20260605a"></script>
+  <script defer src="src/main.js?v=20260605a"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -24,7 +24,7 @@
         <span aria-hidden="true">▥</span>
       </button>
       <h1>Racehorse Wordle</h1>
-      <button id="reset-button" class="icon-button" type="button" aria-label="現在の問題をリセット" title="リセット">
+      <button id="reset-button" class="icon-button" type="button" aria-label="別の問題を出題" title="別の問題">
         <span aria-hidden="true">↻</span>
       </button>
     </header>
@@ -36,30 +36,31 @@
         <div class="board-block horse-block">
           <div class="section-heading">
             <span>馬名</span>
-            <strong>5回</strong>
+            <strong>Wordle</strong>
           </div>
-          <div id="horse-board" class="wordle-board" aria-label="馬名ボード"></div>
+          <div id="horse-board" class="wordle-board tall" aria-label="馬名ボード"></div>
         </div>
 
         <div class="input-strip" aria-live="polite">
-          <span id="current-target">父</span>
+          <span id="current-target">入力</span>
           <strong id="current-input" class="placeholder">入力待ち</strong>
-          <small id="input-hint">0文字 / 0/15</small>
-        </div>
-
-        <div class="target-tabs" role="group" aria-label="入力対象">
-          <button type="button" data-target="sire" class="selected" aria-pressed="true">父</button>
-          <button type="button" data-target="dam" aria-pressed="false">母</button>
-          <button type="button" data-target="horse" aria-pressed="false">馬名</button>
+          <small id="input-hint">0/18文字 / 0/15</small>
         </div>
 
         <div class="board-block pedigree-block">
           <div class="section-heading">
-            <span id="pedigree-title">父 Wordle</span>
-            <strong id="pedigree-count">血統 0/15</strong>
+            <span>父</span>
+            <strong>青 / 水色</strong>
           </div>
-          <p id="reveal-line" class="reveal-line">父母は15回まで合算で挑戦できます</p>
-          <div id="pedigree-board" class="wordle-board compact" aria-label="血統ボード"></div>
+          <div id="sire-board" class="wordle-board compact" aria-label="父ボード"></div>
+        </div>
+
+        <div class="board-block pedigree-block">
+          <div class="section-heading">
+            <span>母</span>
+            <strong>桃 / 薄桃</strong>
+          </div>
+          <div id="dam-board" class="wordle-board compact" aria-label="母ボード"></div>
         </div>
 
         <section id="keyboard" class="keyboard" aria-label="かなキーボード"></section>

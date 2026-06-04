@@ -4,6 +4,10 @@ const { scoreGuess, isCorrectGuess } = require("../src/evaluator.js");
 
 assert.strictEqual(isCorrectGuess("ドウデュース", "ドウデュース"), true);
 assert.strictEqual(isCorrectGuess(" ドウ デュース ", "ドウデュース"), true);
+assert.strictEqual(isCorrectGuess("ドウデュス", "ドウデュース"), false);
+
+const longVowel = scoreGuess("ドウデュース", "ドウデュース").map((item) => item.state);
+assert.deepStrictEqual(longVowel, ["correct", "correct", "correct", "correct", "correct", "correct"]);
 
 const duplicate = scoreGuess("アアア", "アカア").map((item) => item.state);
 assert.deepStrictEqual(duplicate, ["correct", "absent", "correct"]);

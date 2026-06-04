@@ -1,5 +1,5 @@
 (function attachNormalize(root) {
-  const PUNCTUATION = /[\s\u3000・･'’`´\-‐‑‒–—―ーｰ.．,，/／\\()（）［］\[\]{}「」『』"“”]/g;
+  const PUNCTUATION = /[\s\u3000・･'’`´\-‐‑‒–—―.．,，/／\\()（）［］\[\]{}「」『』"“”]/g;
 
   function normalizeName(value) {
     return String(value || "")

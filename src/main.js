@@ -15,7 +15,9 @@
 
     const stats = RHW.makeStats(RHW.storage.readJson(RHW.CONFIG.storageKeys.stats, null));
     const restored = RHW.storage.readJson(RHW.CONFIG.storageKeys.current, null);
-    const restoredQuestion = restored && DATA.horses.find((question) => question.id === restored.questionId);
+    const restoredQuestion = restored?.schemaVersion === 2
+      ? DATA.horses.find((question) => question.id === restored.questionId)
+      : null;
     const question = restoredQuestion || RHW.pickQuestion(DATA.horses, stats, null);
     const round = restoredQuestion ? RHW.makeRound(question, restored) : RHW.makeRound(question);
 
@@ -41,17 +43,9 @@
       else appendText(key);
     });
 
-    document.querySelectorAll("[data-target]").forEach((button) => {
-      button.addEventListener("click", () => {
-        state.round.activeTarget = button.dataset.target;
-        state.round.currentInput = "";
-        renderAndSave();
-      });
-    });
-
     document.querySelector("#next-question").addEventListener("click", nextQuestion);
     document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state, "stats"));
-    document.querySelector("#reset-button").addEventListener("click", resetRound);
+    document.querySelector("#reset-button").addEventListener("click", () => nextQuestion("別の問題を出題しました。"));
     document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
   }
 
@@ -74,11 +68,8 @@
 
   function appendText(value) {
     if (!value || state.round.status !== "playing") return;
-    const answers = RHW.getAnswers(state.question);
-    const activeAnswer = answers[state.round.activeTarget];
-    const limit = RHW.displayLength(activeAnswer.display);
     const chars = RHW.splitAnswer(state.round.currentInput + value);
-    state.round.currentInput = chars.slice(0, limit).join("");
+    state.round.currentInput = chars.slice(0, RHW.MAX_INPUT_LENGTH).join("");
     renderAndSave();
   }
 
@@ -88,9 +79,8 @@
   }
 
   function submit() {
-    const target = state.round.activeTarget;
     const guess = state.round.currentInput;
-    const result = RHW.submitGuess(state.round, state.question, target, guess);
+    const result = RHW.submitGuess(state.round, state.question, guess);
     state.round = result.round;
 
     if (!result.accepted) {
@@ -101,10 +91,10 @@
       return renderAndSave();
     }
 
-    if (state.round.pedigreeRevealed && target !== "horse" && !result.correct) {
-      RHW.ui.setToast("血統15回を使い切りました。父母を開示します。", "warn");
+    if (state.round.status === "lost") {
+      RHW.ui.setToast("15回を使い切りました。", "warn");
     } else {
-      RHW.ui.setToast(result.correct ? "正解です。" : "判定しました。", result.correct ? "good" : "neutral");
+      RHW.ui.setToast(result.message, result.correct ? "good" : "neutral");
     }
 
     if (state.round.status !== "playing") {
@@ -119,18 +109,14 @@
     renderAndSave();
   }
 
-  function nextQuestion() {
-    document.querySelector("#result-modal").close();
+  function nextQuestion(message) {
+    const modal = document.querySelector("#result-modal");
+    if (modal.open) modal.close();
     const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id);
     state.question = next;
     state.round = RHW.makeRound(next);
     renderAndSave();
-  }
-
-  function resetRound() {
-    state.round = RHW.makeRound(state.question);
-    renderAndSave();
-    RHW.ui.setToast("この問題をリセットしました。", "neutral");
+    if (message) RHW.ui.setToast(message, "neutral");
   }
 
   function renderAndSave() {

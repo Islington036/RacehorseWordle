@@ -5,8 +5,9 @@
   const scoreGuess = RHW.scoreGuess || require("./evaluator.js").scoreGuess;
   const isCorrectGuess = RHW.isCorrectGuess || require("./evaluator.js").isCorrectGuess;
 
-  const HORSE_LIMIT = 5;
-  const PEDIGREE_LIMIT = 15;
+  const ATTEMPT_LIMIT = RHW.CONFIG?.attemptLimit || 15;
+  const MAX_INPUT_LENGTH = RHW.CONFIG?.maxInputLength || 18;
+  const TARGETS = ["horse", "sire", "dam"];
 
   function makeAnswer(display, aliases) {
     const allAliases = [display].concat(aliases || []);
@@ -20,11 +21,9 @@
   function makeRound(question, restored) {
     const base = {
       questionId: question.id,
-      activeTarget: "sire",
+      schemaVersion: 2,
       currentInput: "",
-      pedigreeAttemptsUsed: 0,
-      horseAttemptsUsed: 0,
-      pedigreeRevealed: false,
+      attemptsUsed: 0,
       status: "playing",
       resultRecorded: false,
       startedAt: new Date().toISOString(),
@@ -34,7 +33,23 @@
         horse: { solved: false, guesses: [] }
       }
     };
-    return Object.assign(base, restored || {});
+    const restoredTargets = restored?.targets || {};
+    const round = Object.assign(base, restored || {});
+    round.targets = {
+      sire: Object.assign(base.targets.sire, restoredTargets.sire || {}),
+      dam: Object.assign(base.targets.dam, restoredTargets.dam || {}),
+      horse: Object.assign(base.targets.horse, restoredTargets.horse || {})
+    };
+    round.attemptsUsed = typeof round.attemptsUsed === "number"
+      ? round.attemptsUsed
+      : Math.max(
+        round.targets.horse?.guesses?.length || 0,
+        round.targets.sire?.guesses?.length || 0,
+        round.targets.dam?.guesses?.length || 0,
+        round.horseAttemptsUsed || 0,
+        round.pedigreeAttemptsUsed || 0
+      );
+    return round;
   }
 
   function getAnswers(question) {
@@ -45,83 +60,108 @@
     };
   }
 
-  function getTargetLimit(target) {
-    return target === "horse" ? HORSE_LIMIT : PEDIGREE_LIMIT;
+  function getTargetLimit() {
+    return ATTEMPT_LIMIT;
   }
 
-  function getAttemptsUsed(round, target) {
-    return target === "horse" ? round.horseAttemptsUsed : round.pedigreeAttemptsUsed;
+  function getAttemptsUsed(round) {
+    return round.attemptsUsed || 0;
   }
 
-  function canSubmit(round, target) {
+  function canSubmit(round) {
     if (round.status !== "playing") return false;
-    if ((target === "sire" || target === "dam") && round.pedigreeRevealed) return false;
-    if (round.targets[target].solved) return false;
-    return getAttemptsUsed(round, target) < getTargetLimit(target);
+    return getAttemptsUsed(round) < ATTEMPT_LIMIT;
   }
 
-  function validateGuess(round, question, target, guess) {
-    const answers = getAnswers(question);
+  function getGuessArg(targetOrGuess, maybeGuess) {
+    return maybeGuess === undefined ? targetOrGuess : maybeGuess;
+  }
+
+  function validateGuess(round, question, targetOrGuess, maybeGuess) {
+    const guess = getGuessArg(targetOrGuess, maybeGuess);
     const guessLength = splitAnswer(guess).length;
-    const answerLength = splitAnswer(answers[target].display).length;
-    if (!canSubmit(round, target)) {
-      return { ok: false, reason: "この欄はこれ以上入力できません。" };
+    if (!canSubmit(round)) {
+      return { ok: false, reason: "これ以上入力できません。" };
     }
-    if (guessLength !== answerLength) {
-      return { ok: false, reason: `${answerLength}文字で入力してください。` };
+    if (guessLength < 1) {
+      return { ok: false, reason: "1文字以上入力してください。" };
+    }
+    if (guessLength > MAX_INPUT_LENGTH) {
+      return { ok: false, reason: `${MAX_INPUT_LENGTH}文字以内で入力してください。` };
     }
     return { ok: true };
   }
 
-  function submitGuess(round, question, target, guess) {
-    const validation = validateGuess(round, question, target, guess);
+  function themeState(target, state) {
+    if (target === "sire" && state === "correct") return "sire-correct";
+    if (target === "sire" && state === "present") return "sire-present";
+    if (target === "dam" && state === "correct") return "dam-correct";
+    if (target === "dam" && state === "present") return "dam-present";
+    return state;
+  }
+
+  function evaluateTarget(guess, answer, target) {
+    return scoreGuess(guess, answer.display).map((item) => ({
+      char: item.char,
+      state: themeState(target, item.state)
+    }));
+  }
+
+  function submitGuess(round, question, targetOrGuess, maybeGuess) {
+    const guess = getGuessArg(targetOrGuess, maybeGuess);
+    const validation = validateGuess(round, question, guess);
     if (!validation.ok) {
       return { round, accepted: false, message: validation.reason };
     }
 
     const next = structuredClone(round);
     const answers = getAnswers(question);
-    const answer = answers[target];
     const guessKey = normalize(guess);
-    const matchedAlias = answer.aliases.includes(guessKey);
-    const evaluation = scoreGuess(guess, answer.display);
-    const correct = matchedAlias || isCorrectGuess(guess, answer.display);
+    const targetResults = {};
 
-    next.targets[target].guesses.push({
-      value: guess,
-      normalized: guessKey,
-      evaluation,
-      correct
+    TARGETS.forEach((target) => {
+      const answer = answers[target];
+      const matchedAlias = answer.aliases.includes(guessKey);
+      const correct = matchedAlias || isCorrectGuess(guess, answer.display);
+      const evaluation = evaluateTarget(guess, answer, target);
+
+      next.targets[target].guesses.push({
+        value: guess,
+        normalized: guessKey,
+        evaluation,
+        correct
+      });
+
+      next.targets[target].solved = next.targets[target].solved || correct;
+
+      targetResults[target] = { correct, evaluation };
     });
+
     next.currentInput = "";
+    next.attemptsUsed = getAttemptsUsed(next) + 1;
 
-    if (target === "horse") {
-      next.horseAttemptsUsed += 1;
-    } else {
-      next.pedigreeAttemptsUsed += 1;
-    }
-
-    if (correct) {
-      next.targets[target].solved = true;
-      if (target === "horse") {
-        next.status = "won";
-      }
-    }
-
-    if (target === "horse" && !correct && next.horseAttemptsUsed >= HORSE_LIMIT) {
+    if (targetResults.horse.correct) {
+      next.status = "won";
+    } else if (next.attemptsUsed >= ATTEMPT_LIMIT) {
       next.status = "lost";
-    }
-
-    if (target !== "horse" && next.pedigreeAttemptsUsed >= PEDIGREE_LIMIT) {
-      next.pedigreeRevealed = true;
     }
 
     return {
       round: next,
       accepted: true,
-      correct,
-      message: correct ? "正解です。" : "判定しました。"
+      correct: targetResults.horse.correct,
+      targetResults,
+      message: makeResultMessage(targetResults)
     };
+  }
+
+  function makeResultMessage(targetResults) {
+    if (targetResults.horse.correct) return "馬名が正解です。";
+    const pedigree = [];
+    if (targetResults.sire.correct) pedigree.push("父");
+    if (targetResults.dam.correct) pedigree.push("母");
+    if (pedigree.length) return `${pedigree.join("と")}が正解です。`;
+    return "判定しました。";
   }
 
   function makeStats(existing) {
@@ -142,10 +182,10 @@
       questionId: question.id,
       horseName: question.nameJa,
       status: round.status,
-      pedigreeAttemptsUsed: round.pedigreeAttemptsUsed,
-      horseAttemptsUsed: round.horseAttemptsUsed,
+      attemptsUsed: round.attemptsUsed || 0,
       sireSolved: round.targets.sire.solved,
       damSolved: round.targets.dam.solved,
+      horseSolved: round.targets.horse.solved,
       finishedAt: new Date().toISOString()
     });
     return { stats: nextStats, round: nextRound };
@@ -167,8 +207,8 @@
   }
 
   const api = {
-    HORSE_LIMIT,
-    PEDIGREE_LIMIT,
+    ATTEMPT_LIMIT,
+    MAX_INPUT_LENGTH,
     makeRound,
     getAnswers,
     getAttemptsUsed,
