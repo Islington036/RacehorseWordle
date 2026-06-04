@@ -9,9 +9,12 @@ const CACHE_DIR = path.join(ROOT, ".cache", "sources");
 const OUT_QUESTIONS = path.join(ROOT, "data", "questions.json");
 const OUT_EMBEDDED = path.join(ROOT, "data", "questions.embedded.js");
 const OUT_AUDIT = path.join(ROOT, "data", "race-wins.audit.json");
+const { normalizeName } = require(path.join(ROOT, "src", "normalize.js"));
 
 const FROM_YEAR = 1990;
 const CUTOFF = new Date("2026-06-04T23:59:59+09:00");
+const MAX_INPUT_LENGTH = 18;
+const INPUTABLE_KATAKANA = /^[ァ-ヶー]+$/u;
 let lastWikiRequestAt = 0;
 
 const JRA_RACES = [
@@ -130,6 +133,7 @@ async function main() {
     },
     wins: [],
     excluded: [],
+    excludedQuestions: [],
     warnings: []
   };
 
@@ -180,7 +184,7 @@ async function main() {
   await fs.writeFile(OUT_EMBEDDED, `window.RHW_QUESTIONS = ${JSON.stringify(output, null, 2)};\n`);
   await fs.writeFile(OUT_AUDIT, `${JSON.stringify(audit, null, 2)}\n`);
   console.log(`Generated ${questions.length} questions from ${wins.length} included wins.`);
-  console.log(`Excluded ${audit.excluded.length}; warnings ${audit.warnings.length}.`);
+  console.log(`Excluded ${audit.excluded.length} wins and ${audit.excludedQuestions.length} input-incompatible questions; warnings ${audit.warnings.length}.`);
 }
 
 async function collectJraRace(race, audit) {
@@ -443,12 +447,13 @@ async function fetchHorsePedigree(title, displayName, audit) {
 function buildQuestions(wins, audit) {
   const byName = new Map();
   for (const win of wins) {
-    const key = normalizeKey(win.nameJa);
+    const cleanedHorseName = cleanHorseName(win.nameJa);
+    const key = normalizeKey(cleanedHorseName);
     if (!byName.has(key)) {
       byName.set(key, {
-        id: win.id || slugId(win.nameJa),
-        nameJa: win.nameJa,
-        nameKana: win.nameKana || win.nameJa,
+        id: slugId(cleanedHorseName),
+        nameJa: cleanedHorseName,
+        nameKana: cleanHorseName(win.nameKana || cleanedHorseName),
         nameEn: win.nameEn || "",
         country: "JPN",
         birthYear: win.birthYear || null,
@@ -483,7 +488,7 @@ function buildQuestions(wins, audit) {
     const wikiUrl = win.sourceUrls?.find((url) => url.includes("wikipedia.org/wiki/") && !url.includes(encodeURIComponent(win.raceNameJa)));
     if (wikiUrl) horse.sourceUrls.pedigree = wikiUrl;
   }
-  const questions = Array.from(byName.values())
+  const candidates = Array.from(byName.values())
     .map((horse) => ({
       ...horse,
       wins: horse.wins.sort((a, b) => a.date.localeCompare(b.date)),
@@ -493,8 +498,28 @@ function buildQuestions(wins, audit) {
       }
     }))
     .sort((a, b) => a.nameJa.localeCompare(b.nameJa, "ja"));
+
+  const questions = [];
+  for (const horse of candidates) {
+    const inputIssues = findInputIssues(horse);
+    if (inputIssues.length) {
+      audit.excludedQuestions.push({
+        id: horse.id,
+        horse: horse.nameJa,
+        wins: horse.wins.length,
+        excludedReason: "target name contains characters unavailable in kana input or exceeds input length",
+        inputIssues
+      });
+      continue;
+    }
+    questions.push(horse);
+  }
+
   audit.meta.includedWinRecords = wins.length;
+  audit.meta.playableWinRecords = questions.reduce((total, horse) => total + horse.wins.length, 0);
+  audit.meta.questionCountBeforeInputFilter = candidates.length;
   audit.meta.questionCount = questions.length;
+  audit.meta.excludedQuestionCountForInput = audit.excludedQuestions.length;
   return questions;
 }
 
@@ -510,6 +535,10 @@ function validateGeneratedQuestions(questions, audit) {
     if (!horse.wins.length) {
       audit.warnings.push({ kind: "question-missing-wins", horse: horse.nameJa });
     }
+    const inputIssues = findInputIssues(horse);
+    if (inputIssues.length) {
+      audit.warnings.push({ kind: "question-input-unavailable", horse: horse.nameJa, inputIssues });
+    }
   }
   if (audit.meta.includedWinRecords < 900) {
     audit.warnings.push({
@@ -518,6 +547,40 @@ function validateGeneratedQuestions(questions, audit) {
       expectedRoughCount: audit.meta.expectedWinRecordRoughCount
     });
   }
+}
+
+function findInputIssues(horse) {
+  return [
+    ["horse", horse.nameJa],
+    ["sire", horse.sire?.nameJa],
+    ["dam", horse.dam?.nameJa]
+  ].flatMap(([target, value]) => {
+    const normalized = normalizeName(value);
+    const issues = [];
+    if (!normalized) {
+      issues.push({ target, value, normalized, reason: "empty-normalized-name" });
+    }
+    if (normalized && !INPUTABLE_KATAKANA.test(normalized)) {
+      issues.push({
+        target,
+        value,
+        normalized,
+        reason: "unsupported-characters",
+        unsupportedCharacters: Array.from(new Set(Array.from(normalized).filter((char) => !INPUTABLE_KATAKANA.test(char))))
+      });
+    }
+    if (Array.from(normalized).length > MAX_INPUT_LENGTH) {
+      issues.push({
+        target,
+        value,
+        normalized,
+        reason: "too-long",
+        length: Array.from(normalized).length,
+        maxLength: MAX_INPUT_LENGTH
+      });
+    }
+    return issues;
+  });
 }
 
 async function fetchText(url, cacheName, encoding = "utf-8") {
@@ -598,6 +661,7 @@ function htmlToLines(value) {
 
 function cleanHorseName(value) {
   return cleanNameValue(value)
+    .replace(/^(\s*(?:\[[^\]]{1,4}\]|[（(][^）)]{1,4}[）)])\s*)+/, "")
     .replace(/^\[[^\]]+\]/, "")
     .replace(/^[（(][外地][）)]/, "")
     .replace(/（[^）]*[A-Za-z][^）]*）/g, "")
@@ -719,7 +783,7 @@ function normalizeSex(value) {
 function normalizeKey(value) {
   return String(value || "")
     .normalize("NFKC")
-    .replace(/[\s\u3000・･'’`´\-‐‑‒–—―ーｰ.．,，/／\\()（）［］\[\]{}「」『』"“”]/g, "")
+    .replace(/[\s\u3000・･'’`´\-‐‑‒–—―.．,，/／\\()（）［］\[\]{}「」『』"“”]/g, "")
     .toUpperCase();
 }
 

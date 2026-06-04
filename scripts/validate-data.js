@@ -10,6 +10,8 @@ const data = JSON.parse(fs.readFileSync(file, "utf8"));
 const errors = [];
 const warnings = [];
 const horseKeys = new Set();
+const MAX_INPUT_LENGTH = 18;
+const INPUTABLE_KATAKANA = /^[ァ-ヶー]+$/u;
 
 if (!data.meta || data.meta.schemaVersion !== 1) {
   errors.push("meta.schemaVersion must be 1");
@@ -30,8 +32,10 @@ for (const horse of data.horses || []) {
   if (!Array.isArray(horse.wins) || horse.wins.length === 0) errors.push(`${horse.nameJa}: wins are missing`);
 
   for (const target of [horse.nameJa, horse.sire?.nameJa, horse.dam?.nameJa]) {
-    if (normalizeName(target).length === 0) errors.push(`${horse.nameJa}: empty normalized target`);
-    if (normalizeName(target).length > 24) warnings.push(`${horse.nameJa}: long target '${target}' may need horizontal scrolling`);
+    const normalizedTarget = normalizeName(target);
+    if (normalizedTarget.length === 0) errors.push(`${horse.nameJa}: empty normalized target`);
+    if (!INPUTABLE_KATAKANA.test(normalizedTarget)) errors.push(`${horse.nameJa}: target '${target}' contains unsupported input characters`);
+    if (Array.from(normalizedTarget).length > MAX_INPUT_LENGTH) errors.push(`${horse.nameJa}: target '${target}' exceeds ${MAX_INPUT_LENGTH} characters`);
   }
 
   for (const win of horse.wins || []) {

@@ -4,10 +4,13 @@
     "definition": "domestic-flat-top-level-at-run-date",
     "fromYear": 1990,
     "cutoff": "2026-06-04",
-    "generatedAt": "2026-06-04T15:41:00.407Z",
+    "generatedAt": "2026-06-04T16:21:29.509Z",
     "expectedWinRecordRoughCount": 1020,
     "includedWinRecords": 1020,
-    "questionCount": 607
+    "playableWinRecords": 906,
+    "questionCountBeforeInputFilter": 601,
+    "questionCount": 527,
+    "excludedQuestionCountForInput": 74
   },
   "wins": [
     {
@@ -154,7 +157,7 @@
       "source": "JRA",
       "raceId": "jra:feb",
       "year": 2006,
-      "horse": "（父）（市）カネヒキリ",
+      "horse": "カネヒキリ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/feb/result/feb2006.html"
     },
     {
@@ -364,28 +367,28 @@
       "source": "JRA",
       "raceId": "jra:takamatsu",
       "year": 2005,
-      "horse": "（市）アドマイヤマックス",
+      "horse": "アドマイヤマックス",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takamatsu/result/takamatsu2005.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:takamatsu",
       "year": 2004,
-      "horse": "（市）サニングデール",
+      "horse": "サニングデール",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takamatsu/result/takamatsu2004.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:takamatsu",
       "year": 2003,
-      "horse": "（市）ビリーヴ",
+      "horse": "ビリーヴ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takamatsu/result/takamatsu2003.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:takamatsu",
       "year": 2002,
-      "horse": "（父）ショウナンカンプ",
+      "horse": "ショウナンカンプ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takamatsu/result/takamatsu2002.html"
     },
     {
@@ -637,14 +640,14 @@
       "source": "JRA",
       "raceId": "jra:ouka",
       "year": 2007,
-      "horse": "（父）ダイワスカーレット",
+      "horse": "ダイワスカーレット",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/ouka/result/ouka2007.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:ouka",
       "year": 2006,
-      "horse": "（父）（市）キストゥヘヴン",
+      "horse": "キストゥヘヴン",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/ouka/result/ouka2006.html"
     },
     {
@@ -910,7 +913,7 @@
       "source": "JRA",
       "raceId": "jra:satsuki",
       "year": 2005,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/satsuki/result/satsuki2005.html"
     },
     {
@@ -1162,7 +1165,7 @@
       "source": "JRA",
       "raceId": "jra:haruten",
       "year": 2006,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/haruten/result/haruten2006.html"
     },
     {
@@ -1183,7 +1186,7 @@
       "source": "JRA",
       "raceId": "jra:haruten",
       "year": 2003,
-      "horse": "（父）（市）ヒシミラクル",
+      "horse": "ヒシミラクル",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/haruten/result/haruten2003.html"
     },
     {
@@ -1197,7 +1200,7 @@
       "source": "JRA",
       "raceId": "jra:haruten",
       "year": 2001,
-      "horse": "（市）テイエムオペラオー",
+      "horse": "テイエムオペラオー",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/haruten/result/haruten2001.html"
     },
     {
@@ -1414,14 +1417,14 @@
       "source": "JRA",
       "raceId": "jra:nmc",
       "year": 2007,
-      "horse": "（市）ピンクカメオ",
+      "horse": "ピンクカメオ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/nmc/result/nmc2007.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:nmc",
       "year": 2006,
-      "horse": "(父)(市) ロジック",
+      "horse": "ロジック",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/nmc/result/nmc2006.html"
     },
     {
@@ -1435,7 +1438,7 @@
       "source": "JRA",
       "raceId": "jra:nmc",
       "year": 2004,
-      "horse": "（市）キングカメハメハ",
+      "horse": "キングカメハメハ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/nmc/result/nmc2004.html"
     },
     {
@@ -1631,7 +1634,7 @@
       "source": "JRA",
       "raceId": "jra:victoria",
       "year": 2007,
-      "horse": "（父）コイウタ",
+      "horse": "コイウタ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/victoria/result/victoria2007.html"
     },
     {
@@ -1785,14 +1788,14 @@
       "source": "JRA",
       "raceId": "jra:oaks",
       "year": 2006,
-      "horse": "(父) カワカミプリンセス",
+      "horse": "カワカミプリンセス",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/oaks/result/oaks2006.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:oaks",
       "year": 2005,
-      "horse": "（父）シーザリオ",
+      "horse": "シーザリオ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/oaks/result/oaks2005.html"
     },
     {
@@ -2037,7 +2040,7 @@
       "source": "JRA",
       "raceId": "jra:derby",
       "year": 2007,
-      "horse": "（父）ウオッカ",
+      "horse": "ウオッカ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/derby/result/derby2007.html"
     },
     {
@@ -2051,14 +2054,14 @@
       "source": "JRA",
       "raceId": "jra:derby",
       "year": 2005,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/derby/result/derby2005.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:derby",
       "year": 2004,
-      "horse": "（市）キングカメハメハ",
+      "horse": "キングカメハメハ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/derby/result/derby2004.html"
     },
     {
@@ -2296,7 +2299,7 @@
       "source": "JRA",
       "raceId": "jra:yasuda",
       "year": 2004,
-      "horse": "（父）ツルマルボーイ",
+      "horse": "ツルマルボーイ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/yasuda/result/yasuda2004.html"
     },
     {
@@ -2520,7 +2523,7 @@
       "source": "JRA",
       "raceId": "jra:takara",
       "year": 2006,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takara/result/takara2006.html"
     },
     {
@@ -2541,14 +2544,14 @@
       "source": "JRA",
       "raceId": "jra:takara",
       "year": 2003,
-      "horse": "（父）（市）ヒシミラクル",
+      "horse": "ヒシミラクル",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takara/result/takara2003.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:takara",
       "year": 2002,
-      "horse": "（市）ダンツフレーム",
+      "horse": "ダンツフレーム",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takara/result/takara2002.html"
     },
     {
@@ -2562,7 +2565,7 @@
       "source": "JRA",
       "raceId": "jra:takara",
       "year": 2000,
-      "horse": "(市)テイエムオペラオー",
+      "horse": "テイエムオペラオー",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/takara/result/takara2000.html"
     },
     {
@@ -2758,7 +2761,7 @@
       "source": "JRA",
       "raceId": "jra:sprint",
       "year": 2007,
-      "horse": "（父）アストンマーチャン",
+      "horse": "アストンマーチャン",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/sprint/result/sprint2007.html"
     },
     {
@@ -2779,7 +2782,7 @@
       "source": "JRA",
       "raceId": "jra:sprint",
       "year": 2002,
-      "horse": "（市）ビリーヴ",
+      "horse": "ビリーヴ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/sprint/result/sprint2002.html"
     },
     {
@@ -2793,7 +2796,7 @@
       "source": "JRA",
       "raceId": "jra:sprint",
       "year": 2000,
-      "horse": "(父)ダイタクヤマト",
+      "horse": "ダイタクヤマト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/sprint/result/sprint2000.html"
     },
     {
@@ -2996,14 +2999,14 @@
       "source": "JRA",
       "raceId": "jra:shuka",
       "year": 2007,
-      "horse": "（父）ダイワスカーレット",
+      "horse": "ダイワスカーレット",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/shuka/result/shuka2007.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:shuka",
       "year": 2006,
-      "horse": "（父）カワカミプリンセス",
+      "horse": "カワカミプリンセス",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/shuka/result/shuka2006.html"
     },
     {
@@ -3045,7 +3048,7 @@
       "source": "JRA",
       "raceId": "jra:shuka",
       "year": 2000,
-      "horse": "(父)ティコティコタック",
+      "horse": "ティコティコタック",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/shuka/result/shuka2000.html"
     },
     {
@@ -3220,14 +3223,14 @@
       "source": "JRA",
       "raceId": "jra:kikka",
       "year": 2005,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/kikka/result/kikka2005.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:kikka",
       "year": 2004,
-      "horse": "（父）デルタブルース",
+      "horse": "デルタブルース",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/kikka/result/kikka2004.html"
     },
     {
@@ -3241,7 +3244,7 @@
       "source": "JRA",
       "raceId": "jra:kikka",
       "year": 2002,
-      "horse": "（父）（市）ヒシミラクル",
+      "horse": "ヒシミラクル",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/kikka/result/kikka2002.html"
     },
     {
@@ -3479,7 +3482,7 @@
       "source": "JRA",
       "raceId": "jra:akiten",
       "year": 2004,
-      "horse": "（市）ゼンノロブロイ",
+      "horse": "ゼンノロブロイ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/akiten/result/akiten2004.html"
     },
     {
@@ -3696,14 +3699,14 @@
       "source": "JRA",
       "raceId": "jra:eliza",
       "year": 2007,
-      "horse": "（父）ダイワスカーレット",
+      "horse": "ダイワスカーレット",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/eliza/result/eliza2007.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:eliza",
       "year": 2006,
-      "horse": "（市）フサイチパンドラ",
+      "horse": "フサイチパンドラ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/eliza/result/eliza2006.html"
     },
     {
@@ -3717,14 +3720,14 @@
       "source": "JRA",
       "raceId": "jra:eliza",
       "year": 2004,
-      "horse": "（市）アドマイヤグルーヴ",
+      "horse": "アドマイヤグルーヴ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/eliza/result/eliza2004.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:eliza",
       "year": 2003,
-      "horse": "（市）アドマイヤグルーヴ",
+      "horse": "アドマイヤグルーヴ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/eliza/result/eliza2003.html"
     },
     {
@@ -3962,7 +3965,7 @@
       "source": "JRA",
       "raceId": "jra:mile",
       "year": 2005,
-      "horse": "（市）ハットトリック",
+      "horse": "ハットトリック",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/mile/result/mile2005.html"
     },
     {
@@ -3983,7 +3986,7 @@
       "source": "JRA",
       "raceId": "jra:mile",
       "year": 2002,
-      "horse": "（父）（地）トウカイポイント",
+      "horse": "トウカイポイント",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/mile/result/mile2002.html"
     },
     {
@@ -4200,14 +4203,14 @@
       "source": "JRA",
       "raceId": "jra:jc",
       "year": 2006,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/jc/result/jc2006.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:jc",
       "year": 2004,
-      "horse": "（市）ゼンノロブロイ",
+      "horse": "ゼンノロブロイ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/jc/result/jc2004.html"
     },
     {
@@ -4410,7 +4413,7 @@
       "source": "JRA",
       "raceId": "jra:jcd",
       "year": 2005,
-      "horse": "（父）（市）カネヒキリ",
+      "horse": "カネヒキリ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/jcd/result/jcd2005.html"
     },
     {
@@ -4571,21 +4574,21 @@
       "source": "JRA",
       "raceId": "jra:hjf",
       "year": 2007,
-      "horse": "（父）トールポピー",
+      "horse": "トールポピー",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/hjf/result/hjf2007.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:hjf",
       "year": 2006,
-      "horse": "（父）ウオッカ",
+      "horse": "ウオッカ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/hjf/result/hjf2006.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:hjf",
       "year": 2005,
-      "horse": "（市）テイエムプリキュア",
+      "horse": "テイエムプリキュア",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/hjf/result/hjf2005.html"
     },
     {
@@ -4599,7 +4602,7 @@
       "source": "JRA",
       "raceId": "jra:hjf",
       "year": 2003,
-      "horse": "（父）ヤマニンシュクル",
+      "horse": "ヤマニンシュクル",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/hjf/result/hjf2003.html"
     },
     {
@@ -4613,7 +4616,7 @@
       "source": "JRA",
       "raceId": "jra:hjf",
       "year": 2001,
-      "horse": "(抽)タムロチェリー",
+      "horse": "タムロチェリー",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/hjf/result/hjf2001.html"
     },
     {
@@ -4830,21 +4833,21 @@
       "source": "JRA",
       "raceId": "jra:afs",
       "year": 2006,
-      "horse": "（父）ドリームジャーニー",
+      "horse": "ドリームジャーニー",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/afs/result/afs2006.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:afs",
       "year": 2005,
-      "horse": "（市）フサイチリシャール",
+      "horse": "フサイチリシャール",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/afs/result/afs2005.html"
     },
     {
       "source": "JRA",
       "raceId": "jra:afs",
       "year": 2004,
-      "horse": "（市）マイネルレコルト",
+      "horse": "マイネルレコルト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/afs/result/afs2004.html"
     },
     {
@@ -5082,7 +5085,7 @@
       "source": "JRA",
       "raceId": "jra:arima",
       "year": 2006,
-      "horse": "（市）ディープインパクト",
+      "horse": "ディープインパクト",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/arima/result/arima2006.html"
     },
     {
@@ -5096,7 +5099,7 @@
       "source": "JRA",
       "raceId": "jra:arima",
       "year": 2004,
-      "horse": "（市）ゼンノロブロイ",
+      "horse": "ゼンノロブロイ",
       "url": "https://www.jra.go.jp/datafile/seiseki/g1/arima/result/arima2004.html"
     },
     {
@@ -6919,7 +6922,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:ロマンチックウォリア",
+      "id": "horse:ロマンチックウォリアー",
       "nameJa": "ロマンチックウォリアー",
       "nameKana": "ロマンチックウォリアー",
       "nameEn": "ROMANTIC WARRIOR",
@@ -6997,7 +7000,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:フェアリキングプロン",
+      "id": "horse:フェアリーキングプローン",
       "nameJa": "フェアリーキングプローン",
       "nameKana": "フェアリーキングプローン",
       "nameEn": "",
@@ -7032,7 +7035,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:ハトレイク",
+      "id": "horse:ハートレイク",
       "nameJa": "ハートレイク",
       "nameKana": "ハートレイク",
       "nameEn": "",
@@ -7067,7 +7070,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:ウルトラファンタジultrafantasy",
+      "id": "horse:ウルトラファンタジーultrafantasy",
       "nameJa": "ウルトラファンタジー（Ｕｌｔｒａ Ｆａｎｔａｓｙ）",
       "nameKana": "ウルトラファンタジー（Ｕｌｔｒａ Ｆａｎｔａｓｙ）",
       "nameEn": "",
@@ -7102,7 +7105,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:テイクオバタゲット",
+      "id": "horse:テイクオーバーターゲット",
       "nameJa": "テイクオーバーターゲット",
       "nameKana": "テイクオーバーターゲット",
       "nameEn": "Takeover Target",
@@ -7180,7 +7183,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:外スノフェアリ",
+      "id": "horse:外スノーフェアリー",
       "nameJa": "［外］スノーフェアリー",
       "nameKana": "［外］スノーフェアリー",
       "nameEn": "",
@@ -7215,7 +7218,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:外スノフェアリ",
+      "id": "horse:外スノーフェアリー",
       "nameJa": "［外］スノーフェアリー",
       "nameKana": "［外］スノーフェアリー",
       "nameEn": "",
@@ -7363,7 +7366,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:ピルサドスキ",
+      "id": "horse:ピルサドスキー",
       "nameJa": "ピルサドスキー",
       "nameKana": "ピルサドスキー",
       "nameEn": "",
@@ -7398,7 +7401,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:シングスピル",
+      "id": "horse:シングスピール",
       "nameJa": "シングスピール",
       "nameKana": "シングスピール",
       "nameEn": "",
@@ -7468,7 +7471,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:ゴルデンフェザント",
+      "id": "horse:ゴールデンフェザント",
       "nameJa": "ゴールデンフェザント",
       "nameKana": "ゴールデンフェザント",
       "nameEn": "",
@@ -7503,7 +7506,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:ベタルスンアップ",
+      "id": "horse:ベタールースンアップ",
       "nameJa": "ベタールースンアップ",
       "nameKana": "ベタールースンアップ",
       "nameEn": "",
@@ -7538,7 +7541,7 @@
       "excludedReason": "foreign-trained winner"
     },
     {
-      "id": "horse:外フリトストリトダンサ",
+      "id": "horse:外フリートストリートダンサー",
       "nameJa": "［外］フリートストリートダンサー",
       "nameKana": "［外］フリートストリートダンサー",
       "nameEn": "",
@@ -7571,6 +7574,2545 @@
       ],
       "isForeignTrained": true,
       "excludedReason": "foreign-trained winner"
+    }
+  ],
+  "excludedQuestions": [
+    {
+      "id": "horse:アグネスデジタル",
+      "horse": "アグネスデジタル",
+      "wins": 5,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｃｒａｆｔｙ Ｐｒｏｓｐｅｃｔｏｒ",
+          "normalized": "CRAFTYPROSPECTOR",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "R",
+            "A",
+            "F",
+            "T",
+            "Y",
+            "P",
+            "O",
+            "S",
+            "E"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｃｈａｎｃｅｙ Ｓｑｕａｗ",
+          "normalized": "CHANCEYSQUAW",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "H",
+            "A",
+            "N",
+            "E",
+            "Y",
+            "S",
+            "Q",
+            "U",
+            "W"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:アサクサデンエン",
+      "horse": "アサクサデンエン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Singspiel",
+          "normalized": "SINGSPIEL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "I",
+            "N",
+            "G",
+            "P",
+            "E",
+            "L"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Whitewater Affair",
+          "normalized": "WHITEWATERAFFAIR",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "W",
+            "H",
+            "I",
+            "T",
+            "E",
+            "A",
+            "R",
+            "F"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:アジアエクスプレス",
+      "horse": "アジアエクスプレス",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｈｅｎｎｙ Ｈｕｇｈｅｓ",
+          "normalized": "HENNYHUGHES",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "H",
+            "E",
+            "N",
+            "Y",
+            "U",
+            "G",
+            "S"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｒｕｎｎｉｎｇ Ｂｏｂｃａｔｓ",
+          "normalized": "RUNNINGBOBCATS",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "R",
+            "U",
+            "N",
+            "I",
+            "G",
+            "B",
+            "O",
+            "C",
+            "A",
+            "T",
+            "S"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:アドマイヤコジーン",
+      "horse": "アドマイヤコジーン",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｃｏｚｚｅｎｅ",
+          "normalized": "COZZENE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "O",
+            "Z",
+            "E",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:アドマイヤリード",
+      "horse": "アドマイヤリード",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "dam",
+          "value": "ベルアリュールII",
+          "normalized": "ベルアリュールII",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:アポロケンタッキー",
+      "horse": "アポロケンタッキー",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Langfuhr",
+          "normalized": "LANGFUHR",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "L",
+            "A",
+            "N",
+            "G",
+            "F",
+            "U",
+            "H",
+            "R"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Dixiana Delight",
+          "normalized": "DIXIANADELIGHT",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "I",
+            "X",
+            "A",
+            "N",
+            "E",
+            "L",
+            "G",
+            "H",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:イーグルカフェ",
+      "horse": "イーグルカフェ",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｇｕｌｃｈ",
+          "normalized": "GULCH",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "U",
+            "L",
+            "C",
+            "H"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｎｅｔ Ｄａｎｃｅｒ",
+          "normalized": "NETDANCER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "N",
+            "E",
+            "T",
+            "D",
+            "A",
+            "C",
+            "R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エイジアンウインズ",
+      "horse": "エイジアンウインズ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "dam",
+          "value": "サクラサクＩＩ",
+          "normalized": "サクラサクII",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エイシンアポロン",
+      "horse": "エイシンアポロン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｇｉａｎｔ’ｓ Ｃａｕｓｅｗａｙ",
+          "normalized": "GIANTSCAUSEWAY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "I",
+            "A",
+            "N",
+            "T",
+            "S",
+            "C",
+            "U",
+            "E",
+            "W",
+            "Y"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｓｉｌｋ Ａｎｄ Ｓｃａｒｌｅｔ",
+          "normalized": "SILKANDSCARLET",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "I",
+            "L",
+            "K",
+            "A",
+            "N",
+            "D",
+            "C",
+            "R",
+            "E",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エイシンチャンプ",
+      "horse": "エイシンチャンプ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｍｉ Ｃｉｅｌｏ",
+          "normalized": "MICIELO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "I",
+            "C",
+            "E",
+            "L",
+            "O"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｅｉｓｈｉｎ Ｍｉｃｈｉｇａｎ",
+          "normalized": "EISHINMICHIGAN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "E",
+            "I",
+            "S",
+            "H",
+            "N",
+            "M",
+            "C",
+            "G",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エイシンフラッシュ",
+      "horse": "エイシンフラッシュ",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｋｉｎｇ’ｓ Ｂｅｓｔ",
+          "normalized": "KINGSBEST",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "I",
+            "N",
+            "G",
+            "S",
+            "B",
+            "E",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エイシンプレストン",
+      "horse": "エイシンプレストン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｇｒｅｅｎ Ｄａｎｃｅｒ",
+          "normalized": "GREENDANCER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "R",
+            "E",
+            "N",
+            "D",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｗａｒｒａｎｔｙ Ａｐｐｌｉｅｄ",
+          "normalized": "WARRANTYAPPLIED",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "W",
+            "A",
+            "R",
+            "N",
+            "T",
+            "Y",
+            "P",
+            "L",
+            "I",
+            "E",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エーシンフォワード",
+      "horse": "エーシンフォワード",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｆｏｒｅｓｔ Ｗｉｌｄｃａｔ",
+          "normalized": "FORESTWILDCAT",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "O",
+            "R",
+            "E",
+            "S",
+            "T",
+            "W",
+            "I",
+            "L",
+            "D",
+            "C",
+            "A"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｗａｋｅ Ｕｐ Ｋｉｓｓ",
+          "normalized": "WAKEUPKISS",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "W",
+            "A",
+            "K",
+            "E",
+            "U",
+            "P",
+            "I",
+            "S"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エルウェーウィン",
+      "horse": "エルウェーウィン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Caerleon",
+          "normalized": "CAERLEON",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "A",
+            "E",
+            "R",
+            "L",
+            "O",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:エルコンドルパサー",
+      "horse": "エルコンドルパサー",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｋｉｎｇｍａｎｂｏ",
+          "normalized": "KINGMANBO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "I",
+            "N",
+            "G",
+            "M",
+            "A",
+            "B",
+            "O"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｓａｄｄｌｅｒｓ Ｇａｌ",
+          "normalized": "SADDLERSGAL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "A",
+            "D",
+            "L",
+            "E",
+            "R",
+            "G"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:オーブルチェフ",
+      "horse": "オーブルチェフ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Malibu Moon",
+          "normalized": "MALIBUMOON",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "A",
+            "L",
+            "I",
+            "B",
+            "U",
+            "O",
+            "N"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Chatter Chatter",
+          "normalized": "CHATTERCHATTER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "H",
+            "A",
+            "T",
+            "E",
+            "R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:カフェオリンポス",
+      "horse": "カフェオリンポス",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Grand Slam",
+          "normalized": "GRANDSLAM",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "R",
+            "A",
+            "N",
+            "D",
+            "S",
+            "L",
+            "M"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Cognac Lady",
+          "normalized": "COGNACLADY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "O",
+            "G",
+            "N",
+            "A",
+            "L",
+            "D",
+            "Y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:カフェファラオ",
+      "horse": "カフェファラオ",
+      "wins": 3,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "American Pharoah",
+          "normalized": "AMERICANPHAROAH",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "M",
+            "E",
+            "R",
+            "I",
+            "C",
+            "N",
+            "P",
+            "H",
+            "O"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Mary's Follies",
+          "normalized": "MARYSFOLLIES",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "A",
+            "R",
+            "Y",
+            "S",
+            "F",
+            "O",
+            "L",
+            "I",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:キングカメハメハ",
+      "horse": "キングカメハメハ",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｋｉｎｇｍａｍｂｏ",
+          "normalized": "KINGMAMBO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "I",
+            "N",
+            "G",
+            "M",
+            "A",
+            "B",
+            "O"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:キンシャサノキセキ",
+      "horse": "キンシャサノキセキ",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｆｕｊｉ Ｋｉｓｅｋｉ",
+          "normalized": "FUJIKISEKI",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "U",
+            "J",
+            "I",
+            "K",
+            "S",
+            "E"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｋｅｌｔｓｈａａｎ",
+          "normalized": "KELTSHAAN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "E",
+            "L",
+            "T",
+            "S",
+            "H",
+            "A",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:グラスワンダー",
+      "horse": "グラスワンダー",
+      "wins": 4,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｓｉｌｖｅｒ Ｈａｗｋ",
+          "normalized": "SILVERHAWK",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "I",
+            "L",
+            "V",
+            "E",
+            "R",
+            "H",
+            "A",
+            "W",
+            "K"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ａｍｅｒｉｆｌｏｒａ",
+          "normalized": "AMERIFLORA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "M",
+            "E",
+            "R",
+            "I",
+            "F",
+            "L",
+            "O"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:グレナディアガーズ",
+      "horse": "グレナディアガーズ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Frankel",
+          "normalized": "FRANKEL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "R",
+            "A",
+            "N",
+            "K",
+            "E",
+            "L"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:クロフネ",
+      "horse": "クロフネ",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｆｒｅｎｃｈ Ｄｅｐｕｔｙ",
+          "normalized": "FRENCHDEPUTY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "R",
+            "E",
+            "N",
+            "C",
+            "H",
+            "D",
+            "P",
+            "U",
+            "T",
+            "Y"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｂｌｕｅ Ａｖｅｎｕｅ",
+          "normalized": "BLUEAVENUE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "B",
+            "L",
+            "U",
+            "E",
+            "A",
+            "V",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ゴールドティアラ",
+      "horse": "ゴールドティアラ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Seeking the Gold",
+          "normalized": "SEEKINGTHEGOLD",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "K",
+            "I",
+            "N",
+            "G",
+            "T",
+            "H",
+            "O",
+            "L",
+            "D"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Bright Tiara",
+          "normalized": "BRIGHTTIARA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "B",
+            "R",
+            "I",
+            "G",
+            "H",
+            "T",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ゴスホークケン",
+      "horse": "ゴスホークケン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｂｅｒｎｓｔｅｉｎ",
+          "normalized": "BERNSTEIN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "B",
+            "E",
+            "R",
+            "N",
+            "S",
+            "T",
+            "I"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ａｌｌｔｈｅｗａｙｂａｂｙ",
+          "normalized": "ALLTHEWAYBABY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "L",
+            "T",
+            "H",
+            "E",
+            "W",
+            "Y",
+            "B"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:サイレンススズカ号",
+      "horse": "サイレンススズカ号",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "horse",
+          "value": "サイレンススズカ号",
+          "normalized": "サイレンススズカ号",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "号"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:サクラローレル",
+      "horse": "サクラローレル",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Rainbow Quest",
+          "normalized": "RAINBOWQUEST",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "R",
+            "A",
+            "I",
+            "N",
+            "B",
+            "O",
+            "W",
+            "Q",
+            "U",
+            "E",
+            "S",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:サトノクラウン",
+      "horse": "サトノクラウン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｍａｒｊｕ",
+          "normalized": "MARJU",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "A",
+            "R",
+            "J",
+            "U"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "ジョコンダII",
+          "normalized": "ジョコンダII",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シーキングザパール",
+      "horse": "シーキングザパール",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Seeking the Gold",
+          "normalized": "SEEKINGTHEGOLD",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "K",
+            "I",
+            "N",
+            "G",
+            "T",
+            "H",
+            "O",
+            "L",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ジャンタルマンタル",
+      "horse": "ジャンタルマンタル",
+      "wins": 4,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Palace Malice",
+          "normalized": "PALACEMALICE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "P",
+            "A",
+            "L",
+            "C",
+            "E",
+            "M",
+            "I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ジャンダルム",
+      "horse": "ジャンダルム",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Kitten's Joy",
+          "normalized": "KITTENSJOY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "I",
+            "T",
+            "E",
+            "N",
+            "S",
+            "J",
+            "O",
+            "Y"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Believe",
+          "normalized": "BELIEVE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "B",
+            "E",
+            "L",
+            "I",
+            "V"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シュネルマイスター",
+      "horse": "シュネルマイスター",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Kingman",
+          "normalized": "KINGMAN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "I",
+            "N",
+            "G",
+            "M",
+            "A"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Serienholde",
+          "normalized": "SERIENHOLDE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "R",
+            "I",
+            "N",
+            "H",
+            "O",
+            "L",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シンコウキング",
+      "horse": "シンコウキング",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Fairy King",
+          "normalized": "FAIRYKING",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "A",
+            "I",
+            "R",
+            "Y",
+            "K",
+            "N",
+            "G"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Rose of Jericho",
+          "normalized": "ROSEOFJERICHO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "R",
+            "O",
+            "S",
+            "E",
+            "F",
+            "J",
+            "I",
+            "C",
+            "H"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シンコウフォレスト号",
+      "horse": "シンコウフォレスト号",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "horse",
+          "value": "シンコウフォレスト号",
+          "normalized": "シンコウフォレスト号",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "号"
+          ]
+        },
+        {
+          "target": "sire",
+          "value": "Ｇｒｅｅｎ Ｄｅｓｅｒｔ",
+          "normalized": "GREENDESERT",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "R",
+            "E",
+            "N",
+            "D",
+            "S",
+            "T"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｐａｒｋ Ｅｘｐｒｅｓｓ",
+          "normalized": "PARKEXPRESS",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "P",
+            "A",
+            "R",
+            "K",
+            "E",
+            "X",
+            "S"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シンコウラブリイ",
+      "horse": "シンコウラブリイ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Caerleon",
+          "normalized": "CAERLEON",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "A",
+            "E",
+            "R",
+            "L",
+            "O",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シンボリインディ",
+      "horse": "シンボリインディ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ａ．Ｐ．Ｉｎｄｙ",
+          "normalized": "APINDY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "P",
+            "I",
+            "N",
+            "D",
+            "Y"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｇａｅｌｉｃ Ｔｕｎｅ",
+          "normalized": "GAELICTUNE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "A",
+            "E",
+            "L",
+            "I",
+            "C",
+            "T",
+            "U",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:シンボリクリスエス",
+      "horse": "シンボリクリスエス",
+      "wins": 4,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｋｒｉｓ Ｓ．",
+          "normalized": "KRISS",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "R",
+            "I",
+            "S"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｔｅｅ Ｋａｙ",
+          "normalized": "TEEKAY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "T",
+            "E",
+            "K",
+            "A",
+            "Y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:スーニ",
+      "horse": "スーニ",
+      "wins": 3,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Soto",
+          "normalized": "SOTO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "O",
+            "T"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Enabru",
+          "normalized": "ENABRU",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "E",
+            "N",
+            "A",
+            "B",
+            "R",
+            "U"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:スターキングマン",
+      "horse": "スターキングマン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Kingmambo",
+          "normalized": "KINGMAMBO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "I",
+            "N",
+            "G",
+            "M",
+            "A",
+            "B",
+            "O"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Princesse Timide",
+          "normalized": "PRINCESSETIMIDE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "P",
+            "R",
+            "I",
+            "N",
+            "C",
+            "E",
+            "S",
+            "T",
+            "M",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ゼンノエルシド",
+      "horse": "ゼンノエルシド",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｃａｅｒｌｅｏｎ",
+          "normalized": "CAERLEON",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "A",
+            "E",
+            "R",
+            "L",
+            "O",
+            "N"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｅｍｂｌａ",
+          "normalized": "EMBLA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "E",
+            "M",
+            "B",
+            "L",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ソウルスターリング",
+      "horse": "ソウルスターリング",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｆｒａｎｋｅｌ",
+          "normalized": "FRANKEL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "R",
+            "A",
+            "N",
+            "K",
+            "E",
+            "L"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:タイキシャトル",
+      "horse": "タイキシャトル",
+      "wins": 4,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｄｅｖｉｌ’ｓ Ｂａｇ",
+          "normalized": "DEVILSBAG",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "E",
+            "V",
+            "I",
+            "L",
+            "S",
+            "B",
+            "A",
+            "G"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｗｅｌｓｈ Ｍｕｆｆｉｎ",
+          "normalized": "WELSHMUFFIN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "W",
+            "E",
+            "L",
+            "S",
+            "H",
+            "M",
+            "U",
+            "F",
+            "I",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:タイキフォーチュン",
+      "horse": "タイキフォーチュン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Seattle Dancer",
+          "normalized": "SEATTLEDANCER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "A",
+            "T",
+            "L",
+            "D",
+            "N",
+            "C",
+            "R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:タイキブリザード",
+      "horse": "タイキブリザード",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Seattle Slew",
+          "normalized": "SEATTLESLEW",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "A",
+            "T",
+            "L",
+            "W"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Tree of Knowledge",
+          "normalized": "TREEOFKNOWLEDGE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "T",
+            "R",
+            "E",
+            "O",
+            "F",
+            "K",
+            "N",
+            "W",
+            "L",
+            "D",
+            "G"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:タップダンスシチー",
+      "horse": "タップダンスシチー",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｐｌｅａｓａｎｔ Ｔａｐ",
+          "normalized": "PLEASANTTAP",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "P",
+            "L",
+            "E",
+            "A",
+            "S",
+            "N",
+            "T"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ａｌｌ Ｄａｎｃｅ",
+          "normalized": "ALLDANCE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "L",
+            "D",
+            "N",
+            "C",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ダノンファラオ",
+      "horse": "ダノンファラオ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "American Pharoah",
+          "normalized": "AMERICANPHAROAH",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "M",
+            "E",
+            "R",
+            "I",
+            "C",
+            "N",
+            "P",
+            "H",
+            "O"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ダノンレジェンド",
+      "horse": "ダノンレジェンド",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Macho Uno",
+          "normalized": "MACHOUNO",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "A",
+            "C",
+            "H",
+            "O",
+            "U",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:タワーオブロンドン",
+      "horse": "タワーオブロンドン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Raven's Pass",
+          "normalized": "RAVENSPASS",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "R",
+            "A",
+            "V",
+            "E",
+            "N",
+            "S",
+            "P"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ダンツシアトル",
+      "horse": "ダンツシアトル",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Seattle Slew",
+          "normalized": "SEATTLESLEW",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "A",
+            "T",
+            "L",
+            "W"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Call Me Goddess",
+          "normalized": "CALLMEGODDESS",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "A",
+            "L",
+            "M",
+            "E",
+            "G",
+            "O",
+            "D",
+            "S"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:テスタマッタ",
+      "horse": "テスタマッタ",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｔａｐｉｔ",
+          "normalized": "TAPIT",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "T",
+            "A",
+            "P",
+            "I"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｄｉｆｆｉｃｕｌｔ",
+          "normalized": "DIFFICULT",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "I",
+            "F",
+            "C",
+            "U",
+            "L",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:トーヨーシアトル",
+      "horse": "トーヨーシアトル",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Deputy Minister",
+          "normalized": "DEPUTYMINISTER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "E",
+            "P",
+            "U",
+            "T",
+            "Y",
+            "M",
+            "I",
+            "N",
+            "S",
+            "R"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "City Dance",
+          "normalized": "CITYDANCE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "I",
+            "T",
+            "Y",
+            "D",
+            "A",
+            "N",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ネームヴァリュー",
+      "horse": "ネームヴァリュー",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Honour and Glory",
+          "normalized": "HONOURANDGLORY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "H",
+            "O",
+            "N",
+            "U",
+            "R",
+            "A",
+            "D",
+            "G",
+            "L",
+            "Y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ノボトゥルー",
+      "horse": "ノボトゥルー",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｂｒｏａｄ Ｂｒｕｓｈ",
+          "normalized": "BROADBRUSH",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "B",
+            "R",
+            "O",
+            "A",
+            "D",
+            "U",
+            "S",
+            "H"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｎａｓｔｉｑｕｅ",
+          "normalized": "NASTIQUE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "N",
+            "A",
+            "S",
+            "T",
+            "I",
+            "Q",
+            "U",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ヒシアケボノ",
+      "horse": "ヒシアケボノ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Woodman",
+          "normalized": "WOODMAN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "W",
+            "O",
+            "D",
+            "M",
+            "A",
+            "N"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Mysteries",
+          "normalized": "MYSTERIES",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "Y",
+            "S",
+            "T",
+            "E",
+            "R",
+            "I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ヒシアマゾン",
+      "horse": "ヒシアマゾン",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Theatrical",
+          "normalized": "THEATRICAL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "T",
+            "H",
+            "E",
+            "A",
+            "R",
+            "I",
+            "C",
+            "L"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Katies",
+          "normalized": "KATIES",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "K",
+            "A",
+            "T",
+            "I",
+            "E",
+            "S"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ビワハイジ",
+      "horse": "ビワハイジ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Caerleon",
+          "normalized": "CAERLEON",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "A",
+            "E",
+            "R",
+            "L",
+            "O",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ファインモーション",
+      "horse": "ファインモーション",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｄａｎｅｈｉｌｌ",
+          "normalized": "DANEHILL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "A",
+            "N",
+            "E",
+            "H",
+            "I",
+            "L"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｃｏｃｏｔｔｅ",
+          "normalized": "COCOTTE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "O",
+            "T",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ファビラスラフイン",
+      "horse": "ファビラスラフイン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Fabulous Dancer",
+          "normalized": "FABULOUSDANCER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "A",
+            "B",
+            "U",
+            "L",
+            "O",
+            "S",
+            "D",
+            "N",
+            "C",
+            "E",
+            "R"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Mercalle",
+          "normalized": "MERCALLE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "E",
+            "R",
+            "C",
+            "A",
+            "L"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:フィンガー",
+      "horse": "フィンガー",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Gun Runner",
+          "normalized": "GUNRUNNER",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "U",
+            "N",
+            "R",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:フサイチコンコルド",
+      "horse": "フサイチコンコルド",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Caerleon",
+          "normalized": "CAERLEON",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "A",
+            "E",
+            "R",
+            "L",
+            "O",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ブラックホーク",
+      "horse": "ブラックホーク",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｎｕｒｅｙｅｖ",
+          "normalized": "NUREYEV",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "N",
+            "U",
+            "R",
+            "E",
+            "Y",
+            "V"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｓｉｌｖｅｒ Ｌａｎｅ",
+          "normalized": "SILVERLANE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "I",
+            "L",
+            "V",
+            "E",
+            "R",
+            "A",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:マーベラスクラウン",
+      "horse": "マーベラスクラウン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Miswaki",
+          "normalized": "MISWAKI",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "I",
+            "S",
+            "W",
+            "A",
+            "K"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:マイネルラヴ",
+      "horse": "マイネルラヴ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｓｅｅｋｉｎｇ ｔｈｅ Ｇｏｌｄ",
+          "normalized": "SEEKINGTHEGOLD",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "E",
+            "K",
+            "I",
+            "N",
+            "G",
+            "T",
+            "H",
+            "O",
+            "L",
+            "D"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｈｅａｒｔ ｏｆ Ｊｏｙ",
+          "normalized": "HEARTOFJOY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "H",
+            "E",
+            "A",
+            "R",
+            "T",
+            "O",
+            "F",
+            "J",
+            "Y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:マッドクール",
+      "horse": "マッドクール",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Dark Angel",
+          "normalized": "DARKANGEL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "A",
+            "R",
+            "K",
+            "N",
+            "G",
+            "E",
+            "L"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Mad About You",
+          "normalized": "MADABOUTYOU",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "M",
+            "A",
+            "D",
+            "B",
+            "O",
+            "U",
+            "T",
+            "Y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ミスターメロディ",
+      "horse": "ミスターメロディ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Scat Daddy",
+          "normalized": "SCATDADDY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "C",
+            "A",
+            "T",
+            "D",
+            "Y"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Trusty Lady",
+          "normalized": "TRUSTYLADY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "T",
+            "R",
+            "U",
+            "S",
+            "Y",
+            "L",
+            "A",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:メイショウドトウ",
+      "horse": "メイショウドトウ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｂｉｇｓｔｏｎｅ",
+          "normalized": "BIGSTONE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "B",
+            "I",
+            "G",
+            "S",
+            "T",
+            "O",
+            "N",
+            "E"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｐｒｉｎｃｅｓｓ Ｒｅｅｍａ",
+          "normalized": "PRINCESSREEMA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "P",
+            "R",
+            "I",
+            "N",
+            "C",
+            "E",
+            "S",
+            "M",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:モーニン",
+      "horse": "モーニン",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｈｅｎｎｙ Ｈｕｇｈｅｓ",
+          "normalized": "HENNYHUGHES",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "H",
+            "E",
+            "N",
+            "Y",
+            "U",
+            "G",
+            "S"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｇｉｇｇｌｙ",
+          "normalized": "GIGGLY",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "G",
+            "I",
+            "L",
+            "Y"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:モズアスコット",
+      "horse": "モズアスコット",
+      "wins": 2,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Frankel",
+          "normalized": "FRANKEL",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "F",
+            "R",
+            "A",
+            "N",
+            "K",
+            "E",
+            "L"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "India",
+          "normalized": "INDIA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "I",
+            "N",
+            "D",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:モズスーパーフレア",
+      "horse": "モズスーパーフレア",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Speightstown",
+          "normalized": "SPEIGHTSTOWN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "P",
+            "E",
+            "I",
+            "G",
+            "H",
+            "T",
+            "O",
+            "W",
+            "N"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Christies Treasure",
+          "normalized": "CHRISTIESTREASURE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "H",
+            "R",
+            "I",
+            "S",
+            "T",
+            "E",
+            "A",
+            "U"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ヤマニンパラダイス",
+      "horse": "ヤマニンパラダイス",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Danzig",
+          "normalized": "DANZIG",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "D",
+            "A",
+            "N",
+            "Z",
+            "I",
+            "G"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Althea",
+          "normalized": "ALTHEA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "L",
+            "T",
+            "H",
+            "E"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:リエノテソーロ",
+      "horse": "リエノテソーロ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Speightstown",
+          "normalized": "SPEIGHTSTOWN",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "S",
+            "P",
+            "E",
+            "I",
+            "G",
+            "H",
+            "T",
+            "O",
+            "W",
+            "N"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Akilina",
+          "normalized": "AKILINA",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "K",
+            "I",
+            "L",
+            "N"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:リンドシェーバー",
+      "horse": "リンドシェーバー",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Alydar",
+          "normalized": "ALYDAR",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "A",
+            "L",
+            "Y",
+            "D",
+            "R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:レモンポップ",
+      "horse": "レモンポップ",
+      "wins": 6,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Lemon Drop Kid",
+          "normalized": "LEMONDROPKID",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "L",
+            "E",
+            "M",
+            "O",
+            "N",
+            "D",
+            "R",
+            "P",
+            "K",
+            "I"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Unreachable",
+          "normalized": "UNREACHABLE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "U",
+            "N",
+            "R",
+            "E",
+            "A",
+            "C",
+            "H",
+            "B",
+            "L"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ローブデコルテ",
+      "horse": "ローブデコルテ",
+      "wins": 1,
+      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
+      "inputIssues": [
+        {
+          "target": "sire",
+          "value": "Ｃｏｚｚｅｎｅ",
+          "normalized": "COZZENE",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "O",
+            "Z",
+            "E",
+            "N"
+          ]
+        },
+        {
+          "target": "dam",
+          "value": "Ｃｏｌｏｒ ｏｆ Ｇｏｌｄ",
+          "normalized": "COLOROFGOLD",
+          "reason": "unsupported-characters",
+          "unsupportedCharacters": [
+            "C",
+            "O",
+            "L",
+            "R",
+            "F",
+            "G",
+            "D"
+          ]
+        }
+      ]
     }
   ],
   "warnings": []
