@@ -13,6 +13,10 @@
   overflow: auto;
 }
 
+#horse-board {
+  justify-items: start;
+}
+
 .wordle-board.compact {
   min-height: 40px;
   max-height: 132px;
