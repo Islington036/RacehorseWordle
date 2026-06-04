@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "generatedAt": "2026-06-04",
+    "note": "Seed audit file. Run npm run generate:data to replace with generated audit evidence."
+  },
+  "wins": [],
+  "excluded": [],
+  "warnings": [
+    "Seed data is intentionally small and should be refreshed before release."
+  ]
+}

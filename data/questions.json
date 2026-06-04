@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "definition": "domestic-flat-top-level-at-run-date",
+    "fromYear": 1990,
+    "generatedAt": "2026-06-04",
+    "sources": [
+      "JRA",
+      "NAR",
+      "Japanese Wikipedia",
+      "JBIS cross-check pending"
+    ],
+    "note": "Seed data; run npm run generate:data to refresh from public sources."
+  },
+  "horses": [
+    {
+      "id": "seed:deep-impact",
+      "nameJa": "ディープインパクト",
+      "nameKana": "ディープインパクト",
+      "nameEn": "Deep Impact",
+      "country": "JPN",
+      "birthYear": 2002,
+      "sex": "M",
+      "sire": {
+        "nameJa": "サンデーサイレンス",
+        "nameEn": "Sunday Silence",
+        "country": "USA",
+        "aliases": ["Sunday Silence"]
+      },
+      "dam": {
+        "nameJa": "ウインドインハーヘア",
+        "nameEn": "Wind in Her Hair",
+        "country": "IRE",
+        "aliases": ["Wind in Her Hair"]
+      },
+      "wins": [
+        {
+          "date": "2005-05-29",
+          "year": 2005,
+          "raceId": "jra:derby",
+          "raceNameJa": "日本ダービー",
+          "jurisdiction": "JRA",
+          "gradeAtRun": "GI",
+          "course": "東京",
+          "surface": "turf",
+          "distanceM": 2400,
+          "sourceUrls": ["https://www.jra.go.jp/datafile/seiseki/g1/derby/result/derby2005.html"]
+        }
+      ],
+      "sourceUrls": {
+        "pedigree": "https://ja.wikipedia.org/wiki/ディープインパクト_(競走馬)",
+        "raceResults": ["https://www.jra.go.jp/datafile/seiseki/g1/derby/result/derby2005.html"]
+      }
+    },
+    {
+      "id": "seed:almond-eye",
+      "nameJa": "アーモンドアイ",
+      "nameKana": "アーモンドアイ",
+      "nameEn": "Almond Eye",
+      "country": "JPN",
+      "birthYear": 2015,
+      "sex": "F",
+      "sire": {
+        "nameJa": "ロードカナロア",
+        "nameEn": "Lord Kanaloa",
+        "country": "JPN",
+        "aliases": ["Lord Kanaloa"]
+      },
+      "dam": {
+        "nameJa": "フサイチパンドラ",
+        "nameEn": "Fusaichi Pandora",
+        "country": "JPN",
+        "aliases": ["Fusaichi Pandora"]
+      },
+      "wins": [
+        {
+          "date": "2018-11-25",
+          "year": 2018,
+          "raceId": "jra:jc",
+          "raceNameJa": "ジャパンカップ",
+          "jurisdiction": "JRA",
+          "gradeAtRun": "GI",
+          "course": "東京",
+          "surface": "turf",
+          "distanceM": 2400,
+          "sourceUrls": ["https://www.jra.go.jp/datafile/seiseki/g1/jc/result/jc2018.html"]
+        }
+      ],
+      "sourceUrls": {
+        "pedigree": "https://ja.wikipedia.org/wiki/アーモンドアイ",
+        "raceResults": ["https://www.jra.go.jp/datafile/seiseki/g1/jc/result/jc2018.html"]
+      }
+    },
+    {
+      "id": "seed:copano-rickey",
+      "nameJa": "コパノリッキー",
+      "nameKana": "コパノリッキー",
+      "nameEn": "Copano Rickey",
+      "country": "JPN",
+      "birthYear": 2010,
+      "sex": "M",
+      "sire": {
+        "nameJa": "ゴールドアリュール",
+        "nameEn": "Gold Allure",
+        "country": "JPN",
+        "aliases": ["Gold Allure"]
+      },
+      "dam": {
+        "nameJa": "コパノニキータ",
+        "nameEn": "Copano Nikita",
+        "country": "JPN",
+        "aliases": ["Copano Nikita"]
+      },
+      "wins": [
+        {
+          "date": "2016-06-29",
+          "year": 2016,
+          "raceId": "nar:teiosho",
+          "raceNameJa": "帝王賞",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "JpnI",
+          "course": "大井",
+          "surface": "dirt",
+          "distanceM": 2000,
+          "sourceUrls": ["https://ja.wikipedia.org/wiki/帝王賞"]
+        }
+      ],
+      "sourceUrls": {
+        "pedigree": "https://ja.wikipedia.org/wiki/コパノリッキー",
+        "raceResults": ["https://ja.wikipedia.org/wiki/帝王賞"]
+      }
+    }
+  ]
+}

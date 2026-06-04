@@ -1,0 +1,358 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  height: 64px;
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  gap: 12px;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar h1 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-soft);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.game-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  width: min(1180px, calc(100% - 32px));
+  margin: 24px auto 32px;
+}
+
+.play-area {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.board-block {
+  width: min(100%, 760px);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.section-heading strong {
+  color: var(--accent);
+  font-size: 0.86rem;
+}
+
+.input-strip {
+  width: min(100%, 760px);
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel-soft);
+}
+
+.input-strip > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #0d160e;
+  font-weight: 800;
+}
+
+#current-input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+#current-input.placeholder {
+  color: var(--faint);
+}
+
+.input-strip small {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.target-tabs {
+  width: min(100%, 760px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.target-tabs button {
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-soft);
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.target-tabs button.selected {
+  border-color: var(--accent);
+  background: #253125;
+  color: var(--text);
+}
+
+.reveal-line {
+  min-height: 20px;
+  margin: -4px 0 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.stats-panel {
+  align-self: start;
+  position: sticky;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(25, 29, 27, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat-grid div {
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+.stat-grid span,
+.current-round dt {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.stat-grid strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.5rem;
+}
+
+.current-round h2,
+.history-list h2,
+.wins h3 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+}
+
+.current-round p {
+  margin: 0 0 12px;
+  font-weight: 800;
+}
+
+.current-round dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.current-round dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.current-round dd {
+  margin: 0;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.history-list ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.toast {
+  position: fixed;
+  z-index: 10;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(90vw, 520px);
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-weight: 700;
+}
+
+.toast[data-tone="good"] {
+  background: var(--correct);
+}
+
+.toast[data-tone="warn"] {
+  background: var(--danger);
+}
+
+.result-modal {
+  width: min(560px, calc(100% - 32px));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.result-modal::backdrop {
+  background: rgba(0, 0, 0, 0.64);
+}
+
+.modal-shell {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+}
+
+.modal-shell .close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.modal-shell h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.answer-card {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 8px 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-soft);
+}
+
+.answer-card span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.answer-card strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.wins ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.primary-button {
+  height: 46px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--correct);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-panel {
+    position: static;
+    width: min(100%, 760px);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .game-layout {
+    width: min(100% - 20px, 1180px);
+    margin-top: 16px;
+  }
+
+  .input-strip {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .input-strip small {
+    grid-column: 2;
+  }
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Racehorse Wordle</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/wordle.css">
+  <script defer src="data/questions.embedded.js"></script>
+  <script defer src="src/config.js"></script>
+  <script defer src="src/normalize.js"></script>
+  <script defer src="src/evaluator.js"></script>
+  <script defer src="src/storage.js"></script>
+  <script defer src="src/question-picker.js"></script>
+  <script defer src="src/game-state.js"></script>
+  <script defer src="src/ui.js"></script>
+  <script defer src="src/main.js"></script>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <button id="stats-button" class="icon-button" type="button" aria-label="統計を表示" title="統計">
+        <span aria-hidden="true">▥</span>
+      </button>
+      <h1>Racehorse Wordle</h1>
+      <button id="reset-button" class="icon-button" type="button" aria-label="現在の問題をリセット" title="リセット">
+        <span aria-hidden="true">↻</span>
+      </button>
+    </header>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <main class="game-layout">
+      <section class="play-area" aria-label="ゲーム">
+        <div class="board-block horse-block">
+          <div class="section-heading">
+            <span>馬名</span>
+            <strong>5回</strong>
+          </div>
+          <div id="horse-board" class="wordle-board" aria-label="馬名ボード"></div>
+        </div>
+
+        <div class="input-strip" aria-live="polite">
+          <span id="current-target">父</span>
+          <strong id="current-input" class="placeholder">入力待ち</strong>
+          <small id="input-hint">0文字 / 0/15</small>
+        </div>
+
+        <div class="target-tabs" role="group" aria-label="入力対象">
+          <button type="button" data-target="sire" class="selected" aria-pressed="true">父</button>
+          <button type="button" data-target="dam" aria-pressed="false">母</button>
+          <button type="button" data-target="horse" aria-pressed="false">馬名</button>
+        </div>
+
+        <div class="board-block pedigree-block">
+          <div class="section-heading">
+            <span id="pedigree-title">父 Wordle</span>
+            <strong id="pedigree-count">血統 0/15</strong>
+          </div>
+          <p id="reveal-line" class="reveal-line">父母は15回まで合算で挑戦できます</p>
+          <div id="pedigree-board" class="wordle-board compact" aria-label="血統ボード"></div>
+        </div>
+
+        <section id="keyboard" class="keyboard" aria-label="かなキーボード"></section>
+      </section>
+
+      <aside id="stats-panel" class="stats-panel" aria-label="スコアと履歴"></aside>
+    </main>
+  </div>
+
+  <dialog id="result-modal" class="result-modal">
+    <form method="dialog" class="modal-shell">
+      <button id="close-modal" class="icon-button close" type="button" aria-label="閉じる">×</button>
+      <h2 id="modal-title">統計</h2>
+      <div id="modal-body"></div>
+      <button id="next-question" class="primary-button" type="button">次の問題</button>
+    </form>
+  </dialog>
+</body>
+</html>

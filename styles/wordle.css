@@ -1,0 +1,143 @@
+.wordle-board {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.wordle-board.compact {
+  max-height: 420px;
+  overflow: auto;
+}
+
+.tile-row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(30px, 1fr));
+  gap: 6px;
+  min-width: min(100%, calc(var(--cols) * 44px));
+}
+
+.tile {
+  aspect-ratio: 1;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: clamp(0.85rem, 2.8vw, 1.28rem);
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+}
+
+.tile:not(.empty) {
+  border-color: #555c55;
+  animation: pop 90ms ease-out;
+}
+
+.tile.correct,
+.tile.present,
+.tile.absent {
+  animation: flip 480ms ease both;
+  animation-delay: var(--flip-delay);
+}
+
+.tile.correct {
+  border-color: var(--correct);
+  background: var(--correct);
+}
+
+.tile.present {
+  border-color: var(--present);
+  background: var(--present);
+}
+
+.tile.absent {
+  border-color: var(--absent);
+  background: var(--absent);
+}
+
+.keyboard {
+  width: min(100%, 760px);
+  display: grid;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.key {
+  min-width: 0;
+  width: 9%;
+  max-width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 5px;
+  background: #818384;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.key.wide {
+  width: 13%;
+  max-width: 72px;
+  background: #5f6660;
+  font-size: 0.84rem;
+}
+
+.key:hover,
+.key:focus-visible {
+  filter: brightness(1.15);
+  outline: none;
+}
+
+.shake {
+  animation: shake 260ms linear;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); }
+  to { transform: scale(1); }
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    background: transparent;
+  }
+  45% {
+    transform: rotateX(90deg);
+    background: transparent;
+  }
+  55% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .tile.correct,
+  .tile.present,
+  .tile.absent,
+  .shake {
+    animation: none;
+  }
+}

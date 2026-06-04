@@ -1,0 +1,15 @@
+{
+  "name": "racehorse-wordle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A static Wordle-style game for Japanese racehorse GI/JpnI winners.",
+  "scripts": {
+    "generate:data": "node scripts/generate-data.js",
+    "validate:data": "node scripts/validate-data.js",
+    "test": "node tests/run-tests.js",
+    "serve": "python3 -m http.server 4173"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
