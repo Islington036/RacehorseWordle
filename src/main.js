@@ -34,6 +34,16 @@
   }
 
   function bindEvents() {
+    bindInputEvents();
+    bindKeyboardEvents();
+    bindHistoryEvents();
+    bindDialogEvents();
+    bindStatsEvents();
+    document.querySelector("#sire-hint-button").addEventListener("click", () => useSireHint());
+    document.addEventListener("click", () => focusNativeInput());
+  }
+
+  function bindInputEvents() {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("compositionstart", () => {
       composing = true;
@@ -58,7 +68,9 @@
       }
       syncNativeInput();
     });
+  }
 
+  function bindKeyboardEvents() {
     document.querySelector("#keyboard").addEventListener("click", (event) => {
       const button = event.target.closest("[data-key]");
       if (!button) return;
@@ -69,30 +81,35 @@
       else appendText(key);
       focusNativeInput();
     });
+  }
 
+  function bindHistoryEvents() {
     document.querySelector("#history-tabs").addEventListener("click", (event) => {
       const button = event.target.closest("[data-history-target]");
       if (!button) return;
       setHistoryTarget(button.dataset.historyTarget);
     });
+  }
 
-    document.querySelector("#next-question").addEventListener("click", () => RHW.ui.openNextConfirm());
-    document.querySelector("#confirm-next-question").addEventListener("click", () => {
-      RHW.ui.closeNextConfirm();
-      nextQuestion();
+  function bindDialogEvents() {
+    document.querySelector("#next-question").addEventListener("click", () => nextQuestion());
+    document.querySelector("#reset-button").addEventListener("click", () => RHW.ui.openResetConfirm());
+    document.querySelector("#confirm-reset-question").addEventListener("click", () => {
+      RHW.ui.closeResetConfirm();
+      forfeitQuestion();
     });
-    document.querySelector("#cancel-next-question").addEventListener("click", () => {
-      RHW.ui.closeNextConfirm();
+    document.querySelector("#cancel-reset-question").addEventListener("click", () => {
+      RHW.ui.closeResetConfirm();
       focusNativeInput();
     });
+    document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
+  }
+
+  function bindStatsEvents() {
     document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state));
-    document.querySelector("#reset-button").addEventListener("click", () => forfeitQuestion());
-    document.querySelector("#sire-hint-button").addEventListener("click", () => useSireHint());
     document.querySelector("#stats-panel").addEventListener("click", (event) => {
       if (event.target.closest("#clear-history")) clearHistory();
     });
-    document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
-    document.addEventListener("click", () => focusNativeInput());
   }
 
   function onKeyDown(event) {
@@ -191,6 +208,7 @@
   function forfeitQuestion() {
     const modal = document.querySelector("#result-modal");
     if (modal.open) modal.close();
+    RHW.ui.closeResetConfirm();
     clearInputFeedback();
     if (state.round.status === "playing") {
       state.round = RHW.forfeitRound(state.round);
@@ -220,7 +238,7 @@
   function nextQuestion(message) {
     const modal = document.querySelector("#result-modal");
     if (modal.open) modal.close();
-    RHW.ui.closeNextConfirm();
+    RHW.ui.closeResetConfirm();
     clearInputFeedback();
     submitAfterComposition = false;
     const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id, {

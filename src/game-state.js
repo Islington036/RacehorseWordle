@@ -66,10 +66,6 @@
     };
   }
 
-  function getTargetLimit() {
-    return ATTEMPT_LIMIT;
-  }
-
   function getAttemptsUsed(round) {
     return round.attemptsUsed || 0;
   }

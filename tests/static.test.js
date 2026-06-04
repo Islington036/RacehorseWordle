@@ -7,18 +7,40 @@ const indexHtml = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const layoutCss = fs.readFileSync(path.join(root, "styles", "layout.css"), "utf8");
 const wordleCss = fs.readFileSync(path.join(root, "styles", "wordle.css"), "utf8");
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-const sourceFiles = fs.readdirSync(path.join(root, "src"))
-  .filter((file) => file.endsWith(".js"))
-  .map((file) => fs.readFileSync(path.join(root, "src", file), "utf8"));
+const scriptPaths = Array.from(indexHtml.matchAll(/<script[^>]+src="([^"]+)"/g), (match) => match[1].split("?")[0]);
+const shippedSourcePaths = scriptPaths.filter((file) => file.startsWith("src/"));
+const sourceFiles = shippedSourcePaths.map((file) => fs.readFileSync(path.join(root, file), "utf8"));
 const sourceText = sourceFiles.join("\n");
+const orphanSources = listJsFiles(path.join(root, "src"))
+  .map((file) => path.relative(root, file).split(path.sep).join("/"))
+  .filter((file) => !shippedSourcePaths.includes(file));
+
+function listJsFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) return listJsFiles(file);
+    return entry.name.endsWith(".js") ? [file] : [];
+  });
+}
+
+function indexOfScript(file) {
+  return scriptPaths.indexOf(file);
+}
 
 assert.ok(indexHtml.includes("data/questions.embedded.js"), "embedded data script is required for file:// use");
 assert.ok(indexHtml.includes("src/kana-input.js"), "kana input helper is loaded for dakuten and handakuten keys");
+assert.ok(indexHtml.includes("src/ui/constants.js"), "UI constants are loaded explicitly");
+assert.ok(indexHtml.includes("src/ui/renderers.js"), "UI renderers are loaded explicitly");
+assert.ok(indexHtml.includes("src/ui/coordinator.js"), "UI coordinator is loaded explicitly");
+assert.ok(indexOfScript("src/ui/constants.js") < indexOfScript("src/ui/renderers.js"), "UI constants load before renderers");
+assert.ok(indexOfScript("src/ui/renderers.js") < indexOfScript("src/ui/coordinator.js"), "UI renderers load before UI coordinator");
+assert.ok(indexOfScript("src/ui/coordinator.js") < indexOfScript("src/main.js"), "UI coordinator loads before app bootstrap");
 assert.ok(indexHtml.includes("native-input"), "native input is present for IME text entry");
 assert.ok(indexHtml.includes("キーボードで直接入力できます"), "native input guidance replaces the waiting placeholder");
 assert.ok(indexHtml.includes("sire-hint-button"), "sire reveal hint button is present");
-assert.ok(indexHtml.includes("confirm-next-modal"), "next-question confirmation dialog is present");
-assert.ok(indexHtml.includes("本当にリセットしますか？"), "next-question confirmation copy is present");
+assert.ok(indexHtml.includes("confirm-reset-modal"), "reset confirmation dialog is present");
+assert.ok(indexHtml.includes("本当にリセットしますか？"), "reset confirmation copy is present");
+assert.ok(indexHtml.includes("現在の問題を失敗扱い"), "reset confirmation explains forfeit behavior");
 assert.ok(indexHtml.includes("history-tabs"), "history tabs are present for switching horse/sire/dam evaluations");
 assert.ok(indexHtml.includes("data-history-target=\"sire\""), "sire history tab is present");
 assert.ok(indexHtml.includes("data-history-target=\"dam\""), "dam history tab is present");
@@ -39,10 +61,14 @@ assert.ok(sourceText.includes("使用できない文字が含まれています"
 assert.ok(sourceText.includes("forfeitRound"), "refresh button should forfeit and reveal the current answer");
 assert.ok(sourceText.includes("履歴リセット"), "stats panel includes a history reset button");
 assert.ok(sourceText.includes("absent-known"), "keyboard can mark globally absent letters");
-assert.ok(sourceText.includes("HORSE_BOARD_COLS = 9"), "horse board uses nine fixed boxes for the Japanese edition");
-assert.ok(sourceText.includes("PEDIGREE_BOARD_COLS = 18"), "sire and dam boards use eighteen fixed boxes");
-assert.ok(sourceText.includes("openNextConfirm"), "next-question button opens confirmation dialog");
-assert.ok(sourceText.includes("closeNextConfirm"), "confirmation dialog can be closed before or after reset");
+assert.ok(sourceText.includes("horseBoardCols: 9"), "horse board uses nine fixed boxes for the Japanese edition");
+assert.ok(sourceText.includes("pedigreeBoardCols: 18"), "sire and dam boards use eighteen fixed boxes");
+assert.ok(sourceText.includes("openResetConfirm"), "topbar reset opens a confirmation dialog before forfeit");
+assert.ok(sourceText.includes("closeResetConfirm"), "reset confirmation dialog can be closed before or after reset");
+assert.ok(!sourceText.includes("openNextConfirm"), "result next-question confirmation must not remain");
+assert.ok(sourceText.includes('"#reset-button").addEventListener("click", () => RHW.ui.openResetConfirm())'), "topbar reset should ask before forfeiting");
+assert.ok(sourceText.includes('"#next-question").addEventListener("click", () => nextQuestion())'), "result next button should move directly to the next question");
+assert.ok(sourceText.includes('"#confirm-reset-question").addEventListener("click", () =>'), "reset confirm button should own the forfeit path");
 assert.ok(!indexHtml.includes("race-wins.audit.json"), "public page must not reference audit JSON");
 assert.ok(!fs.existsSync(path.join(root, "README.md")), "README.md should be removed for this release prep");
 assert.strictEqual(packageJson.scripts.check, "npm test && npm run validate:data", "release check script should run tests and data validation");
@@ -51,6 +77,7 @@ assert.ok(!layoutCss.includes(".reveal-line"), "unused reveal line styles should
 assert.ok(!layoutCss.includes(".section-heading strong"), "unused section heading strong styles should not remain");
 assert.ok(!layoutCss.includes(".legend-panel .legend-note"), "unused legend note styles should not remain");
 assert.ok(!wordleCss.includes(".tile-row.reserved"), "unused reserved row styles should not remain");
+assert.deepStrictEqual(orphanSources, [], "all runtime src files should be loaded by index.html");
 
 for (const source of sourceFiles) {
   assert.ok(!/\bfetch\s*\(/.test(source), "runtime source must not fetch local JSON for file:// support");

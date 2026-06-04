@@ -1,29 +1,9 @@
 (function attachUi(root) {
   const RHW = root.RHW;
+  const UI = RHW.UI_CONSTANTS;
+  const renderers = RHW.uiRenderers;
 
   const els = {};
-  const HORSE_BOARD_COLS = 9;
-  const PEDIGREE_BOARD_COLS = 18;
-  const KANA_ROWS = [
-    ["ワ", "ラ", "ヤ", "マ", "ハ", "ナ", "タ", "サ", "カ", "ア"],
-    ["ヲ", "リ", "", "ミ", "ヒ", "ニ", "チ", "シ", "キ", "イ"],
-    ["ン", "ル", "ユ", "ム", "フ", "ヌ", "ツ", "ス", "ク", "ウ"],
-    ["", "レ", "", "メ", "ヘ", "ネ", "テ", "セ", "ケ", "エ"],
-    ["", "ロ", "ヨ", "モ", "ホ", "ノ", "ト", "ソ", "コ", "オ"],
-    ["", "", "", "", "小", "゛", "゜", "ー", "消", "決定"]
-  ];
-  const PLACEHOLDER_INPUT = "キーボードで直接入力できます";
-  const KEY_EQUIVALENTS = new Map(Object.entries({
-    ァ: "ア", ィ: "イ", ゥ: "ウ", ェ: "エ", ォ: "オ",
-    ャ: "ヤ", ュ: "ユ", ョ: "ヨ", ッ: "ツ", ヮ: "ワ",
-    ヵ: "カ", ヶ: "ケ",
-    ガ: "カ", ギ: "キ", グ: "ク", ゲ: "ケ", ゴ: "コ",
-    ザ: "サ", ジ: "シ", ズ: "ス", ゼ: "セ", ゾ: "ソ",
-    ダ: "タ", ヂ: "チ", ヅ: "ツ", デ: "テ", ド: "ト",
-    バ: "ハ", ビ: "ヒ", ブ: "フ", ベ: "ヘ", ボ: "ホ",
-    パ: "ハ", ピ: "ヒ", プ: "フ", ペ: "ヘ", ポ: "ホ",
-    ヴ: "ウ"
-  }));
 
   function initElements() {
     Object.assign(els, {
@@ -41,88 +21,13 @@
       modal: document.querySelector("#result-modal"),
       modalTitle: document.querySelector("#modal-title"),
       modalBody: document.querySelector("#modal-body"),
-      confirmModal: document.querySelector("#confirm-next-modal"),
+      resetConfirmModal: document.querySelector("#confirm-reset-modal"),
       nextButton: document.querySelector("#next-question")
     });
   }
 
-  function createTile(char, state, delay) {
-    const tile = document.createElement("span");
-    tile.className = `tile ${state || "empty"}`;
-    tile.textContent = char || "";
-    tile.style.setProperty("--flip-delay", `${delay || 0}ms`);
-    return tile;
-  }
-
-  function renderBoard(container, options) {
-    const { answer, guesses, limit, currentInput, showInput, minRows, cols, animateAttempt } = options;
-    container.innerHTML = "";
-    const colCount = Math.max(cols || RHW.splitAnswer(answer.display).length || 1, 1);
-    container.style.setProperty("--cols", colCount);
-    const rows = [];
-
-    guesses.forEach((guess, index) => {
-      const chars = RHW.splitAnswer(guess.value);
-      rows.push({
-        chars,
-        states: guess.evaluation.map((item) => item.state),
-        cols: Math.max(chars.length, 1),
-        attempt: guess.attempt || index + 1,
-        evaluated: true
-      });
-    });
-
-    if (showInput && currentInput && guesses.length < limit) {
-      const chars = RHW.splitAnswer(currentInput);
-      rows.push({
-        chars,
-        states: [],
-        cols: Math.max(chars.length, 1),
-        active: true
-      });
-    }
-
-    while (rows.length < (minRows || 0)) {
-      rows.push({ chars: [], states: [] });
-    }
-
-    rows.forEach((row) => {
-      const rowEl = document.createElement("div");
-      const shouldAnimate = row.evaluated && row.attempt === animateAttempt;
-      rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${shouldAnimate ? " animate" : " settled"}${row.active ? " active" : ""}`;
-      const rowCols = Math.max(row.cols || colCount, colCount);
-      rowEl.style.setProperty("--cols", rowCols);
-      for (let index = 0; index < rowCols; index += 1) {
-        rowEl.append(createTile(row.chars[index], row.states[index], index * 80));
-      }
-      container.append(rowEl);
-    });
-
-    container.scrollTop = container.scrollHeight;
-  }
-
   function renderKeyboard() {
-    els.keyboard.innerHTML = "";
-    KANA_ROWS.forEach((row) => {
-      const rowEl = document.createElement("div");
-      rowEl.className = row.includes("決定") ? "keyboard-row utility-row" : "keyboard-row kana-row";
-      row.forEach((key) => {
-        if (!key) {
-          const spacer = document.createElement("span");
-          spacer.className = "key-spacer";
-          spacer.setAttribute("aria-hidden", "true");
-          rowEl.append(spacer);
-          return;
-        }
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = `key${key.length > 1 ? " wide" : ""}${key === "決定" ? " submit" : ""}`;
-        button.textContent = key;
-        button.dataset.key = key;
-        rowEl.append(button);
-      });
-      els.keyboard.append(rowEl);
-    });
+    renderers.renderKeyboard(els.keyboard);
   }
 
   function setToast(message, tone) {
@@ -195,12 +100,12 @@
 
     renderHistoryTabs(historyTarget);
     els.currentTarget.textContent = "入力";
-    els.currentInput.textContent = round.currentInput || PLACEHOLDER_INPUT;
+    els.currentInput.textContent = round.currentInput || UI.placeholderInput;
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
     els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
     renderSireHint(round);
 
-    renderBoard(els.horseBoard, {
+    renderers.renderBoard(els.horseBoard, {
       answer: historyAnswer,
       guesses: historyGuesses,
       limit: RHW.ATTEMPT_LIMIT,
@@ -211,30 +116,30 @@
       animateAttempt: round.justSubmittedAttempt
     });
 
-    renderBoard(els.sireBoard, {
+    renderers.renderBoard(els.sireBoard, {
       answer: answers.sire,
       guesses: sireGuesses,
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: "",
       showInput: false,
       minRows: 1,
-      cols: PEDIGREE_BOARD_COLS,
+      cols: UI.pedigreeBoardCols,
       animateAttempt: round.justSubmittedAttempt
     });
 
-    renderBoard(els.damBoard, {
+    renderers.renderBoard(els.damBoard, {
       answer: answers.dam,
       guesses: damGuesses,
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: "",
       showInput: false,
       minRows: 1,
-      cols: PEDIGREE_BOARD_COLS,
+      cols: UI.pedigreeBoardCols,
       animateAttempt: round.justSubmittedAttempt
     });
 
     renderStats(stats, question, round);
-    updateKeyboardState(round, answers);
+    renderers.updateKeyboardState(els.keyboard, round, answers);
   }
 
   function openResultModal(state) {
@@ -266,12 +171,12 @@
     els.modal.showModal();
   }
 
-  function openNextConfirm() {
-    if (!els.confirmModal.open) els.confirmModal.showModal();
+  function openResetConfirm() {
+    if (!els.resetConfirmModal.open) els.resetConfirmModal.showModal();
   }
 
-  function closeNextConfirm() {
-    if (els.confirmModal.open) els.confirmModal.close();
+  function closeResetConfirm() {
+    if (els.resetConfirmModal.open) els.resetConfirmModal.close();
   }
 
   function escapeHtml(value) {
@@ -298,7 +203,7 @@
   }
 
   function getBoardCols(target) {
-    return target === "horse" ? HORSE_BOARD_COLS : PEDIGREE_BOARD_COLS;
+    return target === "horse" ? UI.horseBoardCols : UI.pedigreeBoardCols;
   }
 
   function getPedigreeDisplayGuesses(guesses, solved) {
@@ -317,52 +222,14 @@
     els.sireHintButton.disabled = !canUse;
   }
 
-  function updateKeyboardState(round, answers) {
-    if (!els.keyboard) return;
-    const absentKeys = getGloballyAbsentKeys(round, answers);
-    els.keyboard.querySelectorAll("[data-key]").forEach((button) => {
-      button.classList.toggle("absent-known", absentKeys.has(button.dataset.key));
-    });
-  }
-
-  function getGloballyAbsentKeys(round, answers) {
-    const statesByKey = new Map();
-    const answerKeys = new Set(Object.values(answers).flatMap((answer) => (
-      RHW.splitAnswer(answer.display).map(toKeyboardKey).filter(Boolean)
-    )));
-    ["horse", "sire", "dam"].forEach((target) => {
-      round.targets[target].guesses.forEach((guess) => {
-        guess.evaluation.forEach((item) => {
-          const key = toKeyboardKey(item.char);
-          if (!key) return;
-          const entry = statesByKey.get(key) || { absent: false, included: false };
-          if (item.state === "correct" || item.state === "present") entry.included = true;
-          if (item.state === "absent") entry.absent = true;
-          statesByKey.set(key, entry);
-        });
-      });
-    });
-
-    return new Set(Array.from(statesByKey.entries())
-      .filter(([key, entry]) => entry.absent && !entry.included && !answerKeys.has(key))
-      .map(([key]) => key));
-  }
-
-  function toKeyboardKey(char) {
-    if (!char) return "";
-    const normalized = String(char).normalize("NFKC");
-    if (["小", "゛", "゜", "消", "決定"].includes(normalized)) return "";
-    return KEY_EQUIVALENTS.get(normalized) || normalized;
-  }
-
   const api = {
     initElements,
     render,
     renderKeyboard,
     setToast,
     openResultModal,
-    openNextConfirm,
-    closeNextConfirm
+    openResetConfirm,
+    closeResetConfirm
   };
   root.RHW = Object.assign(RHW, { ui: api });
 })(typeof globalThis !== "undefined" ? globalThis : window);

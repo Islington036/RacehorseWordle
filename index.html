@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="styles/base.css?v=20260605i">
-  <link rel="stylesheet" href="styles/layout.css?v=20260605i">
-  <link rel="stylesheet" href="styles/wordle.css?v=20260605i">
-  <script defer src="data/questions.embedded.js?v=20260605i"></script>
-  <script defer src="src/config.js?v=20260605i"></script>
-  <script defer src="src/normalize.js?v=20260605i"></script>
-  <script defer src="src/evaluator.js?v=20260605i"></script>
-  <script defer src="src/kana-input.js?v=20260605i"></script>
-  <script defer src="src/storage.js?v=20260605i"></script>
-  <script defer src="src/question-picker.js?v=20260605i"></script>
-  <script defer src="src/game-state.js?v=20260605i"></script>
-  <script defer src="src/ui.js?v=20260605i"></script>
-  <script defer src="src/main.js?v=20260605i"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260605j">
+  <link rel="stylesheet" href="styles/layout.css?v=20260605j">
+  <link rel="stylesheet" href="styles/wordle.css?v=20260605j">
+  <script defer src="data/questions.embedded.js?v=20260605j"></script>
+  <script defer src="src/config.js?v=20260605j"></script>
+  <script defer src="src/normalize.js?v=20260605j"></script>
+  <script defer src="src/evaluator.js?v=20260605j"></script>
+  <script defer src="src/kana-input.js?v=20260605j"></script>
+  <script defer src="src/storage.js?v=20260605j"></script>
+  <script defer src="src/question-picker.js?v=20260605j"></script>
+  <script defer src="src/game-state.js?v=20260605j"></script>
+  <script defer src="src/ui/constants.js?v=20260605j"></script>
+  <script defer src="src/ui/renderers.js?v=20260605j"></script>
+  <script defer src="src/ui/coordinator.js?v=20260605j"></script>
+  <script defer src="src/main.js?v=20260605j"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -86,13 +88,13 @@
     </form>
   </dialog>
 
-  <dialog id="confirm-next-modal" class="confirm-modal">
+  <dialog id="confirm-reset-modal" class="confirm-modal">
     <form method="dialog" class="confirm-shell">
       <h2>本当にリセットしますか？</h2>
-      <p>現在表示している結果を閉じて、新しい問題を開始します。</p>
+      <p>現在の問題を失敗扱いにして、答えを表示します。</p>
       <div class="confirm-actions">
-        <button id="cancel-next-question" class="secondary-button" type="button">キャンセル</button>
-        <button id="confirm-next-question" class="primary-button danger" type="button">次の問題へ</button>
+        <button id="cancel-reset-question" class="secondary-button" type="button">キャンセル</button>
+        <button id="confirm-reset-question" class="primary-button danger" type="button">リセットする</button>
       </div>
     </form>
   </dialog>

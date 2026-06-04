@@ -48,15 +48,7 @@
     }
   }
 
-  function remove(key) {
-    try {
-      backend.removeItem(key);
-    } catch (error) {
-      // Storage is best-effort only.
-    }
-  }
-
-  const api = { readJson, writeJson, remove };
+  const api = { readJson, writeJson };
   root.RHW = Object.assign(RHW, { storage: api });
   if (typeof module !== "undefined") {
     module.exports = api;
