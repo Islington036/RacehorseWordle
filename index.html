@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
-  <link rel="stylesheet" href="styles/base.css?v=20260605b">
-  <link rel="stylesheet" href="styles/layout.css?v=20260605b">
-  <link rel="stylesheet" href="styles/wordle.css?v=20260605b">
-  <script defer src="data/questions.embedded.js?v=20260605b"></script>
-  <script defer src="src/config.js?v=20260605b"></script>
-  <script defer src="src/normalize.js?v=20260605b"></script>
-  <script defer src="src/evaluator.js?v=20260605b"></script>
-  <script defer src="src/kana-input.js?v=20260605b"></script>
-  <script defer src="src/storage.js?v=20260605b"></script>
-  <script defer src="src/question-picker.js?v=20260605b"></script>
-  <script defer src="src/game-state.js?v=20260605b"></script>
-  <script defer src="src/ui.js?v=20260605b"></script>
-  <script defer src="src/main.js?v=20260605b"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260605c">
+  <link rel="stylesheet" href="styles/layout.css?v=20260605c">
+  <link rel="stylesheet" href="styles/wordle.css?v=20260605c">
+  <script defer src="data/questions.embedded.js?v=20260605c"></script>
+  <script defer src="src/config.js?v=20260605c"></script>
+  <script defer src="src/normalize.js?v=20260605c"></script>
+  <script defer src="src/evaluator.js?v=20260605c"></script>
+  <script defer src="src/kana-input.js?v=20260605c"></script>
+  <script defer src="src/storage.js?v=20260605c"></script>
+  <script defer src="src/question-picker.js?v=20260605c"></script>
+  <script defer src="src/game-state.js?v=20260605c"></script>
+  <script defer src="src/ui.js?v=20260605c"></script>
+  <script defer src="src/main.js?v=20260605c"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -37,7 +37,6 @@
         <div class="board-block horse-block">
           <div class="section-heading">
             <span>馬名</span>
-            <strong>Wordle</strong>
           </div>
           <div id="horse-board" class="wordle-board tall" aria-label="馬名ボード"></div>
         </div>
@@ -46,12 +45,12 @@
           <span id="current-target">入力</span>
           <strong id="current-input" class="placeholder">入力待ち</strong>
           <small id="input-hint">0/18文字 / 0/15</small>
+          <input id="native-input" class="native-input" type="text" inputmode="kana" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="カタカナ入力">
         </div>
 
         <div class="board-block pedigree-block">
           <div class="section-heading">
             <span>父</span>
-            <strong id="sire-status">Wordle</strong>
           </div>
           <div id="sire-board" class="wordle-board compact" aria-label="父ボード"></div>
         </div>
@@ -59,7 +58,6 @@
         <div class="board-block pedigree-block">
           <div class="section-heading">
             <span>母</span>
-            <strong id="dam-status">Wordle</strong>
           </div>
           <div id="dam-board" class="wordle-board compact" aria-label="母ボード"></div>
         </div>

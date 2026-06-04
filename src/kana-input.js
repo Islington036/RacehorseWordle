@@ -16,6 +16,7 @@
     ヤ: "ャ", ユ: "ュ", ヨ: "ョ", ツ: "ッ",
     ワ: "ヮ", カ: "ヵ", ケ: "ヶ"
   }));
+  const USABLE_KANA = /^[ァ-ヶー]+$/u;
 
   function transformLastKana(value, mark) {
     const chars = Array.from(value || "");
@@ -27,6 +28,15 @@
     return chars.join("");
   }
 
+  function normalizeTypedKana(value) {
+    return String(value || "").normalize("NFKC");
+  }
+
+  function isUsableKanaInput(value) {
+    const normalized = normalizeTypedKana(value);
+    return normalized.length > 0 && USABLE_KANA.test(normalized);
+  }
+
   function getTransform(mark) {
     if (mark === "゛" || mark === "ﾞ") return DAKUTEN;
     if (mark === "゜" || mark === "ﾟ") return HANDAKUTEN;
@@ -34,7 +44,7 @@
     return new Map();
   }
 
-  const api = { transformLastKana };
+  const api = { transformLastKana, normalizeTypedKana, isUsableKanaInput };
   root.RHW = Object.assign(root.RHW || {}, api);
   if (typeof module !== "undefined") {
     module.exports = api;

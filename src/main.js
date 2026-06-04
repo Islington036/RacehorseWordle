@@ -24,14 +24,26 @@
     state = { question, round, stats };
     bindEvents();
     renderAndSave();
+    focusNativeInput();
   }
 
   function bindEvents() {
     document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("compositionstart", () => { composing = true; });
+    document.addEventListener("compositionstart", () => {
+      composing = true;
+    });
     document.addEventListener("compositionend", (event) => {
       composing = false;
-      appendText(event.data);
+      const nativeInput = document.querySelector("#native-input");
+      const value = nativeInput?.value || event.data || "";
+      if (nativeInput) nativeInput.value = "";
+      appendText(value);
+    });
+    document.querySelector("#native-input").addEventListener("input", (event) => {
+      if (composing) return;
+      const value = event.target.value;
+      event.target.value = "";
+      appendText(value);
     });
 
     document.querySelector("#keyboard").addEventListener("click", (event) => {
@@ -42,12 +54,14 @@
       else if (key === "決定") submit();
       else if (key === "゛" || key === "゜" || key === "小") transformInput(key);
       else appendText(key);
+      focusNativeInput();
     });
 
     document.querySelector("#next-question").addEventListener("click", nextQuestion);
     document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state, "stats"));
     document.querySelector("#reset-button").addEventListener("click", () => nextQuestion("別の問題を出題しました。"));
     document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
+    document.addEventListener("click", () => focusNativeInput());
   }
 
   function onKeyDown(event) {
@@ -62,6 +76,7 @@
       backspace();
       return;
     }
+    if (event.target === document.querySelector("#native-input")) return;
     if (event.key.length === 1) {
       appendText(event.key);
     }
@@ -73,7 +88,12 @@
       transformInput(value);
       return;
     }
-    const chars = RHW.splitAnswer(state.round.currentInput + value);
+    const normalizedValue = RHW.normalizeTypedKana(value);
+    if (!RHW.isUsableKanaInput(normalizedValue)) {
+      showInputError("使用できない文字が含まれています");
+      return;
+    }
+    const chars = RHW.splitAnswer(state.round.currentInput + normalizedValue);
     state.round.currentInput = chars.slice(0, RHW.MAX_INPUT_LENGTH).join("");
     renderAndSave();
   }
@@ -100,10 +120,7 @@
     }
 
     if (!result.accepted) {
-      RHW.ui.setToast(result.message, "warn");
-      document.querySelector(".input-strip").classList.remove("shake");
-      void document.querySelector(".input-strip").offsetWidth;
-      document.querySelector(".input-strip").classList.add("shake");
+      showInputError(result.message);
       return renderAndSave();
     }
 
@@ -133,6 +150,7 @@
     state.round = RHW.makeRound(next);
     renderAndSave();
     if (message) RHW.ui.setToast(message, "neutral");
+    focusNativeInput();
   }
 
   function renderAndSave() {
@@ -142,6 +160,21 @@
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.stats, state.stats);
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.current, persistedRound);
     delete state.round.justSubmittedAttempt;
+  }
+
+  function showInputError(message) {
+    RHW.ui.setToast(message, "warn");
+    document.querySelector(".input-strip").classList.remove("shake");
+    void document.querySelector(".input-strip").offsetWidth;
+    document.querySelector(".input-strip").classList.add("shake");
+    focusNativeInput();
+  }
+
+  function focusNativeInput() {
+    const nativeInput = document.querySelector("#native-input");
+    const modal = document.querySelector("#result-modal");
+    if (!nativeInput || modal?.open) return;
+    nativeInput.focus({ preventScroll: true });
   }
 
   root.addEventListener("DOMContentLoaded", init);

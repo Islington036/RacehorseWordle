@@ -81,6 +81,7 @@
 .input-strip {
   width: min(100%, 760px);
   min-height: 48px;
+  position: relative;
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr) auto;
   align-items: center;
@@ -116,6 +117,20 @@
 .input-strip small {
   color: var(--muted);
   white-space: nowrap;
+}
+
+.native-input {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  padding: 0;
+  opacity: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
 }
 
 .target-tabs {

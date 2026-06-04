@@ -33,6 +33,12 @@
   min-width: min(100%, calc(var(--cols) * 29px));
 }
 
+.tile-row.reserved {
+  width: 1px;
+  min-width: 1px;
+  min-height: 38px;
+}
+
 .tile {
   aspect-ratio: 1;
   min-width: 0;
@@ -97,7 +103,7 @@
 }
 
 .keyboard-row.utility-row {
-  grid-template-columns: repeat(5, minmax(54px, 84px));
+  grid-template-columns: repeat(10, minmax(0, 48px));
 }
 
 .key {
@@ -116,6 +122,11 @@
   max-width: none;
   background: #5f6660;
   font-size: 0.84rem;
+}
+
+.key.submit {
+  background: #d97724;
+  color: #fff;
 }
 
 .key-spacer {
@@ -193,6 +204,6 @@
   }
 
   .keyboard-row.utility-row {
-    grid-template-columns: repeat(5, minmax(46px, 72px));
+    grid-template-columns: repeat(10, minmax(0, 40px));
   }
 }
