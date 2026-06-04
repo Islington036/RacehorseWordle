@@ -78,6 +78,7 @@ failed = game.submitGuess(failed, question, "カキクケコ").round;
 assert.strictEqual(failed.status, "lost");
 assert.strictEqual(failed.attemptsUsed, 15);
 assert.strictEqual(game.canSubmit(failed), false);
+assert.strictEqual(game.canRestoreRound(failed), false);
 assert.strictEqual(game.submitGuess(failed, question, "テストホース").accepted, false);
 
 let lateWin = game.makeRound(question);
@@ -87,6 +88,17 @@ for (let i = 0; i < 14; i += 1) {
 lateWin = game.submitGuess(lateWin, question, "テストホース").round;
 assert.strictEqual(lateWin.status, "won");
 assert.strictEqual(lateWin.attemptsUsed, 15);
+assert.strictEqual(game.canRestoreRound(lateWin), false);
+
+let restorable = game.makeRound(question);
+for (let i = 0; i < 14; i += 1) {
+  restorable = game.submitGuess(restorable, question, "アイウエオ").round;
+}
+assert.strictEqual(game.canRestoreRound(restorable), true);
+assert.strictEqual(game.canRestoreRound({ ...restorable, attemptsUsed: 15 }), false);
+assert.strictEqual(game.canRestoreRound({ ...restorable, status: "lost" }), false);
+assert.strictEqual(game.canRestoreRound({ ...restorable, status: "won" }), false);
+assert.strictEqual(game.canRestoreRound({ ...restorable, schemaVersion: 1 }), false);
 
 let hintRound = game.makeRound(question);
 for (let i = 0; i < 8; i += 1) {

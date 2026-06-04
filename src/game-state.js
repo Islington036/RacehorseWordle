@@ -79,6 +79,12 @@
     return getAttemptsUsed(round) < ATTEMPT_LIMIT;
   }
 
+  function canRestoreRound(round) {
+    return round?.schemaVersion === 2
+      && round.status === "playing"
+      && getAttemptsUsed(round) < ATTEMPT_LIMIT;
+  }
+
   function canUseSireHint(round) {
     return round.status === "playing"
       && getAttemptsUsed(round) >= SIRE_HINT_UNLOCK_ATTEMPTS
@@ -227,6 +233,7 @@
     getAnswers,
     getAttemptsUsed,
     canSubmit,
+    canRestoreRound,
     canUseSireHint,
     forfeitRound,
     validateGuess,

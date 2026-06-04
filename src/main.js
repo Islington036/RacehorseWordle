@@ -17,12 +17,15 @@
 
     const stats = RHW.makeStats(RHW.storage.readJson(RHW.CONFIG.storageKeys.stats, null));
     const restored = RHW.storage.readJson(RHW.CONFIG.storageKeys.current, null);
-    const restoredQuestion = restored?.schemaVersion === 2
+    const restoredRecentQuestionIds = makeRecentQuestionIds(restored?.recentQuestionIds, restored?.questionId);
+    const restoredQuestion = RHW.canRestoreRound(restored)
       ? DATA.horses.find((question) => question.id === restored.questionId)
       : null;
-    const question = restoredQuestion || RHW.pickQuestion(DATA.horses, stats, null);
+    const question = restoredQuestion || RHW.pickQuestion(DATA.horses, stats, restored?.questionId || null, {
+      recentQuestionIds: restoredRecentQuestionIds
+    });
     const round = restoredQuestion ? RHW.makeRound(question, restored) : RHW.makeRound(question);
-    const recentQuestionIds = makeRecentQuestionIds(restored?.recentQuestionIds, question.id);
+    const recentQuestionIds = makeRecentQuestionIds(restoredRecentQuestionIds, question.id);
 
     state = { question, round, stats, recentQuestionIds };
     bindEvents();
