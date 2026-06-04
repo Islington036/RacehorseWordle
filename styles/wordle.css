@@ -4,18 +4,21 @@
   width: 100%;
   overflow-x: auto;
   padding-bottom: 2px;
+  justify-items: center;
 }
 
 .wordle-board.compact {
-  max-height: 420px;
+  max-height: 118px;
   overflow: auto;
 }
 
 .tile-row {
   display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(30px, 1fr));
+  grid-template-columns: repeat(var(--cols), minmax(26px, 42px));
+  justify-content: center;
   gap: 6px;
-  min-width: min(100%, calc(var(--cols) * 44px));
+  width: min(100%, calc(var(--cols) * 48px));
+  min-width: min(100%, calc(var(--cols) * 32px));
 }
 
 .tile {
@@ -30,6 +33,11 @@
   font-weight: 900;
   line-height: 1;
   text-align: center;
+}
+
+.compact .tile-row {
+  grid-template-columns: repeat(var(--cols), minmax(22px, 36px));
+  width: min(100%, calc(var(--cols) * 42px));
 }
 
 .tile:not(.empty) {
@@ -76,7 +84,7 @@
   min-width: 0;
   width: 9%;
   max-width: 48px;
-  height: 48px;
+  height: 42px;
   border: 0;
   border-radius: 5px;
   background: #818384;
@@ -139,5 +147,22 @@
   .tile.absent,
   .shake {
     animation: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .tile-row {
+    grid-template-columns: repeat(var(--cols), minmax(23px, 44px));
+    width: min(100%, calc(var(--cols) * 49px));
+    gap: 5px;
+  }
+
+  .compact .tile-row {
+    grid-template-columns: repeat(var(--cols), minmax(20px, 38px));
+    width: min(100%, calc(var(--cols) * 43px));
+  }
+
+  .key {
+    height: 42px;
   }
 }

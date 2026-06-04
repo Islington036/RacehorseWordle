@@ -47,7 +47,7 @@
   grid-template-columns: minmax(0, 1fr) 320px;
   gap: 24px;
   width: min(1180px, calc(100% - 32px));
-  margin: 24px auto 32px;
+  margin: 18px auto 28px;
 }
 
 .play-area {
@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .board-block {
@@ -80,7 +80,7 @@
 
 .input-strip {
   width: min(100%, 760px);
-  min-height: 54px;
+  min-height: 48px;
   display: grid;
   grid-template-columns: 54px minmax(0, 1fr) auto;
   align-items: center;
@@ -126,7 +126,7 @@
 }
 
 .target-tabs button {
-  height: 42px;
+  height: 38px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--panel-soft);
@@ -143,7 +143,7 @@
 
 .reveal-line {
   min-height: 20px;
-  margin: -4px 0 10px;
+  margin: -6px 0 8px;
   color: var(--muted);
   font-size: 0.9rem;
 }

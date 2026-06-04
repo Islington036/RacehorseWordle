@@ -113,6 +113,7 @@
     const recent = summary.recent.length
       ? summary.recent.map((item) => `<li><span>${escapeHtml(item.horseName)}</span><b>${item.status === "won" ? "成功" : "失敗"}</b></li>`).join("")
       : "<li><span>まだ出題履歴がありません</span><b>-</b></li>";
+    const currentLabel = round.status === "playing" ? "挑戦中" : currentQuestion.nameJa;
 
     els.statsPanel.innerHTML = `
       <div class="stat-grid">
@@ -123,7 +124,7 @@
       </div>
       <div class="current-round">
         <h2>現在の出題</h2>
-        <p>${escapeHtml(currentQuestion.nameJa)}</p>
+        <p>${escapeHtml(currentLabel)}</p>
         <dl>
           <div><dt>馬名</dt><dd>${round.horseAttemptsUsed}/5</dd></div>
           <div><dt>父</dt><dd>${round.targets.sire.solved ? "正解" : round.pedigreeRevealed ? "開示" : "未正解"}</dd></div>
