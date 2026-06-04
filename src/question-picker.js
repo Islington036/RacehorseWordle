@@ -1,22 +1,38 @@
 (function attachQuestionPicker(root) {
-  function createSeed() {
-    const today = new Date();
-    return Number(`${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`);
+  function defaultRandom() {
+    const cryptoObj = root.crypto;
+    if (cryptoObj?.getRandomValues) {
+      const values = new Uint32Array(1);
+      cryptoObj.getRandomValues(values);
+      return values[0] / 0x100000000;
+    }
+    return Math.random();
   }
 
-  function seededIndex(length, salt) {
-    const x = Math.sin((createSeed() + salt) * 9301) * 10000;
-    return Math.abs(Math.floor(x)) % length;
+  function randomIndex(length, random) {
+    const value = Math.max(0, Math.min((random || defaultRandom)(), 0.999999999));
+    return Math.floor(value * length);
   }
 
-  function pickQuestion(questions, stats, previousQuestionId) {
+  function pickQuestion(questions, stats, previousQuestionId, options) {
+    const random = options?.random || defaultRandom;
+    const recentQuestionIds = options?.recentQuestionIds || [];
     const playedIds = new Set((stats.rounds || []).map((round) => round.questionId));
     const unplayed = questions.filter((question) => !playedIds.has(question.id));
-    const pool = unplayed.length > 0 ? unplayed : questions;
-    const filteredPool = pool.length > 1
-      ? pool.filter((question) => question.id !== previousQuestionId)
-      : pool;
-    return filteredPool[seededIndex(filteredPool.length, stats.rounds?.length || 0)];
+    const basePool = unplayed.length > 0 ? unplayed : questions;
+    const excludedIds = new Set([previousQuestionId].concat(recentQuestionIds).filter(Boolean));
+    let filteredPool = basePool.length > 1
+      ? basePool.filter((question) => !excludedIds.has(question.id))
+      : basePool;
+
+    if (!filteredPool.length && basePool.length > 1) {
+      filteredPool = basePool.filter((question) => question.id !== previousQuestionId);
+    }
+    if (!filteredPool.length) {
+      filteredPool = basePool;
+    }
+
+    return filteredPool[randomIndex(filteredPool.length, random)];
   }
 
   const api = { pickQuestion };

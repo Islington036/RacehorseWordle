@@ -12,6 +12,8 @@ const sourceText = sourceFiles.join("\n");
 assert.ok(indexHtml.includes("data/questions.embedded.js"), "embedded data script is required for file:// use");
 assert.ok(indexHtml.includes("src/kana-input.js"), "kana input helper is loaded for dakuten and handakuten keys");
 assert.ok(indexHtml.includes("native-input"), "native input is present for IME text entry");
+assert.ok(indexHtml.includes("キーボードで直接入力できます"), "native input guidance replaces the waiting placeholder");
+assert.ok(indexHtml.includes("sire-hint-button"), "sire reveal hint button is present");
 assert.ok(indexHtml.includes("history-tabs"), "history tabs are present for switching horse/sire/dam evaluations");
 assert.ok(indexHtml.includes("data-history-target=\"sire\""), "sire history tab is present");
 assert.ok(indexHtml.includes("data-history-target=\"dam\""), "dam history tab is present");
@@ -24,11 +26,15 @@ assert.ok(indexHtml.includes("0/18文字 / 0/15"), "unified input shows the 18 c
 assert.ok(!indexHtml.includes("5回"), "horse-only five attempt copy should not remain");
 assert.ok(!indexHtml.includes("青 / 水色"), "sire-specific color copy should not remain");
 assert.ok(!indexHtml.includes("桃 / 薄桃"), "dam-specific color copy should not remain");
-assert.ok(indexHtml.includes("別の問題を出題"), "refresh button starts a different question");
+assert.ok(indexHtml.includes("別の問題を出題"), "refresh button is available");
 assert.ok(!sourceText.includes("父と母は正解後"), "fixed pedigree explanation copy should not remain");
 assert.ok(!sourceText.includes('addEventListener("click", nextQuestion)'), "next question click must not pass MouseEvent as a toast message");
 assert.ok(sourceText.includes("[\"ワ\", \"ラ\", \"ヤ\", \"マ\", \"ハ\", \"ナ\", \"タ\", \"サ\", \"カ\", \"ア\"]"), "keyboard top row is traditional right-to-left gojuon order");
 assert.ok(sourceText.includes("使用できない文字が含まれています"), "invalid IME input warning is present");
+assert.ok(sourceText.includes("forfeitRound"), "refresh button should forfeit and reveal the current answer");
+assert.ok(sourceText.includes("履歴リセット"), "stats panel includes a history reset button");
+assert.ok(sourceText.includes("absent-known"), "keyboard can mark globally absent letters");
+assert.ok(!indexHtml.includes("race-wins.audit.json"), "public page must not reference audit JSON");
 
 for (const source of sourceFiles) {
   assert.ok(!/\bfetch\s*\(/.test(source), "runtime source must not fetch local JSON for file:// support");

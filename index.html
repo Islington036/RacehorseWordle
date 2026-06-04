@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
-  <link rel="stylesheet" href="styles/base.css?v=20260605e">
-  <link rel="stylesheet" href="styles/layout.css?v=20260605e">
-  <link rel="stylesheet" href="styles/wordle.css?v=20260605e">
-  <script defer src="data/questions.embedded.js?v=20260605e"></script>
-  <script defer src="src/config.js?v=20260605e"></script>
-  <script defer src="src/normalize.js?v=20260605e"></script>
-  <script defer src="src/evaluator.js?v=20260605e"></script>
-  <script defer src="src/kana-input.js?v=20260605e"></script>
-  <script defer src="src/storage.js?v=20260605e"></script>
-  <script defer src="src/question-picker.js?v=20260605e"></script>
-  <script defer src="src/game-state.js?v=20260605e"></script>
-  <script defer src="src/ui.js?v=20260605e"></script>
-  <script defer src="src/main.js?v=20260605e"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260605g">
+  <link rel="stylesheet" href="styles/layout.css?v=20260605g">
+  <link rel="stylesheet" href="styles/wordle.css?v=20260605g">
+  <script defer src="data/questions.embedded.js?v=20260605g"></script>
+  <script defer src="src/config.js?v=20260605g"></script>
+  <script defer src="src/normalize.js?v=20260605g"></script>
+  <script defer src="src/evaluator.js?v=20260605g"></script>
+  <script defer src="src/kana-input.js?v=20260605g"></script>
+  <script defer src="src/storage.js?v=20260605g"></script>
+  <script defer src="src/question-picker.js?v=20260605g"></script>
+  <script defer src="src/game-state.js?v=20260605g"></script>
+  <script defer src="src/ui.js?v=20260605g"></script>
+  <script defer src="src/main.js?v=20260605g"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -47,9 +47,12 @@
 
         <div class="input-strip" aria-live="polite">
           <span id="current-target">入力</span>
-          <strong id="current-input" class="placeholder">入力待ち</strong>
+          <strong id="current-input" class="placeholder">キーボードで直接入力できます</strong>
           <small id="input-hint">0/18文字 / 0/15</small>
-          <input id="native-input" class="native-input" type="text" inputmode="kana" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="カタカナ入力">
+          <input id="native-input" class="native-input" type="text" inputmode="kana" enterkeyhint="done" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="カタカナ入力">
+        </div>
+        <div class="hint-row">
+          <button id="sire-hint-button" class="hint-button" type="button" hidden>父名を表示</button>
         </div>
 
         <div class="board-block pedigree-block">
@@ -78,7 +81,7 @@
       <button id="close-modal" class="icon-button close" type="button" aria-label="閉じる">×</button>
       <h2 id="modal-title">統計</h2>
       <div id="modal-body"></div>
-      <button id="next-question" class="primary-button" type="button">次の問題</button>
+      <button id="next-question" class="primary-button" type="button">次の問題へ</button>
     </form>
   </dialog>
 </body>

@@ -7,6 +7,7 @@
 
   const ATTEMPT_LIMIT = RHW.CONFIG?.attemptLimit || 15;
   const MAX_INPUT_LENGTH = RHW.CONFIG?.maxInputLength || 18;
+  const SIRE_HINT_UNLOCK_ATTEMPTS = 9;
   const TARGETS = ["horse", "sire", "dam"];
 
   function makeAnswer(display, aliases) {
@@ -26,6 +27,7 @@
       attemptsUsed: 0,
       status: "playing",
       historyTarget: "horse",
+      sireHintUsed: false,
       resultRecorded: false,
       startedAt: new Date().toISOString(),
       targets: {
@@ -75,6 +77,23 @@
   function canSubmit(round) {
     if (round.status !== "playing") return false;
     return getAttemptsUsed(round) < ATTEMPT_LIMIT;
+  }
+
+  function canUseSireHint(round) {
+    return round.status === "playing"
+      && getAttemptsUsed(round) >= SIRE_HINT_UNLOCK_ATTEMPTS
+      && getAttemptsUsed(round) < ATTEMPT_LIMIT
+      && !round.sireHintUsed
+      && !round.targets.sire.solved;
+  }
+
+  function forfeitRound(round) {
+    if (round.status !== "playing") return round;
+    const next = structuredClone(round);
+    next.currentInput = "";
+    next.status = "lost";
+    next.forfeited = true;
+    return next;
   }
 
   function getGuessArg(targetOrGuess, maybeGuess) {
@@ -179,6 +198,8 @@
       sireSolved: round.targets.sire.solved,
       damSolved: round.targets.dam.solved,
       horseSolved: round.targets.horse.solved,
+      forfeited: Boolean(round.forfeited),
+      sireHintUsed: Boolean(round.sireHintUsed),
       finishedAt: new Date().toISOString()
     });
     return { stats: nextStats, round: nextRound };
@@ -206,6 +227,8 @@
     getAnswers,
     getAttemptsUsed,
     canSubmit,
+    canUseSireHint,
+    forfeitRound,
     validateGuess,
     submitGuess,
     makeStats,

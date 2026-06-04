@@ -130,6 +130,11 @@
   color: #fff;
 }
 
+.key.absent-known {
+  background: #3a3a3c;
+  color: #d7dadc;
+}
+
 .key-spacer {
   min-width: 0;
   width: 100%;

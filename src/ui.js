@@ -10,6 +10,18 @@
     ["", "ロ", "ヨ", "モ", "ホ", "ノ", "ト", "ソ", "コ", "オ"],
     ["", "", "", "", "小", "゛", "゜", "ー", "消", "決定"]
   ];
+  const PLACEHOLDER_INPUT = "キーボードで直接入力できます";
+  const KEY_EQUIVALENTS = new Map(Object.entries({
+    ァ: "ア", ィ: "イ", ゥ: "ウ", ェ: "エ", ォ: "オ",
+    ャ: "ヤ", ュ: "ユ", ョ: "ヨ", ッ: "ツ", ヮ: "ワ",
+    ヵ: "カ", ヶ: "ケ",
+    ガ: "カ", ギ: "キ", グ: "ク", ゲ: "ケ", ゴ: "コ",
+    ザ: "サ", ジ: "シ", ズ: "ス", ゼ: "セ", ゾ: "ソ",
+    ダ: "タ", ヂ: "チ", ヅ: "ツ", デ: "テ", ド: "ト",
+    バ: "ハ", ビ: "ヒ", ブ: "フ", ベ: "ヘ", ボ: "ホ",
+    パ: "ハ", ピ: "ヒ", プ: "フ", ペ: "ヘ", ポ: "ホ",
+    ヴ: "ウ"
+  }));
 
   function initElements() {
     Object.assign(els, {
@@ -22,6 +34,7 @@
       currentInput: document.querySelector("#current-input"),
       nativeInput: document.querySelector("#native-input"),
       inputHint: document.querySelector("#input-hint"),
+      sireHintButton: document.querySelector("#sire-hint-button"),
       keyboard: document.querySelector("#keyboard"),
       toast: document.querySelector("#toast"),
       statsPanel: document.querySelector("#stats-panel"),
@@ -163,7 +176,10 @@
         </dl>
       </div>
       <div class="history-list">
-        <h2>出題履歴</h2>
+        <div class="history-header">
+          <h2>出題履歴</h2>
+          <button id="clear-history" class="history-reset-button" type="button"${summary.total ? "" : " disabled"}>履歴リセット</button>
+        </div>
         <ul>${recent}</ul>
       </div>
       <div class="legend-panel">
@@ -187,9 +203,10 @@
 
     renderHistoryTabs(historyTarget);
     els.currentTarget.textContent = "入力";
-    els.currentInput.textContent = round.currentInput || "入力待ち";
+    els.currentInput.textContent = round.currentInput || PLACEHOLDER_INPUT;
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
     els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
+    renderSireHint(round);
 
     renderBoard(els.horseBoard, {
       answer: historyAnswer,
@@ -200,7 +217,7 @@
       minRows: 0,
       cols: null,
       animateAttempt: round.justSubmittedAttempt,
-      reserveInputRow: true
+      reserveInputRow: false
     });
 
     renderBoard(els.sireBoard, {
@@ -226,6 +243,7 @@
     });
 
     renderStats(stats, question, round);
+    updateKeyboardState(round, answers);
   }
 
   function openResultModal(state, mode) {
@@ -287,6 +305,51 @@
       return correct ? [correct] : [guesses[guesses.length - 1]];
     }
     return [guesses[guesses.length - 1]];
+  }
+
+  function renderSireHint(round) {
+    if (!els.sireHintButton) return;
+    const canUse = RHW.canUseSireHint(round);
+    els.sireHintButton.hidden = !canUse;
+    els.sireHintButton.disabled = !canUse;
+  }
+
+  function updateKeyboardState(round, answers) {
+    if (!els.keyboard) return;
+    const absentKeys = getGloballyAbsentKeys(round, answers);
+    els.keyboard.querySelectorAll("[data-key]").forEach((button) => {
+      button.classList.toggle("absent-known", absentKeys.has(button.dataset.key));
+    });
+  }
+
+  function getGloballyAbsentKeys(round, answers) {
+    const statesByKey = new Map();
+    const answerKeys = new Set(Object.values(answers).flatMap((answer) => (
+      RHW.splitAnswer(answer.display).map(toKeyboardKey).filter(Boolean)
+    )));
+    ["horse", "sire", "dam"].forEach((target) => {
+      round.targets[target].guesses.forEach((guess) => {
+        guess.evaluation.forEach((item) => {
+          const key = toKeyboardKey(item.char);
+          if (!key) return;
+          const entry = statesByKey.get(key) || { absent: false, included: false };
+          if (item.state === "correct" || item.state === "present") entry.included = true;
+          if (item.state === "absent") entry.absent = true;
+          statesByKey.set(key, entry);
+        });
+      });
+    });
+
+    return new Set(Array.from(statesByKey.entries())
+      .filter(([key, entry]) => entry.absent && !entry.included && !answerKeys.has(key))
+      .map(([key]) => key));
+  }
+
+  function toKeyboardKey(char) {
+    if (!char) return "";
+    const normalized = String(char).normalize("NFKC");
+    if (["小", "゛", "゜", "消", "決定"].includes(normalized)) return "";
+    return KEY_EQUIVALENTS.get(normalized) || normalized;
   }
 
   const api = {

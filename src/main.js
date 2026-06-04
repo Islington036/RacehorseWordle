@@ -1,6 +1,7 @@
 (function attachMain(root) {
   const RHW = root.RHW;
   const DATA = root.RHW_QUESTIONS;
+  const RECENT_QUESTION_LIMIT = 8;
   let state;
   let composing = false;
   let submitAfterComposition = false;
@@ -21,8 +22,9 @@
       : null;
     const question = restoredQuestion || RHW.pickQuestion(DATA.horses, stats, null);
     const round = restoredQuestion ? RHW.makeRound(question, restored) : RHW.makeRound(question);
+    const recentQuestionIds = makeRecentQuestionIds(restored?.recentQuestionIds, question.id);
 
-    state = { question, round, stats };
+    state = { question, round, stats, recentQuestionIds };
     bindEvents();
     renderAndSave();
     focusNativeInput();
@@ -73,7 +75,11 @@
 
     document.querySelector("#next-question").addEventListener("click", () => nextQuestion());
     document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state, "stats"));
-    document.querySelector("#reset-button").addEventListener("click", () => nextQuestion("別の問題を出題しました。"));
+    document.querySelector("#reset-button").addEventListener("click", () => forfeitQuestion());
+    document.querySelector("#sire-hint-button").addEventListener("click", () => useSireHint());
+    document.querySelector("#stats-panel").addEventListener("click", (event) => {
+      if (event.target.closest("#clear-history")) clearHistory();
+    });
     document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
     document.addEventListener("click", () => focusNativeInput());
   }
@@ -171,13 +177,46 @@
     renderAndSave();
   }
 
+  function forfeitQuestion() {
+    const modal = document.querySelector("#result-modal");
+    if (modal.open) modal.close();
+    clearInputFeedback();
+    if (state.round.status === "playing") {
+      state.round = RHW.forfeitRound(state.round);
+      const recorded = RHW.recordResult(state.stats, state.round, state.question);
+      state.stats = recorded.stats;
+      state.round = recorded.round;
+      renderAndSave();
+    }
+    RHW.ui.openResultModal(state, "result");
+  }
+
+  function useSireHint() {
+    if (!RHW.canUseSireHint(state.round)) return;
+    state.round.sireHintUsed = true;
+    state.round.currentInput = state.question.sire.nameJa;
+    syncNativeInputValue();
+    submit();
+  }
+
+  function clearHistory() {
+    state.stats = RHW.makeStats();
+    renderAndSave();
+    RHW.ui.setToast("出題履歴をリセットしました。", "neutral");
+    focusNativeInput();
+  }
+
   function nextQuestion(message) {
     const modal = document.querySelector("#result-modal");
     if (modal.open) modal.close();
-    RHW.ui.setToast("");
-    const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id);
+    clearInputFeedback();
+    submitAfterComposition = false;
+    const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id, {
+      recentQuestionIds: state.recentQuestionIds
+    });
     state.question = next;
     state.round = RHW.makeRound(next);
+    state.recentQuestionIds = makeRecentQuestionIds(state.recentQuestionIds, next.id);
     renderAndSave();
     if (typeof message === "string" && message) RHW.ui.setToast(message, "neutral");
     focusNativeInput();
@@ -195,6 +234,7 @@
     syncNativeInputValue();
     const persistedRound = structuredClone(state.round);
     delete persistedRound.justSubmittedAttempt;
+    persistedRound.recentQuestionIds = state.recentQuestionIds;
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.stats, state.stats);
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.current, persistedRound);
     delete state.round.justSubmittedAttempt;
@@ -206,6 +246,11 @@
     void document.querySelector(".input-strip").offsetWidth;
     document.querySelector(".input-strip").classList.add("shake");
     focusNativeInput();
+  }
+
+  function clearInputFeedback() {
+    RHW.ui.setToast("");
+    document.querySelector(".input-strip")?.classList.remove("shake");
   }
 
   function focusNativeInput() {
@@ -220,6 +265,10 @@
     const nativeInput = document.querySelector("#native-input");
     if (!nativeInput || composing || nativeInput.value === state.round.currentInput) return;
     nativeInput.value = state.round.currentInput;
+  }
+
+  function makeRecentQuestionIds(ids, currentId) {
+    return Array.from(new Set((ids || []).concat(currentId).filter(Boolean))).slice(-RECENT_QUESTION_LIMIT);
   }
 
   root.addEventListener("DOMContentLoaded", init);

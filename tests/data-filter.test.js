@@ -3,8 +3,11 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const questions = JSON.parse(fs.readFileSync(path.join(root, "data", "questions.json"), "utf8"));
-const audit = JSON.parse(fs.readFileSync(path.join(root, "data", "race-wins.audit.json"), "utf8"));
+const questionsPath = path.join(root, "data", "questions.json");
+const embeddedPath = path.join(root, "data", "questions.embedded.js");
+const questionsText = fs.readFileSync(questionsPath, "utf8");
+const embeddedText = fs.readFileSync(embeddedPath, "utf8");
+const questions = JSON.parse(questionsText);
 
 function isOldNarOnlyQuestion(horse) {
   const wins = horse?.wins || [];
@@ -14,6 +17,8 @@ function isOldNarOnlyQuestion(horse) {
 const playableOldNarOnly = questions.horses.filter(isOldNarOnlyQuestion);
 assert.deepStrictEqual(playableOldNarOnly.map((horse) => horse.nameJa), []);
 
-const auditedOldNarOnly = audit.excludedQuestions.filter((item) => item.excludedReason === "only NAR top-level wins in 2000 or earlier");
-assert.ok(auditedOldNarOnly.length > 0, "old NAR-only exclusions should remain in the audit log");
-assert.strictEqual(audit.meta.excludedQuestionCountForOldNarOnly, auditedOldNarOnly.length);
+assert.ok(questions.meta.excludedQuestionCountForOldNarOnly > 0, "old NAR-only exclusions should remain summarized in public metadata");
+assert.ok(!questionsText.includes("sourceUrls"), "public questions JSON must not expose sourceUrls");
+assert.ok(!embeddedText.includes("sourceUrls"), "embedded data must not expose sourceUrls");
+assert.ok(!/https?:\/\//.test(questionsText), "public questions JSON must not expose source URLs");
+assert.ok(!/https?:\/\//.test(embeddedText), "embedded data must not expose source URLs");

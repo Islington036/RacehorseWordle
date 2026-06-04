@@ -152,6 +152,32 @@
   white-space: nowrap;
 }
 
+.hint-row {
+  width: min(100%, 760px);
+  display: flex;
+  justify-content: flex-end;
+  min-height: 34px;
+  margin-top: -6px;
+}
+
+.hint-button {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--present);
+  border-radius: 5px;
+  background: rgba(194, 174, 57, 0.18);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.hint-button:hover,
+.hint-button:focus-visible {
+  border-color: #d9c34a;
+  outline: none;
+  filter: brightness(1.08);
+}
+
 .native-input {
   position: absolute;
   left: 0;
@@ -244,6 +270,42 @@
 .wins h3 {
   margin: 0 0 10px;
   font-size: 0.95rem;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.history-header h2 {
+  margin: 0;
+}
+
+.history-reset-button {
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.history-reset-button:hover,
+.history-reset-button:focus-visible {
+  border-color: var(--accent);
+  color: var(--text);
+  outline: none;
+}
+
+.history-reset-button:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 
 .current-round p {

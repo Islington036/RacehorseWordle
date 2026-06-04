@@ -17,4 +17,6 @@
 
 ## 注意
 
+公開用データは `data/questions.json` と `data/questions.embedded.js` に限定し、取得元 URL を含む監査ログは `.cache/sources/race-wins.audit.json` に保存します。
+
 JBIS Stakes Results は勝ち馬・父・母が揃う理想的な照合元ですが、この環境ではタイムアウトすることがあるため、自動生成スクリプトでは必須依存にしていません。公開前に JBIS/NAR/JRA の利用条件と出典表記を再確認してください。

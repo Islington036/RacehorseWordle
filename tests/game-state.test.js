@@ -87,3 +87,24 @@ for (let i = 0; i < 14; i += 1) {
 lateWin = game.submitGuess(lateWin, question, "テストホース").round;
 assert.strictEqual(lateWin.status, "won");
 assert.strictEqual(lateWin.attemptsUsed, 15);
+
+let hintRound = game.makeRound(question);
+for (let i = 0; i < 8; i += 1) {
+  hintRound = game.submitGuess(hintRound, question, "アイウエオ").round;
+}
+assert.strictEqual(game.canUseSireHint(hintRound), false);
+hintRound = game.submitGuess(hintRound, question, "カキクケコ").round;
+assert.strictEqual(game.canUseSireHint(hintRound), true);
+hintRound.sireHintUsed = true;
+assert.strictEqual(game.canUseSireHint(hintRound), false);
+
+let forfeited = game.makeRound(question);
+forfeited = game.submitGuess(forfeited, question, "アイウエオ").round;
+forfeited = game.forfeitRound(forfeited);
+assert.strictEqual(forfeited.status, "lost");
+assert.strictEqual(forfeited.attemptsUsed, 1);
+assert.strictEqual(forfeited.forfeited, true);
+const forfeitStats = game.recordResult(game.makeStats(), forfeited, question).stats;
+assert.strictEqual(forfeitStats.rounds.length, 1);
+assert.strictEqual(forfeitStats.rounds[0].status, "lost");
+assert.strictEqual(forfeitStats.rounds[0].forfeited, true);

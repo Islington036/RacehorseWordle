@@ -8,7 +8,7 @@ const ROOT = path.resolve(__dirname, "..");
 const CACHE_DIR = path.join(ROOT, ".cache", "sources");
 const OUT_QUESTIONS = path.join(ROOT, "data", "questions.json");
 const OUT_EMBEDDED = path.join(ROOT, "data", "questions.embedded.js");
-const OUT_AUDIT = path.join(ROOT, "data", "race-wins.audit.json");
+const OUT_AUDIT = path.join(CACHE_DIR, "race-wins.audit.json");
 const { normalizeName } = require(path.join(ROOT, "src", "normalize.js"));
 
 const FROM_YEAR = 1990;
@@ -161,6 +161,7 @@ async function main() {
 
   const questions = buildQuestions(wins, audit);
   validateGeneratedQuestions(questions, audit);
+  const publicQuestions = questions.map(toPublicQuestion);
 
   const output = {
     meta: {
@@ -169,21 +170,23 @@ async function main() {
       fromYear: FROM_YEAR,
       generatedAt: new Date().toISOString().slice(0, 10),
       cutoff: "2026-06-04",
+      questionCount: publicQuestions.length,
+      excludedQuestionCountForOldNarOnly: audit.meta.excludedQuestionCountForOldNarOnly,
+      excludedQuestionCountForInput: audit.meta.excludedQuestionCountForInput,
       sources: [
         "JRA official past GI results",
         "Japanese Wikipedia race tables",
         "Japanese Wikipedia racehorse infoboxes",
         "NAR dirt grade race schedule for scope checks"
-      ],
-      warning: "Review race-wins.audit.json before publishing; JBIS cross-check is recommended."
+      ]
     },
-    horses: questions
+    horses: publicQuestions
   };
 
   await fs.writeFile(OUT_QUESTIONS, `${JSON.stringify(output, null, 2)}\n`);
   await fs.writeFile(OUT_EMBEDDED, `window.RHW_QUESTIONS = ${JSON.stringify(output, null, 2)};\n`);
   await fs.writeFile(OUT_AUDIT, `${JSON.stringify(audit, null, 2)}\n`);
-  console.log(`Generated ${questions.length} questions from ${wins.length} included wins.`);
+  console.log(`Generated ${publicQuestions.length} questions from ${wins.length} included wins.`);
   console.log(`Excluded ${audit.excluded.length} wins and ${audit.excludedQuestions.length} questions; warnings ${audit.warnings.length}.`);
 }
 
@@ -544,6 +547,41 @@ function buildQuestions(wins, audit) {
   audit.meta.excludedQuestionCountForInput = inputExcluded;
   audit.meta.excludedQuestionCount = audit.excludedQuestions.length;
   return questions;
+}
+
+function toPublicQuestion(horse) {
+  return {
+    id: horse.id,
+    nameJa: horse.nameJa,
+    nameKana: horse.nameKana,
+    nameEn: horse.nameEn,
+    country: horse.country,
+    birthYear: horse.birthYear,
+    sex: horse.sex,
+    sire: {
+      nameJa: horse.sire.nameJa,
+      nameEn: horse.sire.nameEn,
+      country: horse.sire.country,
+      aliases: horse.sire.aliases || []
+    },
+    dam: {
+      nameJa: horse.dam.nameJa,
+      nameEn: horse.dam.nameEn,
+      country: horse.dam.country,
+      aliases: horse.dam.aliases || []
+    },
+    wins: horse.wins.map((win) => ({
+      date: win.date,
+      year: win.year,
+      raceId: win.raceId,
+      raceNameJa: win.raceNameJa,
+      jurisdiction: win.jurisdiction,
+      gradeAtRun: win.gradeAtRun,
+      course: win.course,
+      surface: win.surface,
+      distanceM: win.distanceM
+    }))
+  };
 }
 
 function validateGeneratedQuestions(questions, audit) {
