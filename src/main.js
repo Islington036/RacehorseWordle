@@ -16,18 +16,22 @@
     RHW.ui.renderKeyboard();
 
     const stats = RHW.makeStats(RHW.storage.readJson(RHW.CONFIG.storageKeys.stats, null));
+    const options = RHW.makeOptions(RHW.storage.readJson(RHW.CONFIG.storageKeys.options, null));
     const restored = RHW.storage.readJson(RHW.CONFIG.storageKeys.current, null);
     const restoredRecentQuestionIds = makeRecentQuestionIds(restored?.recentQuestionIds, restored?.questionId);
     const restoredQuestion = RHW.canRestoreRound(restored)
       ? DATA.horses.find((question) => question.id === restored.questionId)
       : null;
-    const question = restoredQuestion || RHW.pickQuestion(DATA.horses, stats, restored?.questionId || null, {
+    const questionPool = getQuestionPool(options);
+    const canUseRestoredQuestion = restoredQuestion
+      && questionPool.some((question) => question.id === restoredQuestion.id);
+    const question = canUseRestoredQuestion ? restoredQuestion : RHW.pickQuestion(questionPool, stats, restored?.questionId || null, {
       recentQuestionIds: restoredRecentQuestionIds
     });
-    const round = restoredQuestion ? RHW.makeRound(question, restored) : RHW.makeRound(question);
+    const round = canUseRestoredQuestion ? RHW.makeRound(question, restored) : RHW.makeRound(question);
     const recentQuestionIds = makeRecentQuestionIds(restoredRecentQuestionIds, question.id);
 
-    state = { question, round, stats, recentQuestionIds };
+    state = { question, round, stats, options, recentQuestionIds };
     bindEvents();
     renderAndSave();
     focusNativeInput();
@@ -38,7 +42,7 @@
     bindKeyboardEvents();
     bindHistoryEvents();
     bindDialogEvents();
-    bindStatsEvents();
+    bindOptionsEvents();
     document.querySelector("#sire-hint-button").addEventListener("click", () => useSireHint());
     document.addEventListener("click", () => focusNativeInput());
   }
@@ -105,11 +109,43 @@
     document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
   }
 
-  function bindStatsEvents() {
-    document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state));
-    document.querySelector("#stats-panel").addEventListener("click", (event) => {
-      if (event.target.closest("#clear-history")) clearHistory();
+  function bindOptionsEvents() {
+    document.querySelector("#options-button").addEventListener("click", () => RHW.ui.openOptionsModal(state));
+    document.querySelector("#close-options").addEventListener("click", () => {
+      RHW.ui.closeOptionsModal();
+      focusNativeInput();
     });
+    document.querySelector("#hide-hints").addEventListener("change", (event) => {
+      updateOptions({ hideHints: event.target.checked });
+    });
+    document.querySelector("#decade-filter").addEventListener("change", (event) => {
+      updateOptions({ decadeFilter: event.target.value });
+    });
+    document.querySelector("#clear-history").addEventListener("click", () => clearHistory());
+  }
+
+  function updateOptions(partialOptions) {
+    const nextOptions = RHW.makeOptions(Object.assign({}, state.options, partialOptions));
+    state.options = nextOptions;
+    const questionPool = getQuestionPool();
+    const currentAllowed = questionPool.some((question) => question.id === state.question.id);
+    if (!currentAllowed) {
+      clearInputFeedback();
+      const next = RHW.pickQuestion(questionPool, state.stats, state.question.id, {
+        recentQuestionIds: state.recentQuestionIds
+      });
+      state.question = next;
+      state.round = RHW.makeRound(next);
+      state.recentQuestionIds = makeRecentQuestionIds(state.recentQuestionIds, next.id);
+      RHW.ui.setToast("条件に合う問題へ切り替えました。", "neutral");
+    } else {
+      RHW.ui.setToast("オプションを保存しました。", "neutral");
+    }
+    renderAndSave();
+  }
+
+  function getQuestionPool(options) {
+    return RHW.filterQuestions(DATA.horses, options || state?.options);
   }
 
   function onKeyDown(event) {
@@ -221,6 +257,7 @@
   }
 
   function useSireHint() {
+    if (state.options?.hideHints) return;
     if (!RHW.canUseSireHint(state.round)) return;
     state.round.sireHintUsed = true;
     state.round.currentInput = state.question.sire.nameJa;
@@ -241,7 +278,7 @@
     RHW.ui.closeResetConfirm();
     clearInputFeedback();
     submitAfterComposition = false;
-    const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id, {
+    const next = RHW.pickQuestion(getQuestionPool(), state.stats, state.question.id, {
       recentQuestionIds: state.recentQuestionIds
     });
     state.question = next;
@@ -267,6 +304,7 @@
     persistedRound.recentQuestionIds = state.recentQuestionIds;
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.stats, state.stats);
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.current, persistedRound);
+    RHW.storage.writeJson(RHW.CONFIG.storageKeys.options, state.options);
     delete state.round.justSubmittedAttempt;
   }
 

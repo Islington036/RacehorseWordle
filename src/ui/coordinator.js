@@ -22,6 +22,10 @@
       modal: document.querySelector("#result-modal"),
       modalTitle: document.querySelector("#modal-title"),
       modalBody: document.querySelector("#modal-body"),
+      optionsModal: document.querySelector("#options-modal"),
+      hideHintsInput: document.querySelector("#hide-hints"),
+      decadeFilter: document.querySelector("#decade-filter"),
+      clearHistoryButton: document.querySelector("#clear-history"),
       resetConfirmModal: document.querySelector("#confirm-reset-modal"),
       nextButton: document.querySelector("#next-question")
     });
@@ -73,10 +77,7 @@
         </dl>
       </div>
       <div class="history-list">
-        <div class="history-header">
-          <h2>出題履歴</h2>
-          <button id="clear-history" class="history-reset-button" type="button"${summary.total ? "" : " disabled"}>履歴リセット</button>
-        </div>
+        <div class="history-header"><h2>出題履歴</h2></div>
         <ul>${recent}</ul>
       </div>
       <div class="legend-panel">
@@ -104,7 +105,7 @@
     els.currentInput.textContent = round.currentInput || UI.placeholderInput;
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
     els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
-    renderSireHint(round);
+    renderSireHint(round, state.options);
 
     renderers.renderBoard(els.horseBoard, {
       answer: historyAnswer,
@@ -141,6 +142,7 @@
     });
 
     renderStats(stats, question, round);
+    renderOptions(state.options, stats);
     renderers.updateKeyboardState(els.keyboard, round, answers);
   }
 
@@ -171,6 +173,23 @@
     `;
     els.nextButton.hidden = !isResult;
     els.modal.showModal();
+  }
+
+  function openOptionsModal(state) {
+    renderOptions(state.options, state.stats);
+    if (!els.optionsModal.open) els.optionsModal.showModal();
+  }
+
+  function closeOptionsModal() {
+    if (els.optionsModal.open) els.optionsModal.close();
+  }
+
+  function renderOptions(options, stats) {
+    if (!els.hideHintsInput || !els.decadeFilter || !els.clearHistoryButton) return;
+    const nextOptions = RHW.makeOptions(options);
+    els.hideHintsInput.checked = nextOptions.hideHints;
+    els.decadeFilter.value = nextOptions.decadeFilter;
+    els.clearHistoryButton.disabled = !RHW.summarizeStats(stats).total;
   }
 
   function openResetConfirm() {
@@ -217,9 +236,9 @@
     return [guesses[guesses.length - 1]];
   }
 
-  function renderSireHint(round) {
+  function renderSireHint(round, options) {
     if (!els.sireHintButton) return;
-    const canUse = RHW.canUseSireHint(round);
+    const canUse = !options?.hideHints && RHW.canUseSireHint(round);
     if (els.sireHintRow) els.sireHintRow.hidden = !canUse;
     els.sireHintButton.hidden = !canUse;
     els.sireHintButton.disabled = !canUse;
@@ -231,6 +250,8 @@
     renderKeyboard,
     setToast,
     openResultModal,
+    openOptionsModal,
+    closeOptionsModal,
     openResetConfirm,
     closeResetConfirm
   };

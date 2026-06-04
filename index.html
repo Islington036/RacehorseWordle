@@ -5,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="styles/base.css?v=20260605n">
-  <link rel="stylesheet" href="styles/layout.css?v=20260605n">
-  <link rel="stylesheet" href="styles/wordle.css?v=20260605n">
-  <script defer src="data/questions.embedded.js?v=20260605n"></script>
-  <script defer src="src/config.js?v=20260605n"></script>
-  <script defer src="src/normalize.js?v=20260605n"></script>
-  <script defer src="src/evaluator.js?v=20260605n"></script>
-  <script defer src="src/kana-input.js?v=20260605n"></script>
-  <script defer src="src/storage.js?v=20260605n"></script>
-  <script defer src="src/question-picker.js?v=20260605n"></script>
-  <script defer src="src/game-state.js?v=20260605n"></script>
-  <script defer src="src/ui/constants.js?v=20260605n"></script>
-  <script defer src="src/ui/renderers.js?v=20260605n"></script>
-  <script defer src="src/ui/coordinator.js?v=20260605n"></script>
-  <script defer src="src/main.js?v=20260605n"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260605o">
+  <link rel="stylesheet" href="styles/layout.css?v=20260605o">
+  <link rel="stylesheet" href="styles/wordle.css?v=20260605o">
+  <script defer src="data/questions.embedded.js?v=20260605o"></script>
+  <script defer src="src/config.js?v=20260605o"></script>
+  <script defer src="src/normalize.js?v=20260605o"></script>
+  <script defer src="src/evaluator.js?v=20260605o"></script>
+  <script defer src="src/kana-input.js?v=20260605o"></script>
+  <script defer src="src/storage.js?v=20260605o"></script>
+  <script defer src="src/options.js?v=20260605o"></script>
+  <script defer src="src/question-picker.js?v=20260605o"></script>
+  <script defer src="src/game-state.js?v=20260605o"></script>
+  <script defer src="src/ui/constants.js?v=20260605o"></script>
+  <script defer src="src/ui/renderers.js?v=20260605o"></script>
+  <script defer src="src/ui/coordinator.js?v=20260605o"></script>
+  <script defer src="src/main.js?v=20260605o"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
     <header class="topbar">
-      <button id="stats-button" class="icon-button" type="button" aria-label="統計を表示" title="統計">
-        <span aria-hidden="true">▥</span>
+      <button id="options-button" class="icon-button" type="button" aria-label="オプションを表示" title="オプション">
+        <span aria-hidden="true">⚙</span>
       </button>
       <h1>Racehorse Wordle</h1>
       <button id="reset-button" class="icon-button" type="button" aria-label="別の問題を出題" title="別の問題">
@@ -55,7 +56,7 @@
           <input id="native-input" class="native-input" type="text" inputmode="kana" enterkeyhint="done" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="カタカナ入力">
         </div>
         <div class="hint-row" hidden>
-          <button id="sire-hint-button" class="hint-button" type="button" hidden>父名を表示</button>
+          <button id="sire-hint-button" class="hint-button" type="button" hidden>1回消費してヒントを表示</button>
         </div>
 
         <div class="board-block pedigree-block">
@@ -85,6 +86,30 @@
       <h2 id="modal-title">統計</h2>
       <div id="modal-body"></div>
       <button id="next-question" class="primary-button" type="button">次の問題へ</button>
+    </form>
+  </dialog>
+
+  <dialog id="options-modal" class="options-modal">
+    <form method="dialog" class="modal-shell options-shell">
+      <button id="close-options" class="icon-button close" type="button" aria-label="閉じる">×</button>
+      <h2>オプション</h2>
+      <div class="options-panel">
+        <label class="option-row switch-row">
+          <span>ヒントを表示しない</span>
+          <input id="hide-hints" type="checkbox">
+        </label>
+        <label class="option-row">
+          <span>出題する競走馬の年代を制限</span>
+          <select id="decade-filter" class="option-select">
+            <option value="all">制限なし</option>
+            <option value="1990">1990年代以降</option>
+            <option value="2000">2000年代以降</option>
+            <option value="2010">2010年代以降</option>
+            <option value="2020">2020年代以降</option>
+          </select>
+        </label>
+        <button id="clear-history" class="secondary-button" type="button">履歴リセット</button>
+      </div>
     </form>
   </dialog>
 
