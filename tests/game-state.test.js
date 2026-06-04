@@ -29,7 +29,7 @@ assert.strictEqual(round.targets.horse.solved, false);
 assert.strictEqual(round.attemptsUsed, 1);
 assert.deepStrictEqual(
   round.targets.sire.guesses[0].evaluation.map((item) => item.state),
-  ["sire-correct", "sire-correct", "sire-correct", "sire-correct", "sire-correct", "sire-correct", "sire-correct"]
+  ["correct", "correct", "correct", "correct", "correct", "correct", "correct"]
 );
 
 result = game.submitGuess(round, question, "テストダム");
@@ -37,7 +37,7 @@ round = result.round;
 assert.strictEqual(round.targets.dam.solved, true);
 assert.deepStrictEqual(
   round.targets.dam.guesses[1].evaluation.map((item) => item.state),
-  ["dam-correct", "dam-correct", "dam-correct", "dam-correct", "dam-correct"]
+  ["correct", "correct", "correct", "correct", "correct"]
 );
 
 result = game.submitGuess(round, question, "テストホース");
@@ -53,6 +53,12 @@ round = recorded.round;
 assert.strictEqual(stats.rounds.length, 1);
 assert.strictEqual(stats.rounds[0].attemptsUsed, 3);
 assert.strictEqual(game.recordResult(stats, round, question).stats.rounds.length, 1);
+
+let fixedPedigree = game.makeRound(question);
+fixedPedigree = game.submitGuess(fixedPedigree, question, "テストサイアー").round;
+fixedPedigree = game.submitGuess(fixedPedigree, question, "アイウエオ").round;
+assert.strictEqual(fixedPedigree.targets.sire.guesses.length, 1);
+assert.strictEqual(fixedPedigree.targets.horse.guesses.length, 2);
 
 let failed = game.makeRound(question);
 for (let i = 0; i < 14; i += 1) {

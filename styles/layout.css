@@ -256,6 +256,12 @@
   line-height: 1.35;
 }
 
+.legend-panel .legend-note {
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
 .legend-swatch {
   width: 18px;
   height: 18px;
@@ -272,26 +278,6 @@
 .legend-swatch.present {
   background: var(--present);
   border-color: var(--present);
-}
-
-.legend-swatch.sire-correct {
-  background: var(--sire-correct);
-  border-color: var(--sire-correct);
-}
-
-.legend-swatch.sire-present {
-  background: var(--sire-present);
-  border-color: var(--sire-present);
-}
-
-.legend-swatch.dam-correct {
-  background: var(--dam-correct);
-  border-color: var(--dam-correct);
-}
-
-.legend-swatch.dam-present {
-  background: var(--dam-present);
-  border-color: var(--dam-present);
 }
 
 .legend-swatch.absent {

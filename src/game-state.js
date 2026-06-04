@@ -92,21 +92,6 @@
     return { ok: true };
   }
 
-  function themeState(target, state) {
-    if (target === "sire" && state === "correct") return "sire-correct";
-    if (target === "sire" && state === "present") return "sire-present";
-    if (target === "dam" && state === "correct") return "dam-correct";
-    if (target === "dam" && state === "present") return "dam-present";
-    return state;
-  }
-
-  function evaluateTarget(guess, answer, target) {
-    return scoreGuess(guess, answer.display).map((item) => ({
-      char: item.char,
-      state: themeState(target, item.state)
-    }));
-  }
-
   function submitGuess(round, question, targetOrGuess, maybeGuess) {
     const guess = getGuessArg(targetOrGuess, maybeGuess);
     const validation = validateGuess(round, question, guess);
@@ -118,14 +103,23 @@
     const answers = getAnswers(question);
     const guessKey = normalize(guess);
     const targetResults = {};
+    const nextAttempt = getAttemptsUsed(round) + 1;
 
     TARGETS.forEach((target) => {
+      const wasSolved = Boolean(round.targets[target].solved);
+      if (target !== "horse" && wasSolved) {
+        targetResults[target] = { correct: true, newlySolved: false, skipped: true };
+        return;
+      }
+
       const answer = answers[target];
       const matchedAlias = answer.aliases.includes(guessKey);
       const correct = matchedAlias || isCorrectGuess(guess, answer.display);
-      const evaluation = evaluateTarget(guess, answer, target);
+      const evaluation = scoreGuess(guess, answer.display);
+      const newlySolved = !wasSolved && correct;
 
       next.targets[target].guesses.push({
+        attempt: nextAttempt,
         value: guess,
         normalized: guessKey,
         evaluation,
@@ -134,11 +128,11 @@
 
       next.targets[target].solved = next.targets[target].solved || correct;
 
-      targetResults[target] = { correct, evaluation };
+      targetResults[target] = { correct, newlySolved, evaluation };
     });
 
     next.currentInput = "";
-    next.attemptsUsed = getAttemptsUsed(next) + 1;
+    next.attemptsUsed = nextAttempt;
 
     if (targetResults.horse.correct) {
       next.status = "won";
@@ -158,10 +152,10 @@
   function makeResultMessage(targetResults) {
     if (targetResults.horse.correct) return "馬名が正解です。";
     const pedigree = [];
-    if (targetResults.sire.correct) pedigree.push("父");
-    if (targetResults.dam.correct) pedigree.push("母");
+    if (targetResults.sire.newlySolved) pedigree.push("父");
+    if (targetResults.dam.newlySolved) pedigree.push("母");
     if (pedigree.length) return `${pedigree.join("と")}が正解です。`;
-    return "判定しました。";
+    return "";
   }
 
   function makeStats(existing) {

@@ -8,7 +8,7 @@
     ["ウ", "ク", "ス", "ツ", "ヌ", "フ", "ム", "ユ", "ル", "ン"],
     ["エ", "ケ", "セ", "テ", "ネ", "ヘ", "メ", "", "レ", "ー"],
     ["オ", "コ", "ソ", "ト", "ノ", "ホ", "モ", "ヨ", "ロ", ""],
-    ["消", "決定"]
+    ["小", "゛", "゜", "消", "決定"]
   ];
 
   function initElements() {
@@ -42,37 +42,44 @@
   }
 
   function renderBoard(container, options) {
-    const { answer, guesses, limit, currentInput, showInput, minRows, cols } = options;
+    const { answer, guesses, limit, currentInput, showInput, minRows, cols, animateAttempt } = options;
     container.innerHTML = "";
-    const colCount = Math.max(cols || 1, RHW.splitAnswer(answer.display).length);
+    const colCount = Math.max(cols || RHW.splitAnswer(answer.display).length || 1, 1);
     container.style.setProperty("--cols", colCount);
     const rows = [];
 
-    guesses.forEach((guess) => {
+    guesses.forEach((guess, index) => {
+      const chars = RHW.splitAnswer(guess.value);
       rows.push({
-        chars: RHW.splitAnswer(guess.value),
+        chars,
         states: guess.evaluation.map((item) => item.state),
+        cols: Math.max(chars.length, 1),
+        attempt: guess.attempt || index + 1,
         evaluated: true
       });
     });
 
-    if (showInput && guesses.length < limit) {
+    if (showInput && currentInput && guesses.length < limit) {
+      const chars = RHW.splitAnswer(currentInput);
       rows.push({
-        chars: RHW.splitAnswer(currentInput),
+        chars,
         states: [],
+        cols: Math.max(chars.length, 1),
         active: true
       });
     }
 
-    while (rows.length < minRows) {
+    while (rows.length < (minRows || 0)) {
       rows.push({ chars: [], states: [] });
     }
 
     rows.forEach((row) => {
       const rowEl = document.createElement("div");
-      rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${row.active ? " active" : ""}`;
-      rowEl.style.setProperty("--cols", colCount);
-      for (let index = 0; index < colCount; index += 1) {
+      const shouldAnimate = row.evaluated && row.attempt === animateAttempt;
+      rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${shouldAnimate ? " animate" : " settled"}${row.active ? " active" : ""}`;
+      const rowCols = row.cols || colCount;
+      rowEl.style.setProperty("--cols", rowCols);
+      for (let index = 0; index < rowCols; index += 1) {
         rowEl.append(createTile(row.chars[index], row.states[index], index * 80));
       }
       container.append(rowEl);
@@ -152,13 +159,10 @@
       </div>
       <div class="legend-panel">
         <h2>凡例</h2>
-        <div><span class="legend-swatch correct"></span><p>馬名: 位置も文字も正解</p></div>
-        <div><span class="legend-swatch present"></span><p>馬名: 位置違いで含まれる</p></div>
-        <div><span class="legend-swatch sire-correct"></span><p>父: 位置も文字も正解</p></div>
-        <div><span class="legend-swatch sire-present"></span><p>父: 位置違いで含まれる</p></div>
-        <div><span class="legend-swatch dam-correct"></span><p>母: 位置も文字も正解</p></div>
-        <div><span class="legend-swatch dam-present"></span><p>母: 位置違いで含まれる</p></div>
+        <div><span class="legend-swatch correct"></span><p>位置も文字も正解</p></div>
+        <div><span class="legend-swatch present"></span><p>位置違いで含まれる</p></div>
         <div><span class="legend-swatch absent"></span><p>その対象名には含まれない</p></div>
+        <p class="legend-note">父と母は正解後、その判定行で固定されます。</p>
       </div>
     `;
   }
@@ -167,11 +171,15 @@
     const { question, round, stats } = state;
     const answers = RHW.getAnswers(question);
     const inputLength = RHW.displayLength(round.currentInput);
+    const sireGuesses = getPedigreeDisplayGuesses(round.targets.sire.guesses, round.targets.sire.solved);
+    const damGuesses = getPedigreeDisplayGuesses(round.targets.dam.guesses, round.targets.dam.solved);
 
     els.currentTarget.textContent = "入力";
     els.currentInput.textContent = round.currentInput || "入力待ち";
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
     els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
+    document.querySelector("#sire-status").textContent = round.targets.sire.solved ? "固定" : "Wordle";
+    document.querySelector("#dam-status").textContent = round.targets.dam.solved ? "固定" : "Wordle";
 
     renderBoard(els.horseBoard, {
       answer: answers.horse,
@@ -179,28 +187,31 @@
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: round.currentInput,
       showInput: round.status === "playing",
-      minRows: 6,
-      cols: RHW.MAX_INPUT_LENGTH
+      minRows: 0,
+      cols: null,
+      animateAttempt: round.justSubmittedAttempt
     });
 
     renderBoard(els.sireBoard, {
       answer: answers.sire,
-      guesses: round.targets.sire.guesses,
+      guesses: sireGuesses,
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: "",
       showInput: false,
-      minRows: 3,
-      cols: RHW.MAX_INPUT_LENGTH
+      minRows: 0,
+      cols: null,
+      animateAttempt: round.justSubmittedAttempt
     });
 
     renderBoard(els.damBoard, {
       answer: answers.dam,
-      guesses: round.targets.dam.guesses,
+      guesses: damGuesses,
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: "",
       showInput: false,
-      minRows: 3,
-      cols: RHW.MAX_INPUT_LENGTH
+      minRows: 0,
+      cols: null,
+      animateAttempt: round.justSubmittedAttempt
     });
 
     renderStats(stats, question, round);
@@ -241,6 +252,15 @@
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;");
+  }
+
+  function getPedigreeDisplayGuesses(guesses, solved) {
+    if (!guesses.length) return [];
+    if (solved) {
+      const correct = guesses.find((guess) => guess.correct);
+      return correct ? [correct] : [guesses[guesses.length - 1]];
+    }
+    return [guesses[guesses.length - 1]];
   }
 
   const api = {

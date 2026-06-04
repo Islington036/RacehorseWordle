@@ -40,6 +40,7 @@
       const key = button.dataset.key;
       if (key === "消") backspace();
       else if (key === "決定") submit();
+      else if (key === "゛" || key === "゜" || key === "小") transformInput(key);
       else appendText(key);
     });
 
@@ -68,8 +69,20 @@
 
   function appendText(value) {
     if (!value || state.round.status !== "playing") return;
+    if (value === "゛" || value === "ﾞ" || value === "゜" || value === "ﾟ" || value === "小") {
+      transformInput(value);
+      return;
+    }
     const chars = RHW.splitAnswer(state.round.currentInput + value);
     state.round.currentInput = chars.slice(0, RHW.MAX_INPUT_LENGTH).join("");
+    renderAndSave();
+  }
+
+  function transformInput(mark) {
+    if (state.round.status !== "playing") return;
+    const transformed = RHW.transformLastKana(state.round.currentInput, mark);
+    if (transformed === state.round.currentInput) return;
+    state.round.currentInput = transformed;
     renderAndSave();
   }
 
@@ -82,6 +95,9 @@
     const guess = state.round.currentInput;
     const result = RHW.submitGuess(state.round, state.question, guess);
     state.round = result.round;
+    if (result.accepted) {
+      state.round.justSubmittedAttempt = state.round.attemptsUsed;
+    }
 
     if (!result.accepted) {
       RHW.ui.setToast(result.message, "warn");
@@ -121,8 +137,11 @@
 
   function renderAndSave() {
     RHW.ui.render(state);
+    const persistedRound = structuredClone(state.round);
+    delete persistedRound.justSubmittedAttempt;
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.stats, state.stats);
-    RHW.storage.writeJson(RHW.CONFIG.storageKeys.current, state.round);
+    RHW.storage.writeJson(RHW.CONFIG.storageKeys.current, persistedRound);
+    delete state.round.justSubmittedAttempt;
   }
 
   root.addEventListener("DOMContentLoaded", init);

@@ -8,11 +8,13 @@
 }
 
 .wordle-board.tall {
+  min-height: 46px;
   max-height: 344px;
   overflow: auto;
 }
 
 .wordle-board.compact {
+  min-height: 40px;
   max-height: 132px;
   overflow: auto;
 }
@@ -46,18 +48,14 @@
   min-width: min(100%, calc(var(--cols) * 25px));
 }
 
-.tile:not(.empty) {
+.tile-row.active .tile:not(.empty) {
   border-color: #555c55;
   animation: pop 90ms ease-out;
 }
 
-.tile.correct,
-.tile.present,
-.tile.absent,
-.tile.sire-correct,
-.tile.sire-present,
-.tile.dam-correct,
-.tile.dam-present {
+.tile-row.animate .tile.correct,
+.tile-row.animate .tile.present,
+.tile-row.animate .tile.absent {
   animation: flip 480ms ease both;
   animation-delay: var(--flip-delay);
 }
@@ -75,28 +73,6 @@
 .tile.absent {
   border-color: var(--absent);
   background: var(--absent);
-}
-
-.tile.sire-correct {
-  border-color: var(--sire-correct);
-  background: var(--sire-correct);
-}
-
-.tile.sire-present {
-  border-color: var(--sire-present);
-  background: var(--sire-present);
-  color: #0c2535;
-}
-
-.tile.dam-correct {
-  border-color: var(--dam-correct);
-  background: var(--dam-correct);
-}
-
-.tile.dam-present {
-  border-color: var(--dam-present);
-  background: var(--dam-present);
-  color: #3a1023;
 }
 
 .keyboard {
@@ -117,7 +93,7 @@
 }
 
 .keyboard-row.utility-row {
-  grid-template-columns: repeat(2, minmax(88px, 112px));
+  grid-template-columns: repeat(5, minmax(54px, 84px));
 }
 
 .key {
@@ -189,10 +165,6 @@
   .tile.correct,
   .tile.present,
   .tile.absent,
-  .tile.sire-correct,
-  .tile.sire-present,
-  .tile.dam-correct,
-  .tile.dam-present,
   .shake {
     animation: none;
   }
@@ -217,6 +189,6 @@
   }
 
   .keyboard-row.utility-row {
-    grid-template-columns: repeat(2, minmax(80px, 104px));
+    grid-template-columns: repeat(5, minmax(46px, 72px));
   }
 }
