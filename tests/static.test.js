@@ -63,6 +63,7 @@ assert.ok(sourceText.includes("履歴リセット"), "stats panel includes a his
 assert.ok(sourceText.includes("absent-known"), "keyboard can mark globally absent letters");
 assert.ok(sourceText.includes("horseBoardCols: 9"), "horse board uses nine fixed boxes for the Japanese edition");
 assert.ok(sourceText.includes("pedigreeBoardCols: 18"), "sire and dam boards use eighteen fixed boxes");
+assert.ok(sourceText.includes('minRows: historyTarget === "horse" ? 1 : 0'), "top history tabs should not render empty pedigree boxes");
 assert.ok(sourceText.includes("openResetConfirm"), "topbar reset opens a confirmation dialog before forfeit");
 assert.ok(sourceText.includes("closeResetConfirm"), "reset confirmation dialog can be closed before or after reset");
 assert.ok(!sourceText.includes("openNextConfirm"), "result next-question confirmation must not remain");
@@ -76,6 +77,8 @@ assert.ok(!layoutCss.includes(".target-tabs"), "unused target tab styles should 
 assert.ok(!layoutCss.includes(".reveal-line"), "unused reveal line styles should not remain");
 assert.ok(!layoutCss.includes(".section-heading strong"), "unused section heading strong styles should not remain");
 assert.ok(!layoutCss.includes(".legend-panel .legend-note"), "unused legend note styles should not remain");
+assert.ok(wordleCss.includes("align-content: start"), "history rows should stay packed at the top of fixed-height boards");
+assert.ok(wordleCss.includes("grid-auto-rows: max-content"), "history rows should not stretch apart when fewer than five rows exist");
 assert.ok(!wordleCss.includes(".tile-row.reserved"), "unused reserved row styles should not remain");
 assert.deepStrictEqual(orphanSources, [], "all runtime src files should be loaded by index.html");
 

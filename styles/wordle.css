@@ -1,5 +1,7 @@
 .wordle-board {
   display: grid;
+  align-content: start;
+  grid-auto-rows: max-content;
   gap: 6px;
   width: 100%;
   overflow-x: auto;

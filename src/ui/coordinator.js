@@ -111,7 +111,7 @@
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: round.currentInput,
       showInput: round.status === "playing",
-      minRows: 1,
+      minRows: historyTarget === "horse" ? 1 : 0,
       cols: historyCols,
       animateAttempt: round.justSubmittedAttempt
     });
