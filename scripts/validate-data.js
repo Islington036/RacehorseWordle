@@ -30,6 +30,7 @@ for (const horse of data.horses || []) {
   if (!horse.sire?.nameJa) errors.push(`${horse.nameJa}: sire.nameJa is missing`);
   if (!horse.dam?.nameJa) errors.push(`${horse.nameJa}: dam.nameJa is missing`);
   if (!Array.isArray(horse.wins) || horse.wins.length === 0) errors.push(`${horse.nameJa}: wins are missing`);
+  if (isOldNarOnlyQuestion(horse)) errors.push(`${horse.nameJa}: old NAR-only question must be excluded`);
 
   for (const target of [horse.nameJa, horse.sire?.nameJa, horse.dam?.nameJa]) {
     const normalizedTarget = normalizeName(target);
@@ -43,6 +44,11 @@ for (const horse of data.horses || []) {
     if (!/^(GI|G1|GⅠ|JpnI|Jpn1|JpnⅠ)$/.test(win.gradeAtRun)) errors.push(`${horse.nameJa}: invalid grade ${win.gradeAtRun}`);
     if (/J・/.test(win.gradeAtRun)) errors.push(`${horse.nameJa}: J-GI must be excluded`);
   }
+}
+
+function isOldNarOnlyQuestion(horse) {
+  const wins = horse?.wins || [];
+  return wins.length > 0 && wins.every((win) => win.jurisdiction === "NAR" && Number(win.year) <= 2000);
 }
 
 if (errors.length) {

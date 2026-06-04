@@ -4,13 +4,15 @@
     "definition": "domestic-flat-top-level-at-run-date",
     "fromYear": 1990,
     "cutoff": "2026-06-04",
-    "generatedAt": "2026-06-04T16:21:29.509Z",
+    "generatedAt": "2026-06-04T17:17:31.529Z",
     "expectedWinRecordRoughCount": 1020,
     "includedWinRecords": 1020,
-    "playableWinRecords": 906,
+    "playableWinRecords": 890,
     "questionCountBeforeInputFilter": 601,
-    "questionCount": 527,
-    "excludedQuestionCountForInput": 74
+    "questionCount": 515,
+    "excludedQuestionCountForOldNarOnly": 14,
+    "excludedQuestionCountForInput": 72,
+    "excludedQuestionCount": 86
   },
   "wins": [
     {
@@ -7741,6 +7743,42 @@
       ]
     },
     {
+      "id": "horse:アブクマポーロ",
+      "horse": "アブクマポーロ",
+      "winRecords": 4,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1998,
+          "raceId": "nar:kawasaki-kinen",
+          "raceNameJa": "川崎記念",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        },
+        {
+          "year": 1998,
+          "raceId": "nar:teiosho",
+          "raceNameJa": "帝王賞",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        },
+        {
+          "year": 1998,
+          "raceId": "nar:tokyo-daishoten",
+          "raceNameJa": "東京大賞典",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        },
+        {
+          "year": 1999,
+          "raceId": "nar:kawasaki-kinen",
+          "raceNameJa": "川崎記念",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
       "id": "horse:アポロケンタッキー",
       "horse": "アポロケンタッキー",
       "wins": 1,
@@ -7815,6 +7853,21 @@
             "C",
             "R"
           ]
+        }
+      ]
+    },
+    {
+      "id": "horse:インテリパワー",
+      "horse": "インテリパワー",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 2000,
+          "raceId": "nar:kawasaki-kinen",
+          "raceNameJa": "川崎記念",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     },
@@ -8131,6 +8184,21 @@
       ]
     },
     {
+      "id": "horse:オリオンザサンクス",
+      "horse": "オリオンザサンクス",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1999,
+          "raceId": "nar:jdd",
+          "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
       "id": "horse:カフェオリンポス",
       "horse": "カフェオリンポス",
       "wins": 1,
@@ -8387,42 +8455,15 @@
     {
       "id": "horse:ゴールドティアラ",
       "horse": "ゴールドティアラ",
-      "wins": 1,
-      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
-      "inputIssues": [
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
         {
-          "target": "sire",
-          "value": "Seeking the Gold",
-          "normalized": "SEEKINGTHEGOLD",
-          "reason": "unsupported-characters",
-          "unsupportedCharacters": [
-            "S",
-            "E",
-            "K",
-            "I",
-            "N",
-            "G",
-            "T",
-            "H",
-            "O",
-            "L",
-            "D"
-          ]
-        },
-        {
-          "target": "dam",
-          "value": "Bright Tiara",
-          "normalized": "BRIGHTTIARA",
-          "reason": "unsupported-characters",
-          "unsupportedCharacters": [
-            "B",
-            "R",
-            "I",
-            "G",
-            "H",
-            "T",
-            "A"
-          ]
+          "year": 2000,
+          "raceId": "nar:mcs-nambu",
+          "raceNameJa": "マイルチャンピオンシップ南部杯",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     },
@@ -8462,6 +8503,21 @@
             "Y",
             "B"
           ]
+        }
+      ]
+    },
+    {
+      "id": "horse:コンサートボーイ",
+      "horse": "コンサートボーイ",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1997,
+          "raceId": "nar:teiosho",
+          "raceNameJa": "帝王賞",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     },
@@ -8985,6 +9041,21 @@
       ]
     },
     {
+      "id": "horse:タイキシャーロック",
+      "horse": "タイキシャーロック",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1997,
+          "raceId": "nar:mcs-nambu",
+          "raceNameJa": "マイルチャンピオンシップ南部杯",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
       "id": "horse:タイキシャトル",
       "horse": "タイキシャトル",
       "wins": 4,
@@ -9090,6 +9161,21 @@
             "D",
             "G"
           ]
+        }
+      ]
+    },
+    {
+      "id": "horse:タイキヘラクレス",
+      "horse": "タイキヘラクレス",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1999,
+          "raceId": "nar:derby-grand-prix",
+          "raceNameJa": "ダービーグランプリ",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     },
@@ -9242,6 +9328,21 @@
       ]
     },
     {
+      "id": "horse:テイエムメガトン",
+      "horse": "テイエムメガトン",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1997,
+          "raceId": "nar:derby-grand-prix",
+          "raceNameJa": "ダービーグランプリ",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
       "id": "horse:テスタマッタ",
       "horse": "テスタマッタ",
       "wins": 2,
@@ -9279,43 +9380,45 @@
     {
       "id": "horse:トーヨーシアトル",
       "horse": "トーヨーシアトル",
-      "wins": 1,
-      "excludedReason": "target name contains characters unavailable in kana input or exceeds input length",
-      "inputIssues": [
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
         {
-          "target": "sire",
-          "value": "Deputy Minister",
-          "normalized": "DEPUTYMINISTER",
-          "reason": "unsupported-characters",
-          "unsupportedCharacters": [
-            "D",
-            "E",
-            "P",
-            "U",
-            "T",
-            "Y",
-            "M",
-            "I",
-            "N",
-            "S",
-            "R"
-          ]
-        },
+          "year": 1997,
+          "raceId": "nar:tokyo-daishoten",
+          "raceNameJa": "東京大賞典",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
+      "id": "horse:ナリタホマレ",
+      "horse": "ナリタホマレ",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
         {
-          "target": "dam",
-          "value": "City Dance",
-          "normalized": "CITYDANCE",
-          "reason": "unsupported-characters",
-          "unsupportedCharacters": [
-            "C",
-            "I",
-            "T",
-            "Y",
-            "D",
-            "A",
-            "N",
-            "E"
-          ]
+          "year": 1998,
+          "raceId": "nar:derby-grand-prix",
+          "raceNameJa": "ダービーグランプリ",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
+      "id": "horse:ニホンピロジュピタ",
+      "horse": "ニホンピロジュピタ",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1999,
+          "raceId": "nar:mcs-nambu",
+          "raceNameJa": "マイルチャンピオンシップ南部杯",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     },
@@ -9519,6 +9622,28 @@
       ]
     },
     {
+      "id": "horse:ファストフレンド",
+      "horse": "ファストフレンド",
+      "winRecords": 2,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 2000,
+          "raceId": "nar:teiosho",
+          "raceNameJa": "帝王賞",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        },
+        {
+          "year": 2000,
+          "raceId": "nar:tokyo-daishoten",
+          "raceNameJa": "東京大賞典",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
+        }
+      ]
+    },
+    {
       "id": "horse:ファビラスラフイン",
       "horse": "ファビラスラフイン",
       "wins": 1,
@@ -9661,6 +9786,21 @@
             "A",
             "K"
           ]
+        }
+      ]
+    },
+    {
+      "id": "horse:マイネルコンバット",
+      "horse": "マイネルコンバット",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 2000,
+          "raceId": "nar:jdd",
+          "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     },
@@ -10111,6 +10251,21 @@
             "G",
             "D"
           ]
+        }
+      ]
+    },
+    {
+      "id": "horse:ワールドクリーク",
+      "horse": "ワールドクリーク",
+      "winRecords": 1,
+      "excludedReason": "only NAR top-level wins in 2000 or earlier",
+      "wins": [
+        {
+          "year": 1999,
+          "raceId": "nar:tokyo-daishoten",
+          "raceNameJa": "東京大賞典",
+          "jurisdiction": "NAR",
+          "gradeAtRun": "GI"
         }
       ]
     }

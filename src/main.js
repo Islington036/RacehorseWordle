@@ -3,6 +3,7 @@
   const DATA = root.RHW_QUESTIONS;
   let state;
   let composing = false;
+  let submitAfterComposition = false;
 
   function init() {
     if (!DATA || !Array.isArray(DATA.horses) || DATA.horses.length === 0) {
@@ -32,18 +33,25 @@
     document.addEventListener("compositionstart", () => {
       composing = true;
     });
+    document.addEventListener("compositionupdate", () => {
+      syncNativeInput();
+    });
     document.addEventListener("compositionend", (event) => {
       composing = false;
-      const nativeInput = document.querySelector("#native-input");
-      const value = nativeInput?.value || event.data || "";
-      if (nativeInput) nativeInput.value = "";
-      appendText(value);
+      syncNativeInput(event.data);
+      if (submitAfterComposition) {
+        submitAfterComposition = false;
+        submit();
+      }
     });
     document.querySelector("#native-input").addEventListener("input", (event) => {
-      if (composing) return;
-      const value = event.target.value;
-      event.target.value = "";
-      appendText(value);
+      const value = event.target.value || "";
+      if (/[\r\n]/.test(value)) {
+        setInputValue(value.replace(/[\r\n]/g, ""));
+        submit();
+        return;
+      }
+      syncNativeInput();
     });
 
     document.querySelector("#keyboard").addEventListener("click", (event) => {
@@ -65,18 +73,23 @@
   }
 
   function onKeyDown(event) {
-    if (composing || event.metaKey || event.ctrlKey || event.altKey) return;
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
     if (event.key === "Enter") {
+      if (composing || event.isComposing) {
+        submitAfterComposition = true;
+        return;
+      }
       event.preventDefault();
       submit();
       return;
     }
+    if (event.target === document.querySelector("#native-input")) return;
+    if (composing) return;
     if (event.key === "Backspace") {
       event.preventDefault();
       backspace();
       return;
     }
-    if (event.target === document.querySelector("#native-input")) return;
     if (event.key.length === 1) {
       appendText(event.key);
     }
@@ -88,12 +101,18 @@
       transformInput(value);
       return;
     }
-    const normalizedValue = RHW.normalizeTypedKana(value);
-    if (!RHW.isUsableKanaInput(normalizedValue)) {
-      showInputError("使用できない文字が含まれています");
-      return;
-    }
-    const chars = RHW.splitAnswer(state.round.currentInput + normalizedValue);
+    setInputValue(state.round.currentInput + value);
+  }
+
+  function syncNativeInput(fallbackValue) {
+    const nativeInput = document.querySelector("#native-input");
+    setInputValue(nativeInput?.value || fallbackValue || "");
+  }
+
+  function setInputValue(value) {
+    if (state.round.status !== "playing") return;
+    const normalizedValue = RHW.normalizeTypedKana(value).replace(/[\r\n]/g, "");
+    const chars = RHW.splitAnswer(normalizedValue);
     state.round.currentInput = chars.slice(0, RHW.MAX_INPUT_LENGTH).join("");
     renderAndSave();
   }
@@ -113,6 +132,10 @@
 
   function submit() {
     const guess = state.round.currentInput;
+    if (guess && !RHW.isUsableKanaInput(guess)) {
+      showInputError("使用できない文字が含まれています");
+      return renderAndSave();
+    }
     const result = RHW.submitGuess(state.round, state.question, guess);
     state.round = result.round;
     if (result.accepted) {
@@ -155,6 +178,7 @@
 
   function renderAndSave() {
     RHW.ui.render(state);
+    syncNativeInputValue();
     const persistedRound = structuredClone(state.round);
     delete persistedRound.justSubmittedAttempt;
     RHW.storage.writeJson(RHW.CONFIG.storageKeys.stats, state.stats);
@@ -174,7 +198,14 @@
     const nativeInput = document.querySelector("#native-input");
     const modal = document.querySelector("#result-modal");
     if (!nativeInput || modal?.open) return;
+    syncNativeInputValue();
     nativeInput.focus({ preventScroll: true });
+  }
+
+  function syncNativeInputValue() {
+    const nativeInput = document.querySelector("#native-input");
+    if (!nativeInput || composing || nativeInput.value === state.round.currentInput) return;
+    nativeInput.value = state.round.currentInput;
   }
 
   root.addEventListener("DOMContentLoaded", init);

@@ -1695,98 +1695,6 @@ window.RHW_QUESTIONS = {
       }
     },
     {
-      "id": "horse:アブクマポーロ",
-      "nameJa": "アブクマポーロ",
-      "nameKana": "アブクマポーロ",
-      "nameEn": "Abukuma Poro",
-      "country": "JPN",
-      "birthYear": 1992,
-      "sex": "M",
-      "sire": {
-        "nameJa": "クリスタルグリッターズ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "バンシューウェー",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1998-01-28",
-          "year": 1998,
-          "raceId": "nar:kawasaki-kinen",
-          "raceNameJa": "川崎記念",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第47回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E5%B7%9D%E5%B4%8E%E8%A8%98%E5%BF%B5",
-            "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%96%E3%82%AF%E3%83%9E%E3%83%9D%E3%83%BC%E3%83%AD"
-          ]
-        },
-        {
-          "date": "1998-06-24",
-          "year": 1998,
-          "raceId": "nar:teiosho",
-          "raceNameJa": "帝王賞",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第21回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
-            "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%96%E3%82%AF%E3%83%9E%E3%83%9D%E3%83%BC%E3%83%AD"
-          ]
-        },
-        {
-          "date": "1998-12-23",
-          "year": 1998,
-          "raceId": "nar:tokyo-daishoten",
-          "raceNameJa": "東京大賞典",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第44回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8",
-            "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%96%E3%82%AF%E3%83%9E%E3%83%9D%E3%83%BC%E3%83%AD"
-          ]
-        },
-        {
-          "date": "1999-02-03",
-          "year": 1999,
-          "raceId": "nar:kawasaki-kinen",
-          "raceNameJa": "川崎記念",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第48回",
-          "surface": "dirt",
-          "distanceM": 2100,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E5%B7%9D%E5%B4%8E%E8%A8%98%E5%BF%B5",
-            "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%96%E3%82%AF%E3%83%9E%E3%83%9D%E3%83%BC%E3%83%AD"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%96%E3%82%AF%E3%83%9E%E3%83%9D%E3%83%BC%E3%83%AD",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
-          "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%96%E3%82%AF%E3%83%9E%E3%83%9D%E3%83%BC%E3%83%AD",
-          "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8",
-          "https://ja.wikipedia.org/wiki/%E5%B7%9D%E5%B4%8E%E8%A8%98%E5%BF%B5"
-        ]
-      }
-    },
-    {
       "id": "horse:アマンテビアンコ",
       "nameJa": "アマンテビアンコ",
       "nameKana": "アマンテビアンコ",
@@ -2863,51 +2771,6 @@ window.RHW_QUESTIONS = {
         "raceResults": [
           "https://www.jra.go.jp/datafile/seiseki/g1/yasuda/result/yasuda2019.html",
           "https://www.jra.go.jp/datafile/seiseki/g1/mile/result/mile2019.html"
-        ]
-      }
-    },
-    {
-      "id": "horse:インテリパワー",
-      "nameJa": "インテリパワー",
-      "nameKana": "インテリパワー",
-      "nameEn": "Intelli Power",
-      "country": "JPN",
-      "birthYear": 1995,
-      "sex": "M",
-      "sire": {
-        "nameJa": "ルション",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "インテリフラワー",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "2000-02-09",
-          "year": 2000,
-          "raceId": "nar:kawasaki-kinen",
-          "raceNameJa": "川崎記念",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第49回",
-          "surface": "dirt",
-          "distanceM": 2100,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E5%B7%9D%E5%B4%8E%E8%A8%98%E5%BF%B5",
-            "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%83%91%E3%83%AF%E3%83%BC"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%83%91%E3%83%AF%E3%83%BC",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E5%B7%9D%E5%B4%8E%E8%A8%98%E5%BF%B5",
-          "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%86%E3%83%AA%E3%83%91%E3%83%AF%E3%83%BC"
         ]
       }
     },
@@ -5287,51 +5150,6 @@ window.RHW_QUESTIONS = {
           "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
           "https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%A1%E3%82%AC%E3%83%91%E3%83%95%E3%83%A5%E3%83%BC%E3%83%A0",
           "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8"
-        ]
-      }
-    },
-    {
-      "id": "horse:オリオンザサンクス",
-      "nameJa": "オリオンザサンクス",
-      "nameKana": "オリオンザサンクス",
-      "nameEn": "Orion the Thanks",
-      "country": "JPN",
-      "birthYear": 1996,
-      "sex": "M",
-      "sire": {
-        "nameJa": "シャンハイ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ミラノコレクション",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1999-07-08",
-          "year": 1999,
-          "raceId": "nar:jdd",
-          "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第1回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%E3%83%80%E3%83%BC%E3%83%88%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF",
-            "https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%AA%E3%82%AA%E3%83%B3%E3%82%B6%E3%82%B5%E3%83%B3%E3%82%AF%E3%82%B9"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%E3%83%80%E3%83%BC%E3%83%88%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%E3%83%80%E3%83%BC%E3%83%88%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF",
-          "https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%AA%E3%82%AA%E3%83%B3%E3%82%B6%E3%82%B5%E3%83%B3%E3%82%AF%E3%82%B9"
         ]
       }
     },
@@ -8583,51 +8401,6 @@ window.RHW_QUESTIONS = {
         "raceResults": [
           "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
           "https://ja.wikipedia.org/wiki/%E3%82%B4%E3%83%AB%E3%83%88%E3%83%96%E3%83%AA%E3%83%83%E3%83%84"
-        ]
-      }
-    },
-    {
-      "id": "horse:コンサートボーイ",
-      "nameJa": "コンサートボーイ",
-      "nameKana": "コンサートボーイ",
-      "nameEn": "Concert Boy",
-      "country": "JPN",
-      "birthYear": 1992,
-      "sex": "M",
-      "sire": {
-        "nameJa": "カコイーシーズ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "コンサートダイナ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1997-06-24",
-          "year": 1997,
-          "raceId": "nar:teiosho",
-          "raceNameJa": "帝王賞",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第20回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
-            "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%88%E3%83%9C%E3%83%BC%E3%82%A4"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%88%E3%83%9C%E3%83%BC%E3%82%A4",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
-          "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%88%E3%83%9C%E3%83%BC%E3%82%A4"
         ]
       }
     },
@@ -13479,96 +13252,6 @@ window.RHW_QUESTIONS = {
       }
     },
     {
-      "id": "horse:タイキシャーロック",
-      "nameJa": "タイキシャーロック",
-      "nameKana": "タイキシャーロック",
-      "nameEn": "Taiki Sherlock",
-      "country": "JPN",
-      "birthYear": 1992,
-      "sex": "M",
-      "sire": {
-        "nameJa": "ジェイドロバリー",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ビラローズ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1997-10-10",
-          "year": 1997,
-          "raceId": "nar:mcs-nambu",
-          "raceNameJa": "マイルチャンピオンシップ南部杯",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "盛岡",
-          "surface": "dirt",
-          "distanceM": 1600,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%AB%E3%83%81%E3%83%A3%E3%83%B3%E3%83%94%E3%82%AA%E3%83%B3%E3%82%B7%E3%83%83%E3%83%97%E5%8D%97%E9%83%A8%E6%9D%AF",
-            "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%A4%E3%82%AD%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%A4%E3%82%AD%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%AB%E3%83%81%E3%83%A3%E3%83%B3%E3%83%94%E3%82%AA%E3%83%B3%E3%82%B7%E3%83%83%E3%83%97%E5%8D%97%E9%83%A8%E6%9D%AF",
-          "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%A4%E3%82%AD%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF"
-        ]
-      }
-    },
-    {
-      "id": "horse:タイキヘラクレス",
-      "nameJa": "タイキヘラクレス",
-      "nameKana": "タイキヘラクレス",
-      "nameEn": "Taiki Herakles",
-      "country": "JPN",
-      "birthYear": 1996,
-      "sex": "M",
-      "sire": {
-        "nameJa": "イブンベイ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "サウンドビューティ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1999-11-03",
-          "year": 1999,
-          "raceId": "nar:derby-grand-prix",
-          "raceNameJa": "ダービーグランプリ",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "盛岡",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%93%E3%83%BC%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA",
-            "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%A4%E3%82%AD%E3%83%98%E3%83%A9%E3%82%AF%E3%83%AC%E3%82%B9"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%A4%E3%82%AD%E3%83%98%E3%83%A9%E3%82%AF%E3%83%AC%E3%82%B9",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%93%E3%83%BC%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA",
-          "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%82%A4%E3%82%AD%E3%83%98%E3%83%A9%E3%82%AF%E3%83%AC%E3%82%B9"
-        ]
-      }
-    },
-    {
       "id": "horse:タイセイレジェンド",
       "nameJa": "タイセイレジェンド",
       "nameKana": "タイセイレジェンド",
@@ -16160,51 +15843,6 @@ window.RHW_QUESTIONS = {
       }
     },
     {
-      "id": "horse:テイエムメガトン",
-      "nameJa": "テイエムメガトン",
-      "nameKana": "テイエムメガトン",
-      "nameEn": "T.M.Megaton",
-      "country": "JPN",
-      "birthYear": 1994,
-      "sex": "M",
-      "sire": {
-        "nameJa": "スキャン",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ベツプイチバン",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1997-11-03",
-          "year": 1997,
-          "raceId": "nar:derby-grand-prix",
-          "raceNameJa": "ダービーグランプリ",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "盛岡",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%93%E3%83%BC%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA",
-            "https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%A4%E3%82%A8%E3%83%A0%E3%83%A1%E3%82%AC%E3%83%88%E3%83%B3"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%A4%E3%82%A8%E3%83%A0%E3%83%A1%E3%82%AC%E3%83%88%E3%83%B3",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%93%E3%83%BC%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA",
-          "https://ja.wikipedia.org/wiki/%E3%83%86%E3%82%A4%E3%82%A8%E3%83%A0%E3%83%A1%E3%82%AC%E3%83%88%E3%83%B3"
-        ]
-      }
-    },
-    {
       "id": "horse:ディクテオン",
       "nameJa": "ディクテオン",
       "nameKana": "ディクテオン",
@@ -18209,51 +17847,6 @@ window.RHW_QUESTIONS = {
       }
     },
     {
-      "id": "horse:ナリタホマレ",
-      "nameJa": "ナリタホマレ",
-      "nameKana": "ナリタホマレ",
-      "nameEn": "",
-      "country": "JPN",
-      "birthYear": 1995,
-      "sex": "M",
-      "sire": {
-        "nameJa": "オースミシャダイ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ヒカリホマレ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1998-12-14",
-          "year": 1998,
-          "raceId": "nar:derby-grand-prix",
-          "raceNameJa": "ダービーグランプリ",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "水沢",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%93%E3%83%BC%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA",
-            "https://ja.wikipedia.org/wiki/%E3%83%8A%E3%83%AA%E3%82%BF%E3%83%9B%E3%83%9E%E3%83%AC"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%83%8A%E3%83%AA%E3%82%BF%E3%83%9B%E3%83%9E%E3%83%AC",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%93%E3%83%BC%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA",
-          "https://ja.wikipedia.org/wiki/%E3%83%8A%E3%83%AA%E3%82%BF%E3%83%9B%E3%83%9E%E3%83%AC"
-        ]
-      }
-    },
-    {
       "id": "horse:ナルカミ",
       "nameJa": "ナルカミ",
       "nameKana": "ナルカミ",
@@ -18456,51 +18049,6 @@ window.RHW_QUESTIONS = {
         "pedigree": "",
         "raceResults": [
           "https://www.jra.go.jp/datafile/seiseki/g1/jcd/result/jcd2012.html"
-        ]
-      }
-    },
-    {
-      "id": "horse:ニホンピロジュピタ",
-      "nameJa": "ニホンピロジュピタ",
-      "nameKana": "ニホンピロジュピタ",
-      "nameEn": "Nihon Pillow Jupiter",
-      "country": "JPN",
-      "birthYear": 1995,
-      "sex": "M",
-      "sire": {
-        "nameJa": "オペラハウス",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ニホンピロクリア",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1999-10-11",
-          "year": 1999,
-          "raceId": "nar:mcs-nambu",
-          "raceNameJa": "マイルチャンピオンシップ南部杯",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "盛岡",
-          "surface": "dirt",
-          "distanceM": 1600,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%AB%E3%83%81%E3%83%A3%E3%83%B3%E3%83%94%E3%82%AA%E3%83%B3%E3%82%B7%E3%83%83%E3%83%97%E5%8D%97%E9%83%A8%E6%9D%AF",
-            "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%9B%E3%83%B3%E3%83%94%E3%83%AD%E3%82%B8%E3%83%A5%E3%83%94%E3%82%BF"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%9B%E3%83%B3%E3%83%94%E3%83%AD%E3%82%B8%E3%83%A5%E3%83%94%E3%82%BF",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%AB%E3%83%81%E3%83%A3%E3%83%B3%E3%83%94%E3%82%AA%E3%83%B3%E3%82%B7%E3%83%83%E3%83%97%E5%8D%97%E9%83%A8%E6%9D%AF",
-          "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%9B%E3%83%B3%E3%83%94%E3%83%AD%E3%82%B8%E3%83%A5%E3%83%94%E3%82%BF"
         ]
       }
     },
@@ -20456,67 +20004,6 @@ window.RHW_QUESTIONS = {
         "pedigree": "",
         "raceResults": [
           "https://www.jra.go.jp/datafile/seiseki/g1/takamatsu/result/takamatsu2023.html"
-        ]
-      }
-    },
-    {
-      "id": "horse:ファストフレンド",
-      "nameJa": "ファストフレンド",
-      "nameKana": "ファストフレンド",
-      "nameEn": "Fast Friend",
-      "country": "JPN",
-      "birthYear": 1994,
-      "sex": "F",
-      "sire": {
-        "nameJa": "アイネスフウジン",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ザラストワード",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "2000-06-22",
-          "year": 2000,
-          "raceId": "nar:teiosho",
-          "raceNameJa": "帝王賞",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第23回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
-            "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%B9%E3%83%88%E3%83%95%E3%83%AC%E3%83%B3%E3%83%89"
-          ]
-        },
-        {
-          "date": "2000-12-29",
-          "year": 2000,
-          "raceId": "nar:tokyo-daishoten",
-          "raceNameJa": "東京大賞典",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第46回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8",
-            "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%B9%E3%83%88%E3%83%95%E3%83%AC%E3%83%B3%E3%83%89"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%B9%E3%83%88%E3%83%95%E3%83%AC%E3%83%B3%E3%83%89",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E5%B8%9D%E7%8E%8B%E8%B3%9E",
-          "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%B9%E3%83%88%E3%83%95%E3%83%AC%E3%83%B3%E3%83%89",
-          "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8"
         ]
       }
     },
@@ -22890,51 +22377,6 @@ window.RHW_QUESTIONS = {
         "pedigree": "",
         "raceResults": [
           "https://www.jra.go.jp/datafile/seiseki/g1/haruten/result/haruten2009.html"
-        ]
-      }
-    },
-    {
-      "id": "horse:マイネルコンバット",
-      "nameJa": "マイネルコンバット",
-      "nameKana": "マイネルコンバット",
-      "nameEn": "Meiner Combat",
-      "country": "JPN",
-      "birthYear": 1997,
-      "sex": "M",
-      "sire": {
-        "nameJa": "コマンダーインチーフ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "プリンセススマイル",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "2000-07-12",
-          "year": 2000,
-          "raceId": "nar:jdd",
-          "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第2回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%E3%83%80%E3%83%BC%E3%83%88%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF",
-            "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%8D%E3%83%AB%E3%82%B3%E3%83%B3%E3%83%90%E3%83%83%E3%83%88"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%E3%83%80%E3%83%BC%E3%83%88%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%E3%83%80%E3%83%BC%E3%83%88%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%83%E3%82%AF",
-          "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%82%A4%E3%83%8D%E3%83%AB%E3%82%B3%E3%83%B3%E3%83%90%E3%83%83%E3%83%88"
         ]
       }
     },
@@ -28356,51 +27798,6 @@ window.RHW_QUESTIONS = {
           "https://www.jra.go.jp/datafile/seiseki/g1/satsuki/result/satsuki2026.html",
           "https://www.jra.go.jp/datafile/seiseki/g1/derby/result/derby2026.html",
           "https://www.jra.go.jp/datafile/seiseki/g1/hopeful/result/hopeful2025.html"
-        ]
-      }
-    },
-    {
-      "id": "horse:ワールドクリーク",
-      "nameJa": "ワールドクリーク",
-      "nameKana": "ワールドクリーク",
-      "nameEn": "World Cleek",
-      "country": "JPN",
-      "birthYear": 1995,
-      "sex": "M",
-      "sire": {
-        "nameJa": "マジックミラー",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "dam": {
-        "nameJa": "ケイシュウハーブ",
-        "nameEn": "",
-        "country": "",
-        "aliases": []
-      },
-      "wins": [
-        {
-          "date": "1999-12-29",
-          "year": 1999,
-          "raceId": "nar:tokyo-daishoten",
-          "raceNameJa": "東京大賞典",
-          "jurisdiction": "NAR",
-          "gradeAtRun": "GI",
-          "course": "第45回",
-          "surface": "dirt",
-          "distanceM": 2000,
-          "sourceUrls": [
-            "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8",
-            "https://ja.wikipedia.org/wiki/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AF%E3%83%AA%E3%83%BC%E3%82%AF"
-          ]
-        }
-      ],
-      "sourceUrls": {
-        "pedigree": "https://ja.wikipedia.org/wiki/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AF%E3%83%AA%E3%83%BC%E3%82%AF",
-        "raceResults": [
-          "https://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E5%A4%A7%E8%B3%9E%E5%85%B8",
-          "https://ja.wikipedia.org/wiki/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AF%E3%83%AA%E3%83%BC%E3%82%AF"
         ]
       }
     },

@@ -9,8 +9,9 @@
 
 .wordle-board.tall {
   min-height: 46px;
-  max-height: 344px;
+  max-height: 226px;
   overflow: auto;
+  scrollbar-gutter: stable;
 }
 
 #horse-board {
@@ -89,7 +90,7 @@
   width: min(100%, 760px);
   display: grid;
   gap: 7px;
-  margin-top: 4px;
+  margin-top: 18px;
 }
 
 .keyboard-row {
@@ -205,5 +206,9 @@
 
   .keyboard-row.utility-row {
     grid-template-columns: repeat(10, minmax(0, 40px));
+  }
+
+  .wordle-board.tall {
+    max-height: 204px;
   }
 }

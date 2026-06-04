@@ -184,7 +184,7 @@ async function main() {
   await fs.writeFile(OUT_EMBEDDED, `window.RHW_QUESTIONS = ${JSON.stringify(output, null, 2)};\n`);
   await fs.writeFile(OUT_AUDIT, `${JSON.stringify(audit, null, 2)}\n`);
   console.log(`Generated ${questions.length} questions from ${wins.length} included wins.`);
-  console.log(`Excluded ${audit.excluded.length} wins and ${audit.excludedQuestions.length} input-incompatible questions; warnings ${audit.warnings.length}.`);
+  console.log(`Excluded ${audit.excluded.length} wins and ${audit.excludedQuestions.length} questions; warnings ${audit.warnings.length}.`);
 }
 
 async function collectJraRace(race, audit) {
@@ -500,9 +500,30 @@ function buildQuestions(wins, audit) {
     .sort((a, b) => a.nameJa.localeCompare(b.nameJa, "ja"));
 
   const questions = [];
+  let oldNarOnlyExcluded = 0;
+  let inputExcluded = 0;
   for (const horse of candidates) {
+    if (isOldNarOnlyQuestion(horse)) {
+      oldNarOnlyExcluded += 1;
+      audit.excludedQuestions.push({
+        id: horse.id,
+        horse: horse.nameJa,
+        winRecords: horse.wins.length,
+        excludedReason: "only NAR top-level wins in 2000 or earlier",
+        wins: horse.wins.map((win) => ({
+          year: win.year,
+          raceId: win.raceId,
+          raceNameJa: win.raceNameJa,
+          jurisdiction: win.jurisdiction,
+          gradeAtRun: win.gradeAtRun
+        }))
+      });
+      continue;
+    }
+
     const inputIssues = findInputIssues(horse);
     if (inputIssues.length) {
+      inputExcluded += 1;
       audit.excludedQuestions.push({
         id: horse.id,
         horse: horse.nameJa,
@@ -519,7 +540,9 @@ function buildQuestions(wins, audit) {
   audit.meta.playableWinRecords = questions.reduce((total, horse) => total + horse.wins.length, 0);
   audit.meta.questionCountBeforeInputFilter = candidates.length;
   audit.meta.questionCount = questions.length;
-  audit.meta.excludedQuestionCountForInput = audit.excludedQuestions.length;
+  audit.meta.excludedQuestionCountForOldNarOnly = oldNarOnlyExcluded;
+  audit.meta.excludedQuestionCountForInput = inputExcluded;
+  audit.meta.excludedQuestionCount = audit.excludedQuestions.length;
   return questions;
 }
 
@@ -535,6 +558,9 @@ function validateGeneratedQuestions(questions, audit) {
     if (!horse.wins.length) {
       audit.warnings.push({ kind: "question-missing-wins", horse: horse.nameJa });
     }
+    if (isOldNarOnlyQuestion(horse)) {
+      audit.warnings.push({ kind: "question-old-nar-only", horse: horse.nameJa, wins: horse.wins });
+    }
     const inputIssues = findInputIssues(horse);
     if (inputIssues.length) {
       audit.warnings.push({ kind: "question-input-unavailable", horse: horse.nameJa, inputIssues });
@@ -547,6 +573,11 @@ function validateGeneratedQuestions(questions, audit) {
       expectedRoughCount: audit.meta.expectedWinRecordRoughCount
     });
   }
+}
+
+function isOldNarOnlyQuestion(horse) {
+  const wins = horse?.wins || [];
+  return wins.length > 0 && wins.every((win) => win.jurisdiction === "NAR" && Number(win.year) <= 2000);
 }
 
 function findInputIssues(horse) {
