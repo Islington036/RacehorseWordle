@@ -109,9 +109,9 @@
       answer: historyAnswer,
       guesses: historyGuesses,
       limit: RHW.ATTEMPT_LIMIT,
-      currentInput: round.currentInput,
-      showInput: round.status === "playing",
-      minRows: historyTarget === "horse" ? 1 : 0,
+      currentInput: "",
+      showInput: false,
+      minRows: 0,
       cols: historyCols,
       animateAttempt: round.justSubmittedAttempt
     });

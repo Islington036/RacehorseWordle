@@ -63,7 +63,8 @@ assert.ok(sourceText.includes("履歴リセット"), "stats panel includes a his
 assert.ok(sourceText.includes("absent-known"), "keyboard can mark globally absent letters");
 assert.ok(sourceText.includes("horseBoardCols: 9"), "horse board uses nine fixed boxes for the Japanese edition");
 assert.ok(sourceText.includes("pedigreeBoardCols: 18"), "sire and dam boards use eighteen fixed boxes");
-assert.ok(sourceText.includes('minRows: historyTarget === "horse" ? 1 : 0'), "top history tabs should not render empty pedigree boxes");
+assert.ok(sourceText.includes("showInput: false"), "top history board should only render submitted guesses");
+assert.ok(sourceText.includes("minRows: 0"), "top history board should not render empty placeholder rows");
 assert.ok(sourceText.includes("openResetConfirm"), "topbar reset opens a confirmation dialog before forfeit");
 assert.ok(sourceText.includes("closeResetConfirm"), "reset confirmation dialog can be closed before or after reset");
 assert.ok(!sourceText.includes("openNextConfirm"), "result next-question confirmation must not remain");
