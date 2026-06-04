@@ -12,6 +12,7 @@ const OUT_AUDIT = path.join(ROOT, "data", "race-wins.audit.json");
 
 const FROM_YEAR = 1990;
 const CUTOFF = new Date("2026-06-04T23:59:59+09:00");
+let lastWikiRequestAt = 0;
 
 const JRA_RACES = [
   { id: "jra:feb", slug: "feb", raceNameJa: "フェブラリーステークス", fromYear: 1997, course: "東京", surface: "dirt", distanceM: 1600 },
@@ -57,6 +58,65 @@ const LOCAL_RACES = [
   { id: "nar:sakitama", title: "さきたま杯", raceNameJa: "さきたま杯", periods: [[2024, 2026]], course: "浦和", distanceM: 1400 }
 ];
 
+const KNOWN_FOREIGN_TRAINED_JRA_WIN_KEYS = new Set([
+  "jra:jc:1990",
+  "jra:jc:1991",
+  "jra:jc:1995",
+  "jra:jc:1996",
+  "jra:jc:1997",
+  "jra:jc:2002",
+  "jra:jc:2005",
+  "jra:jc:2025",
+  "jra:yasuda:1995",
+  "jra:yasuda:2000",
+  "jra:yasuda:2006",
+  "jra:yasuda:2024",
+  "jra:sprint:2005",
+  "jra:sprint:2006",
+  "jra:sprint:2010",
+  "jra:takamatsu:2015",
+  "jra:eliza:2010",
+  "jra:eliza:2011",
+  "jra:jcd:2003"
+]);
+
+const HORSE_PAGE_TITLE_OVERRIDES = new Map([
+  ["ベガ", "ベガ (競走馬)"],
+  ["フリオーソ", "フリオーソ (2004年生の競走馬)"],
+  ["ユートピア", "ユートピア (競走馬)"],
+  ["タイムパラドックス", "タイムパラドックス (競走馬)"],
+  ["スーニ", "スーニ (競走馬)"],
+  ["シャマル", "シャマル (競走馬)"]
+]);
+
+const MANUAL_INCLUDED_WINS = [
+  {
+    id: "horse:サンテミリオン",
+    nameJa: "サンテミリオン",
+    nameKana: "サンテミリオン",
+    nameEn: "Saint Emilion",
+    country: "JPN",
+    birthYear: 2007,
+    sex: "F",
+    sire: { nameJa: "ゼンノロブロイ", nameEn: "Zenno Rob Roy", country: "JPN", aliases: ["Zenno Rob Roy"] },
+    dam: { nameJa: "モテック", nameEn: "Moteck", country: "", aliases: ["Moteck"] },
+    date: "2010-05-23",
+    year: 2010,
+    raceId: "jra:oaks",
+    raceNameJa: "優駿牝馬",
+    jurisdiction: "JRA",
+    gradeAtRun: "GI",
+    course: "東京",
+    surface: "turf",
+    distanceM: 2400,
+    sourceUrls: [
+      "https://www.jra.go.jp/datafile/seiseki/g1/oaks/result/oaks2010.html",
+      "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%B3%E3%83%86%E3%83%9F%E3%83%AA%E3%82%AA%E3%83%B3_(%E7%AB%B6%E8%B5%B0%E9%A6%AC)"
+    ],
+    manualReason: "2010 Oaks dead heat winner not represented as a second winner in the JRA race index table."
+  }
+];
+
 async function main() {
   await fs.mkdir(CACHE_DIR, { recursive: true });
   const audit = {
@@ -86,6 +146,13 @@ async function main() {
     const raceWins = await collectLocalRace(race, audit);
     wins.push(...raceWins);
     console.log(`  ${race.raceNameJa}: ${raceWins.length}`);
+  }
+
+  for (const manualWin of MANUAL_INCLUDED_WINS) {
+    if (!wins.some((win) => win.raceId === manualWin.raceId && win.year === manualWin.year && normalizeKey(win.nameJa) === normalizeKey(manualWin.nameJa))) {
+      wins.push(manualWin);
+      audit.wins.push({ source: "manual", raceId: manualWin.raceId, year: manualWin.year, horse: manualWin.nameJa, reason: manualWin.manualReason });
+    }
   }
 
   const questions = buildQuestions(wins, audit);
@@ -128,6 +195,9 @@ async function collectJraRace(race, audit) {
     try {
       const resultHtml = await fetchText(resultUrl, `jra-${race.slug}-${row.year}.html`, "shift_jis");
       const detail = parseJraResult(resultHtml, row, race, resultUrl);
+      if (KNOWN_FOREIGN_TRAINED_JRA_WIN_KEYS.has(`${race.id}:${row.year}`)) {
+        detail.isForeignTrained = true;
+      }
       if (detail.date && new Date(`${detail.date}T23:59:59+09:00`) > CUTOFF) {
         audit.excluded.push({ ...detail, excludedReason: "after cutoff" });
         continue;
@@ -135,6 +205,14 @@ async function collectJraRace(race, audit) {
       if (detail.isForeignTrained) {
         audit.excluded.push({ ...detail, excludedReason: "foreign-trained winner" });
         continue;
+      }
+      if (!detail.sire?.nameJa || !detail.dam?.nameJa) {
+        const fallback = await fetchHorsePedigree(cleanHorseName(row.horseName), row.horseName, audit);
+        detail.nameEn ||= fallback.nameEn || "";
+        detail.birthYear ||= fallback.birthYear || null;
+        detail.sex ||= fallback.sex || "";
+        detail.sire = fallback.sire || detail.sire;
+        detail.dam = fallback.dam || detail.dam;
       }
       if (!detail.sire?.nameJa || !detail.dam?.nameJa) {
         audit.warnings.push({ kind: "missing-pedigree", source: "JRA", race: race.raceNameJa, year: row.year, horse: row.horseName, url: resultUrl });
@@ -168,8 +246,11 @@ function parseJraIndexRows(html, race, indexUrl) {
 function parseJraResult(html, row, race, resultUrl) {
   const dateMatch = html.match(/<div class="cell date">(\d{4})年(\d{1,2})月(\d{1,2})日/);
   const date = dateMatch ? toIsoDate(dateMatch[1], dateMatch[2], dateMatch[3]) : null;
-  const winCell = html.match(/<th scope="row">勝馬<\/th>\s*<td>([\s\S]*?)<\/td>/)?.[1] || "";
-  const lines = htmlToLines(winCell);
+  const winCell = html.match(/<th[^>]*>\s*勝\s*馬\s*<\/th>\s*<td[^>]*>([\s\S]*?)<\/td>/i)?.[1]
+    || html.match(/<td[^>]*>\s*勝\s*馬\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>/i)?.[1]
+    || findLegacyJraWinnerCell(html)
+    || "";
+  const lines = htmlToLines(winCell).filter((line) => !/^勝\s*馬(?:の情報)?$/.test(line));
   const first = lines[0] || row.horseName;
   const isForeignTrained = /\[外\]/.test(first);
   const cleanName = cleanHorseName(first) || row.horseName;
@@ -203,6 +284,15 @@ function parseJraResult(html, row, race, resultUrl) {
   };
 }
 
+function findLegacyJraWinnerCell(html) {
+  const cellPattern = /<td[^>]*>((?:(?!<\/td>)[\s\S])*?父：(?:(?!<\/td>)[\s\S])*?母：(?:(?!<\/td>)[\s\S])*?)<\/td>/i;
+  const direct = html.match(cellPattern)?.[0];
+  if (direct) return direct;
+  const block = html.match(/勝馬の情報[\s\S]{0,5000}/i)?.[0] || "";
+  const cell = block.match(cellPattern)?.[1];
+  return cell || "";
+}
+
 async function collectLocalRace(race, audit) {
   let page;
   try {
@@ -226,7 +316,6 @@ async function collectLocalRace(race, audit) {
     const pedigree = await fetchHorsePedigree(row.pageTitle || row.horseName, row.horseName, audit);
     if (!pedigree.sire?.nameJa || !pedigree.dam?.nameJa) {
       audit.warnings.push({ kind: "missing-local-pedigree", race: race.raceNameJa, year: row.year, horse: row.horseName, pageTitle: row.pageTitle });
-      continue;
     }
     const detail = {
       id: slugId(row.horseName),
@@ -311,12 +400,27 @@ function splitWikiCells(rawRow) {
 }
 
 async function fetchHorsePedigree(title, displayName, audit) {
-  try {
-    const page = await fetchWikiPage(title);
+  const baseTitle = HORSE_PAGE_TITLE_OVERRIDES.get(displayName) || HORSE_PAGE_TITLE_OVERRIDES.get(title) || title;
+  const candidates = Array.from(new Set([
+    baseTitle,
+    title,
+    displayName,
+    `${displayName} (競走馬)`,
+    `${displayName}_(競走馬)`
+  ].filter(Boolean)));
+  let lastError = null;
+
+  for (const candidate of candidates) {
+    try {
+      const page = await fetchWikiPage(candidate);
     const content = page.content;
     const horseTemplate = content.match(/\{\{競走馬[\s\S]*?\n\}\}/)?.[0] || content.slice(0, 4000);
     const sire = extractTemplateParam(horseTemplate, "父");
     const dam = extractTemplateParam(horseTemplate, "母");
+      if (!sire || !dam) {
+        lastError = new Error(`missing infobox pedigree: ${candidate}`);
+        continue;
+      }
     const english = extractTemplateParam(horseTemplate, "英");
     const birth = extractTemplateParam(horseTemplate, "生");
     const sex = extractTemplateParam(horseTemplate, "性");
@@ -328,10 +432,12 @@ async function fetchHorsePedigree(title, displayName, audit) {
       dam: { nameJa: cleanNameValue(dam), nameEn: asciiName(dam), country: "", aliases: aliasList(dam) },
       sourceUrl: `https://ja.wikipedia.org/wiki/${encodeURIComponent(page.title)}`
     };
-  } catch (error) {
-    audit.warnings.push({ kind: "wiki-horse-fetch-failed", title, displayName, message: error.message });
-    return { sire: { nameJa: "" }, dam: { nameJa: "" } };
+    } catch (error) {
+      lastError = error;
+    }
   }
+  audit.warnings.push({ kind: "wiki-horse-fetch-failed", title, displayName, message: lastError?.message || "unknown" });
+  return { sire: { nameJa: "" }, dam: { nameJa: "" } };
 }
 
 function buildQuestions(wins, audit) {
@@ -359,6 +465,8 @@ function buildQuestions(wins, audit) {
     const horse = byName.get(key);
     if (!horse.birthYear && win.birthYear) horse.birthYear = win.birthYear;
     if (!horse.nameEn && win.nameEn) horse.nameEn = win.nameEn;
+    if (!horse.sire.nameJa && win.sire?.nameJa) horse.sire = normalizeParent(win.sire);
+    if (!horse.dam.nameJa && win.dam?.nameJa) horse.dam = normalizeParent(win.dam);
     horse.wins.push({
       date: win.date,
       year: win.year,
@@ -437,10 +545,16 @@ async function fetchWikiPage(title) {
   } catch {
     // Cache miss.
   }
-  const url = `https://ja.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(title)}&redirects=1&formatversion=2`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "RacehorseWordleDataBot/0.1 (+local development)" }
-  });
+  const url = `https://ja.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(title)}&redirects=1&formatversion=2&origin=*`;
+  let response;
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    await throttleWiki();
+    response = await fetch(url, {
+      headers: { "User-Agent": "RacehorseWordleDataBot/0.1 (local development; contact unavailable)" }
+    });
+    if (response.status !== 429) break;
+    await sleep(1200 * (attempt + 1));
+  }
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   const json = await response.json();
   const page = json.query.pages[0];
@@ -451,6 +565,18 @@ async function fetchWikiPage(title) {
   };
   await fs.writeFile(cachePath, JSON.stringify(result));
   return result;
+}
+
+async function throttleWiki() {
+  const elapsed = Date.now() - lastWikiRequestAt;
+  if (elapsed < 650) {
+    await sleep(650 - elapsed);
+  }
+  lastWikiRequestAt = Date.now();
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function stripHtml(value) {
@@ -473,6 +599,7 @@ function htmlToLines(value) {
 function cleanHorseName(value) {
   return cleanNameValue(value)
     .replace(/^\[[^\]]+\]/, "")
+    .replace(/^[（(][外地][）)]/, "")
     .replace(/（[^）]*[A-Za-z][^）]*）/g, "")
     .replace(/\([^)]*[A-Za-z][^)]*\)/g, "")
     .trim();
