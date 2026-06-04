@@ -2,6 +2,8 @@
   const RHW = root.RHW;
 
   const els = {};
+  const HORSE_BOARD_COLS = 9;
+  const PEDIGREE_BOARD_COLS = 18;
   const KANA_ROWS = [
     ["ワ", "ラ", "ヤ", "マ", "ハ", "ナ", "タ", "サ", "カ", "ア"],
     ["ヲ", "リ", "", "ミ", "ヒ", "ニ", "チ", "シ", "キ", "イ"],
@@ -25,14 +27,12 @@
 
   function initElements() {
     Object.assign(els, {
-      app: document.querySelector("#app"),
       horseBoard: document.querySelector("#horse-board"),
       sireBoard: document.querySelector("#sire-board"),
       damBoard: document.querySelector("#dam-board"),
       historyTabs: document.querySelector("#history-tabs"),
       currentTarget: document.querySelector("#current-target"),
       currentInput: document.querySelector("#current-input"),
-      nativeInput: document.querySelector("#native-input"),
       inputHint: document.querySelector("#input-hint"),
       sireHintButton: document.querySelector("#sire-hint-button"),
       keyboard: document.querySelector("#keyboard"),
@@ -41,10 +41,8 @@
       modal: document.querySelector("#result-modal"),
       modalTitle: document.querySelector("#modal-title"),
       modalBody: document.querySelector("#modal-body"),
-      nextButton: document.querySelector("#next-question"),
-      statsButton: document.querySelector("#stats-button"),
-      resetButton: document.querySelector("#reset-button"),
-      closeModal: document.querySelector("#close-modal")
+      confirmModal: document.querySelector("#confirm-next-modal"),
+      nextButton: document.querySelector("#next-question")
     });
   }
 
@@ -57,7 +55,7 @@
   }
 
   function renderBoard(container, options) {
-    const { answer, guesses, limit, currentInput, showInput, minRows, cols, animateAttempt, reserveInputRow } = options;
+    const { answer, guesses, limit, currentInput, showInput, minRows, cols, animateAttempt } = options;
     container.innerHTML = "";
     const colCount = Math.max(cols || RHW.splitAnswer(answer.display).length || 1, 1);
     container.style.setProperty("--cols", colCount);
@@ -82,11 +80,6 @@
         cols: Math.max(chars.length, 1),
         active: true
       });
-    } else if (reserveInputRow && showInput && guesses.length < limit) {
-      rows.push({
-        cols: 1,
-        reserved: true
-      });
     }
 
     while (rows.length < (minRows || 0)) {
@@ -96,13 +89,11 @@
     rows.forEach((row) => {
       const rowEl = document.createElement("div");
       const shouldAnimate = row.evaluated && row.attempt === animateAttempt;
-      rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${shouldAnimate ? " animate" : " settled"}${row.active ? " active" : ""}${row.reserved ? " reserved" : ""}`;
-      const rowCols = row.cols || colCount;
+      rowEl.className = `tile-row${row.evaluated ? " evaluated" : ""}${shouldAnimate ? " animate" : " settled"}${row.active ? " active" : ""}`;
+      const rowCols = Math.max(row.cols || colCount, colCount);
       rowEl.style.setProperty("--cols", rowCols);
-      if (!row.reserved) {
-        for (let index = 0; index < rowCols; index += 1) {
-          rowEl.append(createTile(row.chars[index], row.states[index], index * 80));
-        }
+      for (let index = 0; index < rowCols; index += 1) {
+        rowEl.append(createTile(row.chars[index], row.states[index], index * 80));
       }
       container.append(rowEl);
     });
@@ -198,6 +189,7 @@
     const historyTarget = getHistoryTarget(round);
     const historyAnswer = answers[historyTarget];
     const historyGuesses = round.targets[historyTarget].guesses;
+    const historyCols = getBoardCols(historyTarget);
     const sireGuesses = getPedigreeDisplayGuesses(round.targets.sire.guesses, round.targets.sire.solved);
     const damGuesses = getPedigreeDisplayGuesses(round.targets.dam.guesses, round.targets.dam.solved);
 
@@ -214,10 +206,9 @@
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: round.currentInput,
       showInput: round.status === "playing",
-      minRows: 0,
-      cols: null,
-      animateAttempt: round.justSubmittedAttempt,
-      reserveInputRow: false
+      minRows: 1,
+      cols: historyCols,
+      animateAttempt: round.justSubmittedAttempt
     });
 
     renderBoard(els.sireBoard, {
@@ -226,8 +217,8 @@
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: "",
       showInput: false,
-      minRows: 0,
-      cols: null,
+      minRows: 1,
+      cols: PEDIGREE_BOARD_COLS,
       animateAttempt: round.justSubmittedAttempt
     });
 
@@ -237,8 +228,8 @@
       limit: RHW.ATTEMPT_LIMIT,
       currentInput: "",
       showInput: false,
-      minRows: 0,
-      cols: null,
+      minRows: 1,
+      cols: PEDIGREE_BOARD_COLS,
       animateAttempt: round.justSubmittedAttempt
     });
 
@@ -246,7 +237,7 @@
     updateKeyboardState(round, answers);
   }
 
-  function openResultModal(state, mode) {
+  function openResultModal(state) {
     const { question, round, stats } = state;
     const answers = RHW.getAnswers(question);
     const summary = RHW.summarizeStats(stats);
@@ -275,6 +266,14 @@
     els.modal.showModal();
   }
 
+  function openNextConfirm() {
+    if (!els.confirmModal.open) els.confirmModal.showModal();
+  }
+
+  function closeNextConfirm() {
+    if (els.confirmModal.open) els.confirmModal.close();
+  }
+
   function escapeHtml(value) {
     return String(value ?? "")
       .replaceAll("&", "&amp;")
@@ -296,6 +295,10 @@
 
   function getHistoryTarget(round) {
     return ["horse", "sire", "dam"].includes(round.historyTarget) ? round.historyTarget : "horse";
+  }
+
+  function getBoardCols(target) {
+    return target === "horse" ? HORSE_BOARD_COLS : PEDIGREE_BOARD_COLS;
   }
 
   function getPedigreeDisplayGuesses(guesses, solved) {
@@ -357,7 +360,9 @@
     render,
     renderKeyboard,
     setToast,
-    openResultModal
+    openResultModal,
+    openNextConfirm,
+    closeNextConfirm
   };
   root.RHW = Object.assign(RHW, { ui: api });
 })(typeof globalThis !== "undefined" ? globalThis : window);

@@ -34,12 +34,6 @@
   min-width: min(100%, calc(var(--cols) * 29px));
 }
 
-.tile-row.reserved {
-  width: 1px;
-  min-width: 1px;
-  min-height: 38px;
-}
-
 .tile {
   aspect-ratio: 1;
   min-width: 0;

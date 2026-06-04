@@ -76,8 +76,16 @@
       setHistoryTarget(button.dataset.historyTarget);
     });
 
-    document.querySelector("#next-question").addEventListener("click", () => nextQuestion());
-    document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state, "stats"));
+    document.querySelector("#next-question").addEventListener("click", () => RHW.ui.openNextConfirm());
+    document.querySelector("#confirm-next-question").addEventListener("click", () => {
+      RHW.ui.closeNextConfirm();
+      nextQuestion();
+    });
+    document.querySelector("#cancel-next-question").addEventListener("click", () => {
+      RHW.ui.closeNextConfirm();
+      focusNativeInput();
+    });
+    document.querySelector("#stats-button").addEventListener("click", () => RHW.ui.openResultModal(state));
     document.querySelector("#reset-button").addEventListener("click", () => forfeitQuestion());
     document.querySelector("#sire-hint-button").addEventListener("click", () => useSireHint());
     document.querySelector("#stats-panel").addEventListener("click", (event) => {
@@ -173,7 +181,7 @@
       state.stats = recorded.stats;
       state.round = recorded.round;
       renderAndSave();
-      RHW.ui.openResultModal(state, "result");
+      RHW.ui.openResultModal(state);
       return;
     }
 
@@ -191,7 +199,7 @@
       state.round = recorded.round;
       renderAndSave();
     }
-    RHW.ui.openResultModal(state, "result");
+    RHW.ui.openResultModal(state);
   }
 
   function useSireHint() {
@@ -212,6 +220,7 @@
   function nextQuestion(message) {
     const modal = document.querySelector("#result-modal");
     if (modal.open) modal.close();
+    RHW.ui.closeNextConfirm();
     clearInputFeedback();
     submitAfterComposition = false;
     const next = RHW.pickQuestion(DATA.horses, state.stats, state.question.id, {
@@ -258,8 +267,8 @@
 
   function focusNativeInput() {
     const nativeInput = document.querySelector("#native-input");
-    const modal = document.querySelector("#result-modal");
-    if (!nativeInput || modal?.open) return;
+    const openDialog = document.querySelector("dialog[open]");
+    if (!nativeInput || openDialog) return;
     syncNativeInputValue();
     nativeInput.focus({ preventScroll: true });
   }

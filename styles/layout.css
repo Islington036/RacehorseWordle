@@ -73,11 +73,6 @@
   font-weight: 700;
 }
 
-.section-heading strong {
-  color: var(--accent);
-  font-size: 0.86rem;
-}
-
 .history-heading {
   justify-content: flex-start;
 }
@@ -190,36 +185,6 @@
   background: transparent;
   color: transparent;
   caret-color: transparent;
-}
-
-.target-tabs {
-  display: none;
-  width: min(100%, 760px);
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.target-tabs button {
-  height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--panel-soft);
-  color: var(--muted);
-  cursor: pointer;
-  font-weight: 800;
-}
-
-.target-tabs button.selected {
-  border-color: var(--accent);
-  background: #253125;
-  color: var(--text);
-}
-
-.reveal-line {
-  min-height: 20px;
-  margin: -6px 0 8px;
-  color: var(--muted);
-  font-size: 0.9rem;
 }
 
 .stats-panel {
@@ -366,12 +331,6 @@
   line-height: 1.35;
 }
 
-.legend-panel .legend-note {
-  margin-top: 2px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
-}
-
 .legend-swatch {
   width: 18px;
   height: 18px;
@@ -418,7 +377,8 @@
   background: var(--danger);
 }
 
-.result-modal {
+.result-modal,
+.confirm-modal {
   width: min(560px, calc(100% - 32px));
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -427,11 +387,13 @@
   box-shadow: var(--shadow);
 }
 
-.result-modal::backdrop {
+.result-modal::backdrop,
+.confirm-modal::backdrop {
   background: rgba(0, 0, 0, 0.64);
 }
 
-.modal-shell {
+.modal-shell,
+.confirm-shell {
   position: relative;
   display: grid;
   gap: 18px;
@@ -444,9 +406,22 @@
   right: 12px;
 }
 
-.modal-shell h2 {
+.modal-shell h2,
+.confirm-shell h2 {
   margin: 0;
   font-size: 1.6rem;
+}
+
+.confirm-shell p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .answer-card {
@@ -483,6 +458,26 @@
   color: #fff;
   cursor: pointer;
   font-weight: 800;
+}
+
+.primary-button.danger {
+  background: #d97724;
+}
+
+.secondary-button {
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-soft);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.secondary-button:hover,
+.secondary-button:focus-visible {
+  border-color: var(--accent);
+  outline: none;
 }
 
 @media (max-width: 900px) {
