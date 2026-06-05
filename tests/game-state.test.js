@@ -67,6 +67,32 @@ assert.strictEqual(restoredTarget.historyTarget, "dam");
 const invalidRestoredTarget = game.makeRound(question, { historyTarget: "owner" });
 assert.strictEqual(invalidRestoredTarget.historyTarget, "horse");
 
+const corruptRound = game.makeRound(question, {
+  schemaVersion: 2,
+  status: "playing",
+  attemptsUsed: "not-a-number",
+  targets: {
+    horse: { solved: "yes", guesses: [{ value: "アイ", evaluation: [{ char: "<", state: "script" }] }] },
+    sire: { guesses: "broken" },
+    dam: null
+  }
+});
+assert.strictEqual(corruptRound.attemptsUsed, 1);
+assert.strictEqual(corruptRound.targets.horse.guesses[0].evaluation[0].state, "absent");
+assert.deepStrictEqual(corruptRound.targets.sire.guesses, []);
+assert.deepStrictEqual(corruptRound.targets.dam.guesses, []);
+
+const corruptStats = game.makeStats({
+  rounds: [{
+    horseName: "<img src=x onerror=alert(1)>",
+    attemptsUsed: "<script>",
+    status: "maybe"
+  }]
+});
+assert.strictEqual(corruptStats.rounds[0].status, "lost");
+assert.strictEqual(corruptStats.rounds[0].attemptsUsed, 0);
+assert.strictEqual(game.summarizeStats({ rounds: "broken" }).total, 0);
+
 let failed = game.makeRound(question);
 for (let i = 0; i < 14; i += 1) {
   failed = game.submitGuess(failed, question, "アイウエオ").round;

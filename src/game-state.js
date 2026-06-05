@@ -36,26 +36,69 @@
         horse: { solved: false, guesses: [] }
       }
     };
-    const restoredTargets = restored?.targets || {};
-    const round = Object.assign(base, restored || {});
+    const safeRestored = isPlainObject(restored) ? restored : {};
+    const restoredTargets = isPlainObject(safeRestored.targets) ? safeRestored.targets : {};
+    const round = Object.assign({}, base, safeRestored);
+    round.questionId = typeof round.questionId === "string" ? round.questionId : question.id;
+    round.currentInput = typeof round.currentInput === "string" ? round.currentInput : "";
+    round.status = ["playing", "won", "lost"].includes(round.status) ? round.status : "playing";
+    round.sireHintUsed = Boolean(round.sireHintUsed);
+    round.resultRecorded = Boolean(round.resultRecorded);
+    round.startedAt = typeof round.startedAt === "string" ? round.startedAt : base.startedAt;
     round.targets = {
-      sire: Object.assign(base.targets.sire, restoredTargets.sire || {}),
-      dam: Object.assign(base.targets.dam, restoredTargets.dam || {}),
-      horse: Object.assign(base.targets.horse, restoredTargets.horse || {})
+      sire: makeRestoredTarget(question, "sire", restoredTargets.sire),
+      dam: makeRestoredTarget(question, "dam", restoredTargets.dam),
+      horse: makeRestoredTarget(question, "horse", restoredTargets.horse)
     };
     if (!TARGETS.includes(round.historyTarget)) {
       round.historyTarget = "horse";
     }
     round.attemptsUsed = typeof round.attemptsUsed === "number"
-      ? round.attemptsUsed
+      ? clampAttempt(round.attemptsUsed)
       : Math.max(
         round.targets.horse?.guesses?.length || 0,
         round.targets.sire?.guesses?.length || 0,
         round.targets.dam?.guesses?.length || 0,
-        round.horseAttemptsUsed || 0,
-        round.pedigreeAttemptsUsed || 0
+        clampAttempt(round.horseAttemptsUsed || 0),
+        clampAttempt(round.pedigreeAttemptsUsed || 0)
       );
     return round;
+  }
+
+  function makeRestoredTarget(question, target, restoredTarget) {
+    const answers = getAnswers(question);
+    const source = isPlainObject(restoredTarget) ? restoredTarget : {};
+    const guesses = Array.isArray(source.guesses)
+      ? source.guesses.map((guess, index) => makeRestoredGuess(guess, answers[target], index)).filter(Boolean)
+      : [];
+    return {
+      solved: guesses.some((guess) => guess.correct),
+      guesses
+    };
+  }
+
+  function makeRestoredGuess(guess, answer, index) {
+    if (!isPlainObject(guess) || typeof guess.value !== "string") return null;
+    const value = guess.value;
+    const normalized = typeof guess.normalized === "string" ? guess.normalized : normalize(value);
+    const correct = answer.aliases.includes(normalized) || isCorrectGuess(value, answer.display);
+    return {
+      attempt: clampAttempt(guess.attempt || index + 1),
+      value,
+      normalized,
+      evaluation: sanitizeEvaluation(guess.evaluation, value, answer.display),
+      correct
+    };
+  }
+
+  function sanitizeEvaluation(evaluation, value, answer) {
+    if (!Array.isArray(evaluation) || evaluation.length === 0) {
+      return scoreGuess(value, answer);
+    }
+    return evaluation.map((item) => ({
+      char: typeof item?.char === "string" ? item.char : "",
+      state: ["correct", "present", "absent"].includes(item?.state) ? item.state : "absent"
+    }));
   }
 
   function getAnswers(question) {
@@ -179,10 +222,34 @@
   }
 
   function makeStats(existing) {
-    return Object.assign({
+    const base = {
       schemaVersion: 1,
       rounds: []
-    }, existing || {});
+    };
+    if (!isPlainObject(existing)) return base;
+    return {
+      schemaVersion: 1,
+      rounds: Array.isArray(existing.rounds)
+        ? existing.rounds.map(makeStatsRound).filter(Boolean)
+        : []
+    };
+  }
+
+  function makeStatsRound(round) {
+    if (!isPlainObject(round)) return null;
+    const status = ["won", "lost"].includes(round.status) ? round.status : "lost";
+    return {
+      questionId: typeof round.questionId === "string" ? round.questionId : "",
+      horseName: typeof round.horseName === "string" ? round.horseName : "",
+      status,
+      attemptsUsed: clampAttempt(round.attemptsUsed ?? round.horseAttemptsUsed ?? round.pedigreeAttemptsUsed ?? 0),
+      sireSolved: Boolean(round.sireSolved),
+      damSolved: Boolean(round.damSolved),
+      horseSolved: Boolean(round.horseSolved),
+      forfeited: Boolean(round.forfeited),
+      sireHintUsed: Boolean(round.sireHintUsed),
+      finishedAt: typeof round.finishedAt === "string" ? round.finishedAt : ""
+    };
   }
 
   function recordResult(stats, round, question) {
@@ -208,7 +275,7 @@
   }
 
   function summarizeStats(stats) {
-    const rounds = stats?.rounds || [];
+    const rounds = Array.isArray(stats?.rounds) ? stats.rounds : [];
     const wins = rounds.filter((round) => round.status === "won").length;
     const losses = rounds.filter((round) => round.status === "lost").length;
     const total = rounds.length;
@@ -220,6 +287,16 @@
       failureRate: total ? Math.round((losses / total) * 100) : 0,
       recent: rounds.slice(-8).reverse()
     };
+  }
+
+  function clampAttempt(value) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) return 0;
+    return Math.max(0, Math.min(ATTEMPT_LIMIT, Math.trunc(numeric)));
+  }
+
+  function isPlainObject(value) {
+    return Boolean(value) && typeof value === "object" && !Array.isArray(value);
   }
 
   const api = {

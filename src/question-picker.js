@@ -17,7 +17,8 @@
   function pickQuestion(questions, stats, previousQuestionId, options) {
     const random = options?.random || defaultRandom;
     const recentQuestionIds = options?.recentQuestionIds || [];
-    const playedIds = new Set((stats.rounds || []).map((round) => round.questionId));
+    const rounds = Array.isArray(stats?.rounds) ? stats.rounds : [];
+    const playedIds = new Set(rounds.map((round) => round.questionId));
     const unplayed = questions.filter((question) => !playedIds.has(question.id));
     const basePool = unplayed.length > 0 ? unplayed : questions;
     const excludedIds = new Set([previousQuestionId].concat(recentQuestionIds).filter(Boolean));

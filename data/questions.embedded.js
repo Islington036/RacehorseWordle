@@ -631,7 +631,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第50回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -642,7 +642,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第51回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -653,7 +653,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第55回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -664,7 +664,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第18回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -675,7 +675,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第29回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -990,7 +990,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第27回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -1069,7 +1069,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第54回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -1339,7 +1339,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "羽田盃",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第69回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 1800
         }
@@ -1407,7 +1407,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第71回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -1780,7 +1780,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第58回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -2186,7 +2186,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第56回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -2208,7 +2208,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第53回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -2241,7 +2241,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第32回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -2263,7 +2263,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第59回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -2297,7 +2297,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第70回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -2579,7 +2579,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第38回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -2860,7 +2860,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第68回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -2871,7 +2871,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第72回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -2882,7 +2882,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第69回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -3187,7 +3187,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第53回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -3232,7 +3232,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第21回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -3265,7 +3265,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第22回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -3276,7 +3276,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第24回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -3704,7 +3704,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第66回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -3919,7 +3919,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第64回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -3930,7 +3930,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第42回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -3941,7 +3941,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第65回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -3952,7 +3952,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第66回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -3963,7 +3963,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第67回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -4154,7 +4154,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第70回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -4165,7 +4165,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第33回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -4199,7 +4199,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第16回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -4233,7 +4233,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第75回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -4267,7 +4267,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第25回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -4278,7 +4278,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第52回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -4323,7 +4323,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第7回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -4367,7 +4367,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第54回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -4378,7 +4378,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第58回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -4851,7 +4851,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第23回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -4919,7 +4919,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第18回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -5066,7 +5066,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第47回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -5381,7 +5381,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第21回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -5392,7 +5392,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第43回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -5437,7 +5437,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第15回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -5505,7 +5505,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第56回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -5573,7 +5573,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第13回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -5786,7 +5786,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第40回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -5797,7 +5797,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第67回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -5944,7 +5944,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第4回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -5966,7 +5966,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第48回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -6122,7 +6122,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第30回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -6133,7 +6133,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第41回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -6144,7 +6144,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第31回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -6302,7 +6302,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第26回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -6346,7 +6346,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第28回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -6357,7 +6357,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第39回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -6379,7 +6379,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第29回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -6401,7 +6401,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第63回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -6435,7 +6435,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第35回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -6660,7 +6660,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第66回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -6694,7 +6694,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第61回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -6750,7 +6750,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第10回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -6772,7 +6772,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第55回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -7292,7 +7292,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第63回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -7996,7 +7996,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第36回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -8007,7 +8007,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第37回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -8018,7 +8018,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "さきたま杯",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第29回",
+          "course": "浦和",
           "surface": "dirt",
           "distanceM": 1400
         }
@@ -8369,7 +8369,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第34回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -9329,7 +9329,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第17回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -9543,7 +9543,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第56回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -9554,7 +9554,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第34回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -9576,7 +9576,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第57回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -9587,7 +9587,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第61回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -10410,7 +10410,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第54回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -10421,7 +10421,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第28回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -11584,7 +11584,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第69回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -11606,7 +11606,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第71回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -11764,7 +11764,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第65回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -12235,7 +12235,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第71回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -12303,7 +12303,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第44回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -12517,7 +12517,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第73回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -12945,7 +12945,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第3回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -13047,7 +13047,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第47回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -13171,7 +13171,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第72回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -13520,7 +13520,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "羽田盃",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第70回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 1800
         },
@@ -13531,7 +13531,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京ダービー",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第71回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -13779,7 +13779,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第27回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -14050,7 +14050,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第69回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -14197,7 +14197,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第24回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -14265,7 +14265,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第17回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -14412,7 +14412,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第76回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -14480,7 +14480,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第14回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -14491,7 +14491,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第62回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -14593,7 +14593,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第64回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -14842,7 +14842,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第19回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -15034,7 +15034,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第5回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -15068,7 +15068,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第61回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -15542,7 +15542,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第57回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -15766,7 +15766,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第74回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -15777,7 +15777,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第26回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -15788,7 +15788,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第70回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -15992,7 +15992,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第55回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -16139,7 +16139,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第57回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -16150,7 +16150,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第9回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -16161,7 +16161,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第31回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -16172,7 +16172,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第33回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -16183,7 +16183,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第60回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -16194,7 +16194,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第23回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -16295,7 +16295,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第52回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -16306,7 +16306,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第19回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -16498,7 +16498,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第8回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -16973,7 +16973,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第25回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -16984,7 +16984,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第36回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -17006,7 +17006,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第59回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -17028,7 +17028,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第63回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -17039,7 +17039,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第60回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -17050,7 +17050,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第64回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -17061,7 +17061,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第38回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -17072,7 +17072,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第65回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -17151,7 +17151,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第30回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -17162,7 +17162,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第20回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -17434,7 +17434,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第24回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -17468,7 +17468,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第12回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -17998,7 +17998,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第48回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -18077,7 +18077,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第25回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -18111,7 +18111,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第68回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -18280,7 +18280,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第75回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -18449,7 +18449,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第45回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -18460,7 +18460,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第35回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -18471,7 +18471,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第46回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -18482,7 +18482,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第74回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -18628,7 +18628,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第22回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -19315,7 +19315,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第53回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -19472,7 +19472,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第73回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -19720,7 +19720,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第60回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -19799,7 +19799,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京ダービー",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第70回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -19901,7 +19901,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第51回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         }
@@ -20160,7 +20160,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "全日本2歳優駿",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第68回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 1600
         },
@@ -20182,7 +20182,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "ジャパンダートダービー/ジャパンダートクラシック",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第20回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -20611,7 +20611,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "川崎記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第50回",
+          "course": "川崎",
           "surface": "dirt",
           "distanceM": 2100
         },
@@ -21119,7 +21119,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "東京大賞典",
           "jurisdiction": "NAR",
           "gradeAtRun": "GI",
-          "course": "第58回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         }
@@ -21491,7 +21491,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第32回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -21604,7 +21604,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "帝王賞",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第37回",
+          "course": "大井",
           "surface": "dirt",
           "distanceM": 2000
         },
@@ -21615,7 +21615,7 @@ window.RHW_QUESTIONS = {
           "raceNameJa": "かしわ記念",
           "jurisdiction": "NAR",
           "gradeAtRun": "JpnI",
-          "course": "第27回",
+          "course": "船橋",
           "surface": "dirt",
           "distanceM": 1600
         }
@@ -21656,4 +21656,4 @@ window.RHW_QUESTIONS = {
       ]
     }
   ]
-};
+}

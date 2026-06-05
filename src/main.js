@@ -1,7 +1,6 @@
 (function attachMain(root) {
   const RHW = root.RHW;
   const DATA = root.RHW_QUESTIONS;
-  const RECENT_QUESTION_LIMIT = 8;
   let state;
   let composing = false;
   let submitAfterComposition = false;
@@ -15,23 +14,11 @@
     RHW.ui.initElements();
     RHW.ui.renderKeyboard();
 
-    const stats = RHW.makeStats(RHW.storage.readJson(RHW.CONFIG.storageKeys.stats, null));
-    const options = RHW.makeOptions(RHW.storage.readJson(RHW.CONFIG.storageKeys.options, null));
-    const restored = RHW.storage.readJson(RHW.CONFIG.storageKeys.current, null);
-    const restoredRecentQuestionIds = makeRecentQuestionIds(restored?.recentQuestionIds, restored?.questionId);
-    const restoredQuestion = RHW.canRestoreRound(restored)
-      ? DATA.horses.find((question) => question.id === restored.questionId)
-      : null;
-    const questionPool = getQuestionPool(options);
-    const canUseRestoredQuestion = restoredQuestion
-      && questionPool.some((question) => question.id === restoredQuestion.id);
-    const question = canUseRestoredQuestion ? restoredQuestion : RHW.pickQuestion(questionPool, stats, restored?.questionId || null, {
-      recentQuestionIds: restoredRecentQuestionIds
+    state = RHW.createInitialState(DATA.horses, {
+      stats: RHW.storage.readJson(RHW.CONFIG.storageKeys.stats, null),
+      options: RHW.storage.readJson(RHW.CONFIG.storageKeys.options, null),
+      round: RHW.storage.readJson(RHW.CONFIG.storageKeys.current, null)
     });
-    const round = canUseRestoredQuestion ? RHW.makeRound(question, restored) : RHW.makeRound(question);
-    const recentQuestionIds = makeRecentQuestionIds(restoredRecentQuestionIds, question.id);
-
-    state = { question, round, stats, options, recentQuestionIds };
     bindEvents();
     renderAndSave();
     focusNativeInput();
@@ -127,25 +114,16 @@
   function updateOptions(partialOptions) {
     const nextOptions = RHW.makeOptions(Object.assign({}, state.options, partialOptions));
     state.options = nextOptions;
-    const questionPool = getQuestionPool();
+    const questionPool = RHW.getQuestionPool(DATA.horses, state.options);
     const currentAllowed = questionPool.some((question) => question.id === state.question.id);
     if (!currentAllowed) {
       clearInputFeedback();
-      const next = RHW.pickQuestion(questionPool, state.stats, state.question.id, {
-        recentQuestionIds: state.recentQuestionIds
-      });
-      state.question = next;
-      state.round = RHW.makeRound(next);
-      state.recentQuestionIds = makeRecentQuestionIds(state.recentQuestionIds, next.id);
+      switchToQuestion(RHW.pickNextQuestion(state, DATA.horses));
       RHW.ui.setToast("条件に合う問題へ切り替えました。", "neutral");
     } else {
       RHW.ui.setToast("オプションを保存しました。", "neutral");
     }
     renderAndSave();
-  }
-
-  function getQuestionPool(options) {
-    return RHW.filterQuestions(DATA.horses, options || state?.options);
   }
 
   function onKeyDown(event) {
@@ -278,15 +256,16 @@
     RHW.ui.closeResetConfirm();
     clearInputFeedback();
     submitAfterComposition = false;
-    const next = RHW.pickQuestion(getQuestionPool(), state.stats, state.question.id, {
-      recentQuestionIds: state.recentQuestionIds
-    });
-    state.question = next;
-    state.round = RHW.makeRound(next);
-    state.recentQuestionIds = makeRecentQuestionIds(state.recentQuestionIds, next.id);
+    switchToQuestion(RHW.pickNextQuestion(state, DATA.horses));
     renderAndSave();
     if (typeof message === "string" && message) RHW.ui.setToast(message, "neutral");
     focusNativeInput();
+  }
+
+  function switchToQuestion(next) {
+    state.question = next.question;
+    state.round = next.round;
+    state.recentQuestionIds = next.recentQuestionIds;
   }
 
   function setHistoryTarget(target) {
@@ -333,10 +312,6 @@
     const nativeInput = document.querySelector("#native-input");
     if (!nativeInput || composing || nativeInput.value === state.round.currentInput) return;
     nativeInput.value = state.round.currentInput;
-  }
-
-  function makeRecentQuestionIds(ids, currentId) {
-    return Array.from(new Set((ids || []).concat(currentId).filter(Boolean))).slice(-RECENT_QUESTION_LIMIT);
   }
 
   root.addEventListener("DOMContentLoaded", init);

@@ -43,6 +43,7 @@ for (const horse of data.horses || []) {
     if (!win.date || win.date > "2026-06-04") errors.push(`${horse.nameJa}: invalid win date ${win.date}`);
     if (!/^(GI|G1|GⅠ|JpnI|Jpn1|JpnⅠ)$/.test(win.gradeAtRun)) errors.push(`${horse.nameJa}: invalid grade ${win.gradeAtRun}`);
     if (/J・/.test(win.gradeAtRun)) errors.push(`${horse.nameJa}: J-GI must be excluded`);
+    if (/^第[0-9０-９]+回$/.test(win.course || "")) errors.push(`${horse.nameJa}: course contains race edition instead of venue`);
   }
 }
 

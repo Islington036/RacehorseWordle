@@ -30,6 +30,7 @@ function indexOfScript(file) {
 assert.ok(indexHtml.includes("data/questions.embedded.js"), "embedded data script is required for file:// use");
 assert.ok(indexHtml.includes("src/kana-input.js"), "kana input helper is loaded for dakuten and handakuten keys");
 assert.ok(indexHtml.includes("src/options.js"), "options helper is loaded before app bootstrap");
+assert.ok(indexHtml.includes("src/app-session.js"), "app session helper is loaded before app bootstrap");
 assert.ok(indexHtml.includes("src/ui/constants.js"), "UI constants are loaded explicitly");
 assert.ok(indexHtml.includes("src/ui/renderers.js"), "UI renderers are loaded explicitly");
 assert.ok(indexHtml.includes("src/ui/coordinator.js"), "UI coordinator is loaded explicitly");
@@ -37,6 +38,8 @@ assert.ok(indexOfScript("src/ui/constants.js") < indexOfScript("src/ui/renderers
 assert.ok(indexOfScript("src/ui/renderers.js") < indexOfScript("src/ui/coordinator.js"), "UI renderers load before UI coordinator");
 assert.ok(indexOfScript("src/ui/coordinator.js") < indexOfScript("src/main.js"), "UI coordinator loads before app bootstrap");
 assert.ok(indexOfScript("src/options.js") < indexOfScript("src/main.js"), "options helper loads before app bootstrap");
+assert.ok(indexOfScript("src/game-state.js") < indexOfScript("src/app-session.js"), "game state loads before app session");
+assert.ok(indexOfScript("src/app-session.js") < indexOfScript("src/main.js"), "app session loads before app bootstrap");
 assert.ok(indexHtml.includes("native-input"), "native input is present for IME text entry");
 assert.ok(indexHtml.includes("キーボードで直接入力できます"), "native input guidance replaces the waiting placeholder");
 assert.ok(indexHtml.includes("sire-hint-button"), "sire reveal hint button is present");
@@ -85,6 +88,7 @@ assert.ok(sourceText.includes("minRows: 0"), "top history board should not rende
 assert.ok(sourceText.includes("padRows: false"), "top history board should not pad submitted guesses with empty boxes");
 assert.ok(sourceText.includes("openResetConfirm"), "topbar reset opens a confirmation dialog before forfeit");
 assert.ok(sourceText.includes("openOptionsModal"), "top-left button opens the options dialog");
+assert.ok(sourceText.includes("createInitialState"), "session restoration is separated from app event handling");
 assert.ok(sourceText.includes("filterQuestions"), "question list can be filtered by option settings");
 assert.ok(sourceText.includes("rhw:options:v1"), "options are persisted in localStorage");
 assert.ok(sourceText.includes("closeResetConfirm"), "reset confirmation dialog can be closed before or after reset");

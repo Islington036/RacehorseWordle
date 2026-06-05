@@ -54,7 +54,7 @@
     const recent = summary.recent.length
       ? summary.recent.map((item) => {
         const attempts = item.attemptsUsed ?? item.horseAttemptsUsed ?? item.pedigreeAttemptsUsed ?? "-";
-        return `<li><span>${escapeHtml(item.horseName)}</span><b>${item.status === "won" ? "成功" : "失敗"} ${attempts}</b></li>`;
+        return `<li><span>${escapeHtml(item.horseName)}</span><b>${item.status === "won" ? "成功" : "失敗"} ${escapeHtml(attempts)}</b></li>`;
       }).join("")
       : "<li><span>まだ出題履歴がありません</span><b>-</b></li>";
     const currentLabel = round.status === "playing" ? "挑戦中" : currentQuestion.nameJa;
