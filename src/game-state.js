@@ -5,11 +5,11 @@
   const scoreGuess = RHW.scoreGuess || require("./evaluator.js").scoreGuess;
   const isCorrectGuess = RHW.isCorrectGuess || require("./evaluator.js").isCorrectGuess;
 
-  const ATTEMPT_LIMIT = RHW.CONFIG?.attemptLimit || 15;
-  const EASY_ATTEMPT_LIMIT = RHW.CONFIG?.easyAttemptLimit || 10;
+  const ATTEMPT_LIMIT = RHW.CONFIG?.attemptLimit || 12;
+  const EASY_ATTEMPT_LIMIT = RHW.CONFIG?.easyAttemptLimit || 8;
   const MAX_INPUT_LENGTH = RHW.CONFIG?.maxInputLength || 18;
-  const SIRE_HINT_UNLOCK_ATTEMPTS = 9;
-  const EASY_SIRE_HINT_UNLOCK_ATTEMPTS = 4;
+  const SIRE_HINT_UNLOCK_ATTEMPTS = 5;
+  const EASY_SIRE_HINT_UNLOCK_ATTEMPTS = 0;
   const TARGETS = ["horse", "sire", "dam"];
   const GAME_RULES = {
     normal: {

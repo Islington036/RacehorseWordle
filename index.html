@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="styles/base.css?v=20260605u">
-  <link rel="stylesheet" href="styles/layout.css?v=20260605u">
-  <link rel="stylesheet" href="styles/tiles.css?v=20260605u">
-  <script defer src="data/questions.embedded.js?v=20260605u"></script>
-  <script defer src="src/config.js?v=20260605u"></script>
-  <script defer src="src/normalize.js?v=20260605u"></script>
-  <script defer src="src/evaluator.js?v=20260605u"></script>
-  <script defer src="src/kana-input.js?v=20260605u"></script>
-  <script defer src="src/storage.js?v=20260605u"></script>
-  <script defer src="src/options.js?v=20260605u"></script>
-  <script defer src="src/question-picker.js?v=20260605u"></script>
-  <script defer src="src/game-state.js?v=20260605u"></script>
-  <script defer src="src/app-session.js?v=20260605u"></script>
-  <script defer src="src/ui/constants.js?v=20260605u"></script>
-  <script defer src="src/ui/renderers.js?v=20260605u"></script>
-  <script defer src="src/ui/coordinator.js?v=20260605u"></script>
-  <script defer src="src/main.js?v=20260605u"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260606a">
+  <link rel="stylesheet" href="styles/layout.css?v=20260606a">
+  <link rel="stylesheet" href="styles/tiles.css?v=20260606a">
+  <script defer src="data/questions.embedded.js?v=20260606a"></script>
+  <script defer src="src/config.js?v=20260606a"></script>
+  <script defer src="src/normalize.js?v=20260606a"></script>
+  <script defer src="src/evaluator.js?v=20260606a"></script>
+  <script defer src="src/kana-input.js?v=20260606a"></script>
+  <script defer src="src/storage.js?v=20260606a"></script>
+  <script defer src="src/options.js?v=20260606a"></script>
+  <script defer src="src/question-picker.js?v=20260606a"></script>
+  <script defer src="src/game-state.js?v=20260606a"></script>
+  <script defer src="src/app-session.js?v=20260606a"></script>
+  <script defer src="src/ui/constants.js?v=20260606a"></script>
+  <script defer src="src/ui/renderers.js?v=20260606a"></script>
+  <script defer src="src/ui/coordinator.js?v=20260606a"></script>
+  <script defer src="src/main.js?v=20260606a"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -53,7 +53,7 @@
         <div class="input-strip" aria-live="polite">
           <span id="current-target">入力</span>
           <strong id="current-input" class="placeholder">キーボードで直接入力できます</strong>
-          <small id="input-hint">0/18文字 / 0/15</small>
+          <small id="input-hint">0/18文字 / 0/12</small>
           <input id="native-input" class="native-input" type="text" inputmode="kana" enterkeyhint="done" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="カタカナ入力">
         </div>
         <div class="hint-row" hidden>
@@ -131,7 +131,7 @@
   <dialog id="easy-mode-prompt-modal" class="confirm-modal">
     <form method="dialog" class="confirm-shell">
       <h2>簡単モードで始めますか？</h2>
-      <p>馬名の文字数が見えるようになり、挑戦回数は10回になります。5回目から父名ヒントも使えます。</p>
+      <p>馬名の文字数が見えるようになり、挑戦回数は8回になります。父名ヒントは最初から使えます。</p>
       <div class="confirm-actions">
         <button id="decline-easy-mode" class="secondary-button" type="button">通常モード</button>
         <button id="accept-easy-mode" class="primary-button" type="button">簡単モード</button>

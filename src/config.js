@@ -5,8 +5,8 @@
       current: "rhw:current:v1",
       options: "rhw:options:v1"
     },
-    attemptLimit: 15,
-    easyAttemptLimit: 10,
+    attemptLimit: 12,
+    easyAttemptLimit: 8,
     maxInputLength: 18
   };
 
