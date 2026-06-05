@@ -25,6 +25,7 @@
       optionsModal: document.querySelector("#options-modal"),
       hideHintsInput: document.querySelector("#hide-hints"),
       decadeFilter: document.querySelector("#decade-filter"),
+      winCountFilter: document.querySelector("#win-count-filter"),
       clearHistoryButton: document.querySelector("#clear-history"),
       resetConfirmModal: document.querySelector("#confirm-reset-modal"),
       nextButton: document.querySelector("#next-question")
@@ -143,7 +144,7 @@
 
     renderStats(stats, question, round);
     renderOptions(state.options, stats);
-    renderers.updateKeyboardState(els.keyboard, round, answers);
+    renderers.updateKeyboardState(els.keyboard, round, answers, historyTarget);
   }
 
   function openResultModal(state) {
@@ -185,10 +186,11 @@
   }
 
   function renderOptions(options, stats) {
-    if (!els.hideHintsInput || !els.decadeFilter || !els.clearHistoryButton) return;
+    if (!els.hideHintsInput || !els.decadeFilter || !els.winCountFilter || !els.clearHistoryButton) return;
     const nextOptions = RHW.makeOptions(options);
     els.hideHintsInput.checked = nextOptions.hideHints;
     els.decadeFilter.value = nextOptions.decadeFilter;
+    els.winCountFilter.value = nextOptions.winCountFilter;
     els.clearHistoryButton.disabled = !RHW.summarizeStats(stats).total;
   }
 

@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Racehorse Wordle</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="styles/base.css?v=20260605r">
-  <link rel="stylesheet" href="styles/layout.css?v=20260605r">
-  <link rel="stylesheet" href="styles/tiles.css?v=20260605r">
-  <script defer src="data/questions.embedded.js?v=20260605r"></script>
-  <script defer src="src/config.js?v=20260605r"></script>
-  <script defer src="src/normalize.js?v=20260605r"></script>
-  <script defer src="src/evaluator.js?v=20260605r"></script>
-  <script defer src="src/kana-input.js?v=20260605r"></script>
-  <script defer src="src/storage.js?v=20260605r"></script>
-  <script defer src="src/options.js?v=20260605r"></script>
-  <script defer src="src/question-picker.js?v=20260605r"></script>
-  <script defer src="src/game-state.js?v=20260605r"></script>
-  <script defer src="src/app-session.js?v=20260605r"></script>
-  <script defer src="src/ui/constants.js?v=20260605r"></script>
-  <script defer src="src/ui/renderers.js?v=20260605r"></script>
-  <script defer src="src/ui/coordinator.js?v=20260605r"></script>
-  <script defer src="src/main.js?v=20260605r"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260605s">
+  <link rel="stylesheet" href="styles/layout.css?v=20260605s">
+  <link rel="stylesheet" href="styles/tiles.css?v=20260605s">
+  <script defer src="data/questions.embedded.js?v=20260605s"></script>
+  <script defer src="src/config.js?v=20260605s"></script>
+  <script defer src="src/normalize.js?v=20260605s"></script>
+  <script defer src="src/evaluator.js?v=20260605s"></script>
+  <script defer src="src/kana-input.js?v=20260605s"></script>
+  <script defer src="src/storage.js?v=20260605s"></script>
+  <script defer src="src/options.js?v=20260605s"></script>
+  <script defer src="src/question-picker.js?v=20260605s"></script>
+  <script defer src="src/game-state.js?v=20260605s"></script>
+  <script defer src="src/app-session.js?v=20260605s"></script>
+  <script defer src="src/ui/constants.js?v=20260605s"></script>
+  <script defer src="src/ui/renderers.js?v=20260605s"></script>
+  <script defer src="src/ui/coordinator.js?v=20260605s"></script>
+  <script defer src="src/main.js?v=20260605s"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
@@ -100,13 +100,23 @@
           <input id="hide-hints" type="checkbox">
         </label>
         <label class="option-row">
-          <span>出題する競走馬の年代を制限</span>
+          <span>次の問題から出題する年代を制限</span>
           <select id="decade-filter" class="option-select">
             <option value="all">制限なし</option>
             <option value="1990">1990年代以降</option>
             <option value="2000">2000年代以降</option>
             <option value="2010">2010年代以降</option>
             <option value="2020">2020年代以降</option>
+          </select>
+        </label>
+        <label class="option-row">
+          <span>G1勝利数</span>
+          <select id="win-count-filter" class="option-select">
+            <option value="all">制限無し</option>
+            <option value="2">2勝</option>
+            <option value="3">3勝</option>
+            <option value="4">4勝</option>
+            <option value="5plus">5勝以上</option>
           </select>
         </label>
         <button id="clear-history" class="secondary-button" type="button">履歴リセット</button>

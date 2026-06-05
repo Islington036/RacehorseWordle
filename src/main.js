@@ -108,21 +108,16 @@
     document.querySelector("#decade-filter").addEventListener("change", (event) => {
       updateOptions({ decadeFilter: event.target.value });
     });
+    document.querySelector("#win-count-filter").addEventListener("change", (event) => {
+      updateOptions({ winCountFilter: event.target.value });
+    });
     document.querySelector("#clear-history").addEventListener("click", () => clearHistory());
   }
 
   function updateOptions(partialOptions) {
     const nextOptions = RHW.makeOptions(Object.assign({}, state.options, partialOptions));
     state.options = nextOptions;
-    const questionPool = RHW.getQuestionPool(DATA.horses, state.options);
-    const currentAllowed = questionPool.some((question) => question.id === state.question.id);
-    if (!currentAllowed) {
-      clearInputFeedback();
-      switchToQuestion(RHW.pickNextQuestion(state, DATA.horses));
-      RHW.ui.setToast("条件に合う問題へ切り替えました。", "neutral");
-    } else {
-      RHW.ui.setToast("オプションを保存しました。", "neutral");
-    }
+    RHW.ui.setToast("オプションを保存しました。次の問題から反映されます。", "neutral");
     renderAndSave();
   }
 

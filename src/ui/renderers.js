@@ -81,21 +81,22 @@
     });
   }
 
-  function updateKeyboardState(container, round, answers) {
+  function updateKeyboardState(container, round, answers, activeTarget) {
     if (!container) return;
-    const absentKeys = getHorseAbsentKeys(round, answers.horse);
+    const target = ["horse", "sire", "dam"].includes(activeTarget) ? activeTarget : "horse";
+    const absentKeys = getTargetAbsentKeys(round, answers[target], target);
     container.querySelectorAll("[data-key]").forEach((button) => {
       button.classList.toggle("absent-known", absentKeys.has(button.dataset.key));
     });
   }
 
-  function getHorseAbsentKeys(round, horseAnswer) {
+  function getTargetAbsentKeys(round, answer, target) {
     const statesByKey = new Map();
-    const horseAnswerKeys = new Set(
-      RHW.splitAnswer(horseAnswer.display).map(toKeyboardKey).filter(Boolean)
+    const answerKeys = new Set(
+      RHW.splitAnswer(answer.display).map(toKeyboardKey).filter(Boolean)
     );
 
-    round.targets.horse.guesses.forEach((guess) => {
+    (round.targets[target]?.guesses || []).forEach((guess) => {
       guess.evaluation.forEach((item) => {
         const key = toKeyboardKey(item.char);
         if (!key) return;
@@ -107,7 +108,7 @@
     });
 
     return new Set(Array.from(statesByKey.entries())
-      .filter(([key, entry]) => entry.absent && !entry.included && !horseAnswerKeys.has(key))
+      .filter(([key, entry]) => entry.absent && !entry.included && !answerKeys.has(key))
       .map(([key]) => key));
   }
 

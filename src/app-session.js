@@ -19,8 +19,7 @@
       ? questions.find((question) => question.id === restored.questionId)
       : null;
     const questionPool = getQuestionPool(questions, options);
-    const canUseRestoredQuestion = Boolean(restoredQuestion)
-      && questionPool.some((question) => question.id === restoredQuestion.id);
+    const canUseRestoredQuestion = Boolean(restoredQuestion);
     const question = canUseRestoredQuestion
       ? restoredQuestion
       : RHW.pickQuestion(questionPool, stats, restored?.questionId || null, {
