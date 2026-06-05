@@ -660,7 +660,7 @@ async function fetchText(url, cacheName, encoding = "utf-8") {
     // Cache miss.
   }
   const response = await fetch(url, {
-    headers: { "User-Agent": "RacehorseWordleDataBot/0.1 (+local development)" }
+    headers: { "User-Agent": "RacehorseNamePuzzleDataBot/0.1 (+local development)" }
   });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   const buffer = Buffer.from(await response.arrayBuffer());
@@ -682,7 +682,7 @@ async function fetchWikiPage(title) {
   for (let attempt = 0; attempt < 5; attempt += 1) {
     await throttleWiki();
     response = await fetch(url, {
-      headers: { "User-Agent": "RacehorseWordleDataBot/0.1 (local development; contact unavailable)" }
+      headers: { "User-Agent": "RacehorseNamePuzzleDataBot/0.1 (local development; contact unavailable)" }
     });
     if (response.status !== 429) break;
     await sleep(1200 * (attempt + 1));
