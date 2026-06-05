@@ -6,6 +6,7 @@
       options: "rhw:options:v1"
     },
     attemptLimit: 15,
+    easyAttemptLimit: 10,
     maxInputLength: 18
   };
 

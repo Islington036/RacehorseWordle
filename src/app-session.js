@@ -15,7 +15,7 @@
     const options = RHW.makeOptions(persisted?.options);
     const restored = persisted?.round || null;
     const restoredRecentQuestionIds = makeRecentQuestionIds(restored?.recentQuestionIds, restored?.questionId);
-    const restoredQuestion = RHW.canRestoreRound(restored)
+    const restoredQuestion = RHW.canRestoreRound(restored, options)
       ? questions.find((question) => question.id === restored.questionId)
       : null;
     const questionPool = getQuestionPool(questions, options);

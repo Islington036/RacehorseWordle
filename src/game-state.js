@@ -6,9 +6,23 @@
   const isCorrectGuess = RHW.isCorrectGuess || require("./evaluator.js").isCorrectGuess;
 
   const ATTEMPT_LIMIT = RHW.CONFIG?.attemptLimit || 15;
+  const EASY_ATTEMPT_LIMIT = RHW.CONFIG?.easyAttemptLimit || 10;
   const MAX_INPUT_LENGTH = RHW.CONFIG?.maxInputLength || 18;
   const SIRE_HINT_UNLOCK_ATTEMPTS = 9;
+  const EASY_SIRE_HINT_UNLOCK_ATTEMPTS = 4;
   const TARGETS = ["horse", "sire", "dam"];
+  const GAME_RULES = {
+    normal: {
+      easyMode: false,
+      attemptLimit: ATTEMPT_LIMIT,
+      sireHintUnlockAttempts: SIRE_HINT_UNLOCK_ATTEMPTS
+    },
+    easy: {
+      easyMode: true,
+      attemptLimit: EASY_ATTEMPT_LIMIT,
+      sireHintUnlockAttempts: EASY_SIRE_HINT_UNLOCK_ATTEMPTS
+    }
+  };
 
   function makeAnswer(display, aliases) {
     const allAliases = [display].concat(aliases || []);
@@ -113,23 +127,32 @@
     return round.attemptsUsed || 0;
   }
 
-  function canSubmit(round) {
-    if (round.status !== "playing") return false;
-    return getAttemptsUsed(round) < ATTEMPT_LIMIT;
+  function getGameRules(options) {
+    return Boolean(options?.easyMode) ? GAME_RULES.easy : GAME_RULES.normal;
   }
 
-  function canRestoreRound(round) {
+  function getAttemptLimit(options) {
+    return getGameRules(options).attemptLimit;
+  }
+
+  function canSubmit(round, options) {
+    if (round.status !== "playing") return false;
+    return getAttemptsUsed(round) < getAttemptLimit(options);
+  }
+
+  function canRestoreRound(round, options) {
     return round?.schemaVersion === 2
       && round.status === "playing"
-      && getAttemptsUsed(round) < ATTEMPT_LIMIT;
+      && getAttemptsUsed(round) < getAttemptLimit(options);
   }
 
-  function canUseSireHint(round) {
+  function canUseSireHint(round, options) {
     const sireSolved = Boolean(round.targets?.sire?.solved)
       || Boolean(round.targets?.sire?.guesses?.some((guess) => guess.correct));
+    const rules = getGameRules(options);
     return round.status === "playing"
-      && getAttemptsUsed(round) >= SIRE_HINT_UNLOCK_ATTEMPTS
-      && getAttemptsUsed(round) < ATTEMPT_LIMIT
+      && getAttemptsUsed(round) >= rules.sireHintUnlockAttempts
+      && getAttemptsUsed(round) < rules.attemptLimit
       && !round.sireHintUsed
       && !sireSolved;
   }
@@ -143,14 +166,17 @@
     return next;
   }
 
-  function getGuessArg(targetOrGuess, maybeGuess) {
-    return maybeGuess === undefined ? targetOrGuess : maybeGuess;
+  function getGuessAndOptions(targetOrGuess, maybeGuess, maybeOptions) {
+    if (typeof maybeGuess === "string") {
+      return { guess: maybeGuess, options: maybeOptions };
+    }
+    return { guess: targetOrGuess, options: maybeGuess };
   }
 
-  function validateGuess(round, question, targetOrGuess, maybeGuess) {
-    const guess = getGuessArg(targetOrGuess, maybeGuess);
+  function validateGuess(round, question, targetOrGuess, maybeGuess, maybeOptions) {
+    const { guess, options } = getGuessAndOptions(targetOrGuess, maybeGuess, maybeOptions);
     const guessLength = splitAnswer(guess).length;
-    if (!canSubmit(round)) {
+    if (!canSubmit(round, options)) {
       return { ok: false, reason: "これ以上入力できません。" };
     }
     if (guessLength < 1) {
@@ -162,9 +188,9 @@
     return { ok: true };
   }
 
-  function submitGuess(round, question, targetOrGuess, maybeGuess) {
-    const guess = getGuessArg(targetOrGuess, maybeGuess);
-    const validation = validateGuess(round, question, guess);
+  function submitGuess(round, question, targetOrGuess, maybeGuess, maybeOptions) {
+    const { guess, options } = getGuessAndOptions(targetOrGuess, maybeGuess, maybeOptions);
+    const validation = validateGuess(round, question, guess, options);
     if (!validation.ok) {
       return { round, accepted: false, message: validation.reason };
     }
@@ -201,7 +227,7 @@
 
     if (targetResults.horse.correct) {
       next.status = "won";
-    } else if (next.attemptsUsed >= ATTEMPT_LIMIT) {
+    } else if (next.attemptsUsed >= getAttemptLimit(options)) {
       next.status = "lost";
     }
 
@@ -303,7 +329,10 @@
 
   const api = {
     ATTEMPT_LIMIT,
+    EASY_ATTEMPT_LIMIT,
     MAX_INPUT_LENGTH,
+    getGameRules,
+    getAttemptLimit,
     makeRound,
     getAnswers,
     getAttemptsUsed,

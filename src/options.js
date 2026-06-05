@@ -14,10 +14,12 @@
     { value: "5plus", label: "5勝以上", minWins: 5, maxWins: null }
   ];
   const DEFAULT_OPTIONS = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     hideHints: false,
     decadeFilter: "all",
-    winCountFilter: "all"
+    winCountFilter: "all",
+    easyMode: false,
+    easyModePromptSeen: false
   };
 
   function makeOptions(existing) {
@@ -29,6 +31,8 @@
       next.winCountFilter = DEFAULT_OPTIONS.winCountFilter;
     }
     next.hideHints = Boolean(next.hideHints);
+    next.easyMode = Boolean(next.easyMode);
+    next.easyModePromptSeen = Boolean(next.easyModePromptSeen);
     return next;
   }
 

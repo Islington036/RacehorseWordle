@@ -23,11 +23,13 @@
       modalTitle: document.querySelector("#modal-title"),
       modalBody: document.querySelector("#modal-body"),
       optionsModal: document.querySelector("#options-modal"),
+      easyModeInput: document.querySelector("#easy-mode"),
       hideHintsInput: document.querySelector("#hide-hints"),
       decadeFilter: document.querySelector("#decade-filter"),
       winCountFilter: document.querySelector("#win-count-filter"),
       clearHistoryButton: document.querySelector("#clear-history"),
       resetConfirmModal: document.querySelector("#confirm-reset-modal"),
+      easyModePromptModal: document.querySelector("#easy-mode-prompt-modal"),
       nextButton: document.querySelector("#next-question")
     });
   }
@@ -50,8 +52,9 @@
     }, 2600);
   }
 
-  function renderStats(stats, currentQuestion, round) {
+  function renderStats(stats, currentQuestion, round, options) {
     const summary = RHW.summarizeStats(stats);
+    const rules = RHW.getGameRules(options);
     const recent = summary.recent.length
       ? summary.recent.map((item) => {
         const attempts = item.attemptsUsed ?? item.horseAttemptsUsed ?? item.pedigreeAttemptsUsed ?? "-";
@@ -66,7 +69,7 @@
         <div><span>正答率</span><strong>${summary.successRate}%</strong></div>
         <div><span>失敗率</span><strong>${summary.failureRate}%</strong></div>
         <div><span>総問題</span><strong>${summary.total}</strong></div>
-        <div><span>挑戦</span><strong>${attemptsUsed}/${RHW.ATTEMPT_LIMIT}</strong></div>
+        <div><span>挑戦</span><strong>${attemptsUsed}/${rules.attemptLimit}</strong></div>
       </div>
       <div class="current-round">
         <h2>現在の出題</h2>
@@ -93,37 +96,42 @@
   function render(state) {
     const { question, round, stats } = state;
     const answers = RHW.getAnswers(question);
+    const rules = RHW.getGameRules(state.options);
     const inputLength = RHW.displayLength(round.currentInput);
     const historyTarget = getHistoryTarget(round);
     const historyAnswer = answers[historyTarget];
     const historyGuesses = round.targets[historyTarget].guesses;
-    const historyCols = getBoardCols(historyTarget);
+    const historyCols = getBoardCols(historyTarget, historyAnswer, rules);
     const sireGuesses = getPedigreeDisplayGuesses(round.targets.sire.guesses, round.targets.sire.solved);
     const damGuesses = getPedigreeDisplayGuesses(round.targets.dam.guesses, round.targets.dam.solved);
+    const showEasyHorseLength = rules.easyMode && historyTarget === "horse";
+    const easyHorseRows = showEasyHorseLength
+      ? Math.min(rules.attemptLimit, historyGuesses.length + 1)
+      : 0;
 
     renderHistoryTabs(historyTarget);
     els.currentTarget.textContent = "入力";
     els.currentInput.textContent = round.currentInput || UI.placeholderInput;
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
-    els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}`;
+    els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${rules.attemptLimit}`;
     renderSireHint(round, state.options);
 
     renderers.renderBoard(els.horseBoard, {
       answer: historyAnswer,
       guesses: historyGuesses,
-      limit: RHW.ATTEMPT_LIMIT,
+      limit: rules.attemptLimit,
       currentInput: "",
       showInput: false,
-      minRows: 0,
+      minRows: easyHorseRows,
       cols: historyCols,
       animateAttempt: round.justSubmittedAttempt,
-      padRows: false
+      padRows: showEasyHorseLength
     });
 
     renderers.renderBoard(els.sireBoard, {
       answer: answers.sire,
       guesses: sireGuesses,
-      limit: RHW.ATTEMPT_LIMIT,
+      limit: rules.attemptLimit,
       currentInput: "",
       showInput: false,
       minRows: 1,
@@ -134,7 +142,7 @@
     renderers.renderBoard(els.damBoard, {
       answer: answers.dam,
       guesses: damGuesses,
-      limit: RHW.ATTEMPT_LIMIT,
+      limit: rules.attemptLimit,
       currentInput: "",
       showInput: false,
       minRows: 1,
@@ -142,7 +150,7 @@
       animateAttempt: round.justSubmittedAttempt
     });
 
-    renderStats(stats, question, round);
+    renderStats(stats, question, round, state.options);
     renderOptions(state.options, stats);
     renderers.updateKeyboardState(els.keyboard, round, answers, historyTarget);
   }
@@ -151,6 +159,7 @@
     const { question, round, stats } = state;
     const answers = RHW.getAnswers(question);
     const summary = RHW.summarizeStats(stats);
+    const rules = RHW.getGameRules(state.options);
     const isResult = round.status !== "playing";
     els.modalTitle.textContent = isResult
       ? round.status === "won" ? "正解" : "失敗"
@@ -162,7 +171,7 @@
         <span>母</span><strong>${escapeHtml(answers.dam.display)}</strong>
       </div>
       <div class="stat-grid modal-grid">
-        <div><span>挑戦</span><strong>${RHW.getAttemptsUsed(round)}/${RHW.ATTEMPT_LIMIT}</strong></div>
+        <div><span>挑戦</span><strong>${RHW.getAttemptsUsed(round)}/${rules.attemptLimit}</strong></div>
         <div><span>父母</span><strong>${round.targets.sire.solved ? "父" : "-"} / ${round.targets.dam.solved ? "母" : "-"}</strong></div>
         <div><span>正答率</span><strong>${summary.successRate}%</strong></div>
         <div><span>失敗率</span><strong>${summary.failureRate}%</strong></div>
@@ -186,8 +195,9 @@
   }
 
   function renderOptions(options, stats) {
-    if (!els.hideHintsInput || !els.decadeFilter || !els.winCountFilter || !els.clearHistoryButton) return;
+    if (!els.easyModeInput || !els.hideHintsInput || !els.decadeFilter || !els.winCountFilter || !els.clearHistoryButton) return;
     const nextOptions = RHW.makeOptions(options);
+    els.easyModeInput.checked = nextOptions.easyMode;
     els.hideHintsInput.checked = nextOptions.hideHints;
     els.decadeFilter.value = nextOptions.decadeFilter;
     els.winCountFilter.value = nextOptions.winCountFilter;
@@ -200,6 +210,14 @@
 
   function closeResetConfirm() {
     if (els.resetConfirmModal.open) els.resetConfirmModal.close();
+  }
+
+  function openEasyModePrompt() {
+    if (!els.easyModePromptModal.open) els.easyModePromptModal.showModal();
+  }
+
+  function closeEasyModePrompt() {
+    if (els.easyModePromptModal.open) els.easyModePromptModal.close();
   }
 
   function escapeHtml(value) {
@@ -225,7 +243,10 @@
     return ["horse", "sire", "dam"].includes(round.historyTarget) ? round.historyTarget : "horse";
   }
 
-  function getBoardCols(target) {
+  function getBoardCols(target, answer, rules) {
+    if (target === "horse" && rules.easyMode) {
+      return RHW.splitAnswer(answer.display).length;
+    }
     return target === "horse" ? UI.horseBoardCols : UI.pedigreeBoardCols;
   }
 
@@ -242,7 +263,7 @@
     if (!els.sireHintButton) return;
     const sireSolved = Boolean(round.targets?.sire?.solved)
       || Boolean(round.targets?.sire?.guesses?.some((guess) => guess.correct));
-    const canUse = !options?.hideHints && !sireSolved && RHW.canUseSireHint(round);
+    const canUse = !options?.hideHints && !sireSolved && RHW.canUseSireHint(round, options);
     if (els.sireHintRow) els.sireHintRow.hidden = !canUse;
     els.sireHintButton.hidden = !canUse;
     els.sireHintButton.disabled = !canUse;
@@ -257,7 +278,9 @@
     openOptionsModal,
     closeOptionsModal,
     openResetConfirm,
-    closeResetConfirm
+    closeResetConfirm,
+    openEasyModePrompt,
+    closeEasyModePrompt
   };
   root.RHW = Object.assign(RHW, { ui: api });
 })(typeof globalThis !== "undefined" ? globalThis : window);

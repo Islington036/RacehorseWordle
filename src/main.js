@@ -19,9 +19,14 @@
       options: RHW.storage.readJson(RHW.CONFIG.storageKeys.options, null),
       round: RHW.storage.readJson(RHW.CONFIG.storageKeys.current, null)
     });
+    const shouldShowEasyModePrompt = !state.options.easyModePromptSeen;
     bindEvents();
     renderAndSave();
-    focusNativeInput();
+    if (shouldShowEasyModePrompt) {
+      RHW.ui.openEasyModePrompt();
+    } else {
+      focusNativeInput();
+    }
   }
 
   function bindEvents() {
@@ -93,6 +98,12 @@
       RHW.ui.closeResetConfirm();
       focusNativeInput();
     });
+    document.querySelector("#accept-easy-mode").addEventListener("click", () => setEasyModeFromPrompt(true));
+    document.querySelector("#decline-easy-mode").addEventListener("click", () => setEasyModeFromPrompt(false));
+    document.querySelector("#easy-mode-prompt-modal").addEventListener("cancel", (event) => {
+      event.preventDefault();
+      setEasyModeFromPrompt(false);
+    });
     document.querySelector("#close-modal").addEventListener("click", () => document.querySelector("#result-modal").close());
   }
 
@@ -101,6 +112,9 @@
     document.querySelector("#close-options").addEventListener("click", () => {
       RHW.ui.closeOptionsModal();
       focusNativeInput();
+    });
+    document.querySelector("#easy-mode").addEventListener("change", (event) => {
+      updateOptions({ easyMode: event.target.checked, easyModePromptSeen: true });
     });
     document.querySelector("#hide-hints").addEventListener("change", (event) => {
       updateOptions({ hideHints: event.target.checked });
@@ -116,8 +130,13 @@
 
   function updateOptions(partialOptions) {
     const nextOptions = RHW.makeOptions(Object.assign({}, state.options, partialOptions));
+    const easyModeChanged = Object.prototype.hasOwnProperty.call(partialOptions, "easyMode")
+      && nextOptions.easyMode !== state.options.easyMode;
     state.options = nextOptions;
-    RHW.ui.setToast("オプションを保存しました。次の問題から反映されます。", "neutral");
+    RHW.ui.setToast(
+      easyModeChanged ? "簡単モード設定を保存しました。" : "オプションを保存しました。次の問題から反映されます。",
+      "neutral"
+    );
     renderAndSave();
   }
 
@@ -185,7 +204,7 @@
       showInputError("使用できない文字が含まれています");
       return renderAndSave();
     }
-    const result = RHW.submitGuess(state.round, state.question, guess);
+    const result = RHW.submitGuess(state.round, state.question, guess, state.options);
     state.round = result.round;
     if (result.accepted) {
       state.round.justSubmittedAttempt = state.round.attemptsUsed;
@@ -197,7 +216,7 @@
     }
 
     if (state.round.status === "lost") {
-      RHW.ui.setToast("15回を使い切りました。", "warn");
+      RHW.ui.setToast(`${RHW.getAttemptLimit(state.options)}回を使い切りました。`, "warn");
     } else {
       RHW.ui.setToast(result.message, result.correct ? "good" : "neutral");
     }
@@ -231,11 +250,22 @@
 
   function useSireHint() {
     if (state.options?.hideHints) return;
-    if (!RHW.canUseSireHint(state.round)) return;
+    if (!RHW.canUseSireHint(state.round, state.options)) return;
     state.round.sireHintUsed = true;
     state.round.currentInput = state.question.sire.nameJa;
     syncNativeInputValue();
     submit();
+  }
+
+  function setEasyModeFromPrompt(enabled) {
+    state.options = RHW.makeOptions(Object.assign({}, state.options, {
+      easyMode: enabled,
+      easyModePromptSeen: true
+    }));
+    RHW.ui.closeEasyModePrompt();
+    renderAndSave();
+    RHW.ui.setToast(enabled ? "簡単モードで始めます。" : "通常モードで始めます。", "neutral");
+    focusNativeInput();
   }
 
   function clearHistory() {
