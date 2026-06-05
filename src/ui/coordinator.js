@@ -238,7 +238,9 @@
 
   function renderSireHint(round, options) {
     if (!els.sireHintButton) return;
-    const canUse = !options?.hideHints && RHW.canUseSireHint(round);
+    const sireSolved = Boolean(round.targets?.sire?.solved)
+      || Boolean(round.targets?.sire?.guesses?.some((guess) => guess.correct));
+    const canUse = !options?.hideHints && !sireSolved && RHW.canUseSireHint(round);
     if (els.sireHintRow) els.sireHintRow.hidden = !canUse;
     els.sireHintButton.hidden = !canUse;
     els.sireHintButton.disabled = !canUse;

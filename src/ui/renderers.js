@@ -83,32 +83,31 @@
 
   function updateKeyboardState(container, round, answers) {
     if (!container) return;
-    const absentKeys = getGloballyAbsentKeys(round, answers);
+    const absentKeys = getHorseAbsentKeys(round, answers.horse);
     container.querySelectorAll("[data-key]").forEach((button) => {
       button.classList.toggle("absent-known", absentKeys.has(button.dataset.key));
     });
   }
 
-  function getGloballyAbsentKeys(round, answers) {
+  function getHorseAbsentKeys(round, horseAnswer) {
     const statesByKey = new Map();
-    const answerKeys = new Set(Object.values(answers).flatMap((answer) => (
-      RHW.splitAnswer(answer.display).map(toKeyboardKey).filter(Boolean)
-    )));
-    ["horse", "sire", "dam"].forEach((target) => {
-      round.targets[target].guesses.forEach((guess) => {
-        guess.evaluation.forEach((item) => {
-          const key = toKeyboardKey(item.char);
-          if (!key) return;
-          const entry = statesByKey.get(key) || { absent: false, included: false };
-          if (item.state === "correct" || item.state === "present") entry.included = true;
-          if (item.state === "absent") entry.absent = true;
-          statesByKey.set(key, entry);
-        });
+    const horseAnswerKeys = new Set(
+      RHW.splitAnswer(horseAnswer.display).map(toKeyboardKey).filter(Boolean)
+    );
+
+    round.targets.horse.guesses.forEach((guess) => {
+      guess.evaluation.forEach((item) => {
+        const key = toKeyboardKey(item.char);
+        if (!key) return;
+        const entry = statesByKey.get(key) || { absent: false, included: false };
+        if (item.state === "correct" || item.state === "present") entry.included = true;
+        if (item.state === "absent") entry.absent = true;
+        statesByKey.set(key, entry);
       });
     });
 
     return new Set(Array.from(statesByKey.entries())
-      .filter(([key, entry]) => entry.absent && !entry.included && !answerKeys.has(key))
+      .filter(([key, entry]) => entry.absent && !entry.included && !horseAnswerKeys.has(key))
       .map(([key]) => key));
   }
 

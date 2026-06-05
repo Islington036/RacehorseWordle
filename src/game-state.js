@@ -125,11 +125,13 @@
   }
 
   function canUseSireHint(round) {
+    const sireSolved = Boolean(round.targets?.sire?.solved)
+      || Boolean(round.targets?.sire?.guesses?.some((guess) => guess.correct));
     return round.status === "playing"
       && getAttemptsUsed(round) >= SIRE_HINT_UNLOCK_ATTEMPTS
       && getAttemptsUsed(round) < ATTEMPT_LIMIT
       && !round.sireHintUsed
-      && !round.targets.sire.solved;
+      && !sireSolved;
   }
 
   function forfeitRound(round) {
