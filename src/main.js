@@ -270,6 +270,7 @@
 
   function clearHistory() {
     state.stats = RHW.makeStats();
+    state.recentQuestionIds = RHW.makeRecentQuestionIds([], state.question.id);
     renderAndSave();
     RHW.ui.setToast("出題履歴をリセットしました。", "neutral");
     focusNativeInput();

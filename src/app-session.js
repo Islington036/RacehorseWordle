@@ -3,7 +3,14 @@
   const RECENT_QUESTION_LIMIT = 8;
 
   function makeRecentQuestionIds(ids, currentId) {
-    return Array.from(new Set((ids || []).concat(currentId).filter(Boolean))).slice(-RECENT_QUESTION_LIMIT);
+    const uniqueIds = [];
+    (ids || []).forEach((id) => {
+      if (id && id !== currentId && !uniqueIds.includes(id)) {
+        uniqueIds.push(id);
+      }
+    });
+    if (currentId) uniqueIds.push(currentId);
+    return uniqueIds.slice(-RECENT_QUESTION_LIMIT);
   }
 
   function getQuestionPool(questions, options) {
