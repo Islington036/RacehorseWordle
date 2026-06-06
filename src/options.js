@@ -8,9 +8,9 @@
   ];
   const OPTION_WIN_COUNT_FILTERS = [
     { value: "all", label: "制限無し", minWins: null, maxWins: null },
-    { value: "2", label: "2勝", minWins: 2, maxWins: 2 },
-    { value: "3", label: "3勝", minWins: 3, maxWins: 3 },
-    { value: "4", label: "4勝", minWins: 4, maxWins: 4 },
+    { value: "2", label: "2勝以上", minWins: 2, maxWins: null },
+    { value: "3", label: "3勝以上", minWins: 3, maxWins: null },
+    { value: "4", label: "4勝以上", minWins: 4, maxWins: null },
     { value: "5plus", label: "5勝以上", minWins: 5, maxWins: null }
   ];
   const DEFAULT_OPTIONS = {
