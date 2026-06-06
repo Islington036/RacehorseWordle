@@ -1,17 +1,19 @@
 (function attachOptions(root) {
+  const textApi = root.RHW?.text || (typeof require !== "undefined" ? require("./text.js").text : null);
+  const text = (path) => textApi?.get(path) || "";
   const OPTION_DECADE_FILTERS = [
-    { value: "all", label: "制限なし", sinceYear: null },
-    { value: "1990", label: "1990年代以降", sinceYear: 1990 },
-    { value: "2000", label: "2000年代以降", sinceYear: 2000 },
-    { value: "2010", label: "2010年代以降", sinceYear: 2010 },
-    { value: "2020", label: "2020年代以降", sinceYear: 2020 }
+    { value: "all", label: text("options.decadeFilters.all"), sinceYear: null },
+    { value: "1990", label: text("options.decadeFilters.1990"), sinceYear: 1990 },
+    { value: "2000", label: text("options.decadeFilters.2000"), sinceYear: 2000 },
+    { value: "2010", label: text("options.decadeFilters.2010"), sinceYear: 2010 },
+    { value: "2020", label: text("options.decadeFilters.2020"), sinceYear: 2020 }
   ];
   const OPTION_WIN_COUNT_FILTERS = [
-    { value: "all", label: "制限無し", minWins: null, maxWins: null },
-    { value: "2", label: "2勝以上", minWins: 2, maxWins: null },
-    { value: "3", label: "3勝以上", minWins: 3, maxWins: null },
-    { value: "4", label: "4勝以上", minWins: 4, maxWins: null },
-    { value: "5plus", label: "5勝以上", minWins: 5, maxWins: null }
+    { value: "all", label: text("options.winCountFilters.all"), minWins: null, maxWins: null },
+    { value: "2", label: text("options.winCountFilters.2"), minWins: 2, maxWins: null },
+    { value: "3", label: text("options.winCountFilters.3"), minWins: 3, maxWins: null },
+    { value: "4", label: text("options.winCountFilters.4"), minWins: 4, maxWins: null },
+    { value: "5plus", label: text("options.winCountFilters.5plus"), minWins: 5, maxWins: null }
   ];
   const DEFAULT_OPTIONS = {
     schemaVersion: 2,

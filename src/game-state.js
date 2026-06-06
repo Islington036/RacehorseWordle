@@ -4,12 +4,17 @@
   const splitAnswer = RHW.splitAnswer || require("./normalize.js").splitAnswer;
   const scoreGuess = RHW.scoreGuess || require("./evaluator.js").scoreGuess;
   const isCorrectGuess = RHW.isCorrectGuess || require("./evaluator.js").isCorrectGuess;
+  const textApi = RHW.text || (typeof require !== "undefined" ? require("./text.js").text : null);
+  const rulesConfig = RHW.CONFIG.rules;
+  const normalRules = rulesConfig.normal;
+  const easyRules = rulesConfig.easy;
 
-  const ATTEMPT_LIMIT = RHW.CONFIG?.attemptLimit || 12;
-  const EASY_ATTEMPT_LIMIT = RHW.CONFIG?.easyAttemptLimit || 8;
-  const MAX_INPUT_LENGTH = RHW.CONFIG?.maxInputLength || 18;
-  const SIRE_HINT_UNLOCK_ATTEMPTS = 5;
-  const EASY_SIRE_HINT_UNLOCK_ATTEMPTS = 0;
+  const ATTEMPT_LIMIT = normalRules.attemptLimit;
+  const EASY_ATTEMPT_LIMIT = easyRules.attemptLimit;
+  const MAX_INPUT_LENGTH = rulesConfig.maxInputLength;
+  const SIRE_HINT_UNLOCK_ATTEMPTS = normalRules.sireHintUnlockAttempts;
+  const EASY_SIRE_HINT_UNLOCK_ATTEMPTS = easyRules.sireHintUnlockAttempts;
+  const STATS_HISTORY_LIMIT = rulesConfig.statsHistoryLimit;
   const TARGETS = ["horse", "sire", "dam"];
   const GAME_RULES = {
     normal: {
@@ -177,13 +182,13 @@
     const { guess, options } = getGuessAndOptions(targetOrGuess, maybeGuess, maybeOptions);
     const guessLength = splitAnswer(guess).length;
     if (!canSubmit(round, options)) {
-      return { ok: false, reason: "これ以上入力できません。" };
+      return { ok: false, reason: text("messages.cannotSubmitMore") };
     }
     if (guessLength < 1) {
-      return { ok: false, reason: "1文字以上入力してください。" };
+      return { ok: false, reason: text("messages.minOneChar") };
     }
     if (guessLength > MAX_INPUT_LENGTH) {
-      return { ok: false, reason: `${MAX_INPUT_LENGTH}文字以内で入力してください。` };
+      return { ok: false, reason: text("messages.maxChars", { maxLength: MAX_INPUT_LENGTH }) };
     }
     return { ok: true };
   }
@@ -241,12 +246,20 @@
   }
 
   function makeResultMessage(targetResults) {
-    if (targetResults.horse.correct) return "馬名が正解です。";
+    if (targetResults.horse.correct) return text("messages.horseCorrect");
     const pedigree = [];
-    if (targetResults.sire.newlySolved) pedigree.push("父");
-    if (targetResults.dam.newlySolved) pedigree.push("母");
-    if (pedigree.length) return `${pedigree.join("と")}が正解です。`;
+    if (targetResults.sire.newlySolved) pedigree.push(text("labels.sireShort"));
+    if (targetResults.dam.newlySolved) pedigree.push(text("labels.damShort"));
+    if (pedigree.length) {
+      return text("messages.pedigreeCorrect", {
+        targets: pedigree.join(text("particles.and"))
+      });
+    }
     return "";
+  }
+
+  function text(path, params) {
+    return textApi?.format(path, params) || "";
   }
 
   function makeStats(existing) {
@@ -313,7 +326,7 @@
       losses,
       successRate: total ? Math.round((wins / total) * 100) : 0,
       failureRate: total ? Math.round((losses / total) * 100) : 0,
-      recent: rounds.slice(-8).reverse()
+      recent: rounds.slice(-STATS_HISTORY_LIMIT).reverse()
     };
   }
 
@@ -331,6 +344,7 @@
     ATTEMPT_LIMIT,
     EASY_ATTEMPT_LIMIT,
     MAX_INPUT_LENGTH,
+    STATS_HISTORY_LIMIT,
     getGameRules,
     getAttemptLimit,
     makeRound,

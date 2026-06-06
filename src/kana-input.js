@@ -1,4 +1,6 @@
 (function attachKanaInput(root) {
+  const RHW = root.RHW || {};
+  const keyboard = RHW.TEXT?.keyboard || (typeof require !== "undefined" ? require("./text.js").TEXT.keyboard : {});
   const DAKUTEN = new Map(Object.entries({
     カ: "ガ", キ: "ギ", ク: "グ", ケ: "ゲ", コ: "ゴ",
     サ: "ザ", シ: "ジ", ス: "ズ", セ: "ゼ", ソ: "ゾ",
@@ -38,14 +40,14 @@
   }
 
   function getTransform(mark) {
-    if (mark === "゛" || mark === "ﾞ") return DAKUTEN;
-    if (mark === "゜" || mark === "ﾟ") return HANDAKUTEN;
-    if (mark === "小") return SMALL;
+    if (mark === keyboard.dakuten || mark === "ﾞ") return DAKUTEN;
+    if (mark === keyboard.handakuten || mark === "ﾟ") return HANDAKUTEN;
+    if (mark === keyboard.small) return SMALL;
     return new Map();
   }
 
   const api = { transformLastKana, normalizeTypedKana, isUsableKanaInput };
-  root.RHW = Object.assign(root.RHW || {}, api);
+  root.RHW = Object.assign(RHW, api);
   if (typeof module !== "undefined") {
     module.exports = api;
   }

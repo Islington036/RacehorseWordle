@@ -2,6 +2,7 @@
   const RHW = root.RHW;
   const UI = RHW.UI_CONSTANTS;
   const renderers = RHW.uiRenderers;
+  const text = RHW.text;
 
   const els = {};
 
@@ -32,6 +33,9 @@
       easyModePromptModal: document.querySelector("#easy-mode-prompt-modal"),
       nextButton: document.querySelector("#next-question")
     });
+    text.applyDocumentText(document);
+    populateSelect(els.decadeFilter, RHW.OPTION_DECADE_FILTERS);
+    populateSelect(els.winCountFilter, RHW.OPTION_WIN_COUNT_FILTERS);
   }
 
   function renderKeyboard() {
@@ -49,7 +53,7 @@
     clearTimeout(setToast.timer);
     setToast.timer = setTimeout(() => {
       els.toast.hidden = true;
-    }, 2600);
+    }, RHW.CONFIG.rules.toastDurationMs);
   }
 
   function renderStats(stats, currentQuestion, round, options) {
@@ -58,37 +62,43 @@
     const recent = summary.recent.length
       ? summary.recent.map((item) => {
         const attempts = item.attemptsUsed ?? item.horseAttemptsUsed ?? item.pedigreeAttemptsUsed ?? "-";
-        return `<li><span>${escapeHtml(item.horseName)}</span><b>${item.status === "won" ? "成功" : "失敗"} ${escapeHtml(attempts)}</b></li>`;
+        const status = item.status === "won" ? t("status.won") : t("status.failed");
+        return `<li><span>${escapeHtml(item.horseName)}</span><b>${escapeHtml(status)} ${escapeHtml(attempts)}</b></li>`;
       }).join("")
-      : "<li><span>まだ出題履歴がありません</span><b>-</b></li>";
-    const currentLabel = round.status === "playing" ? "挑戦中" : currentQuestion.nameJa;
+      : `<li><span>${escapeHtml(t("history.empty"))}</span><b>${escapeHtml(t("status.empty"))}</b></li>`;
+    const currentLabel = round.status === "playing" ? t("status.playing") : currentQuestion.nameJa;
     const attemptsUsed = RHW.getAttemptsUsed(round);
+    const horseStatus = round.targets.horse.solved
+      ? t("status.correct")
+      : round.status === "lost" ? t("status.failed") : t("status.unsolved");
+    const sireStatus = round.targets.sire.solved ? t("status.correct") : t("status.unsolved");
+    const damStatus = round.targets.dam.solved ? t("status.correct") : t("status.unsolved");
 
     els.statsPanel.innerHTML = `
       <div class="stat-grid">
-        <div><span>正答率</span><strong>${summary.successRate}%</strong></div>
-        <div><span>失敗率</span><strong>${summary.failureRate}%</strong></div>
-        <div><span>総問題</span><strong>${summary.total}</strong></div>
-        <div><span>挑戦</span><strong>${attemptsUsed}/${rules.attemptLimit}</strong></div>
+        <div><span>${escapeHtml(t("labels.successRate"))}</span><strong>${summary.successRate}%</strong></div>
+        <div><span>${escapeHtml(t("labels.failureRate"))}</span><strong>${summary.failureRate}%</strong></div>
+        <div><span>${escapeHtml(t("labels.totalQuestions"))}</span><strong>${summary.total}</strong></div>
+        <div><span>${escapeHtml(t("labels.attempt"))}</span><strong>${attemptsUsed}/${rules.attemptLimit}</strong></div>
       </div>
       <div class="current-round">
-        <h2>現在の出題</h2>
+        <h2>${escapeHtml(t("labels.currentQuestion"))}</h2>
         <p>${escapeHtml(currentLabel)}</p>
         <dl>
-          <div><dt>馬名</dt><dd>${round.targets.horse.solved ? "正解" : round.status === "lost" ? "失敗" : "未正解"}</dd></div>
-          <div><dt>父</dt><dd>${round.targets.sire.solved ? "正解" : "未正解"}</dd></div>
-          <div><dt>母</dt><dd>${round.targets.dam.solved ? "正解" : "未正解"}</dd></div>
+          <div><dt>${escapeHtml(t("labels.horseShort"))}</dt><dd>${escapeHtml(horseStatus)}</dd></div>
+          <div><dt>${escapeHtml(t("labels.sireShort"))}</dt><dd>${escapeHtml(sireStatus)}</dd></div>
+          <div><dt>${escapeHtml(t("labels.damShort"))}</dt><dd>${escapeHtml(damStatus)}</dd></div>
         </dl>
       </div>
       <div class="history-list">
-        <div class="history-header"><h2>出題履歴</h2></div>
+        <div class="history-header"><h2>${escapeHtml(t("labels.questionHistory"))}</h2></div>
         <ul>${recent}</ul>
       </div>
       <div class="legend-panel">
-        <h2>凡例</h2>
-        <div><span class="legend-swatch correct"></span><p>位置も文字も正解</p></div>
-        <div><span class="legend-swatch present"></span><p>位置違いで含まれる</p></div>
-        <div><span class="legend-swatch absent"></span><p>その対象名には含まれない</p></div>
+        <h2>${escapeHtml(t("labels.legend"))}</h2>
+        <div><span class="legend-swatch correct"></span><p>${escapeHtml(t("legend.correct"))}</p></div>
+        <div><span class="legend-swatch present"></span><p>${escapeHtml(t("legend.present"))}</p></div>
+        <div><span class="legend-swatch absent"></span><p>${escapeHtml(t("legend.absent"))}</p></div>
       </div>
     `;
   }
@@ -110,10 +120,17 @@
       : 0;
 
     renderHistoryTabs(historyTarget);
-    els.currentTarget.textContent = "入力";
+    els.sireBoard.setAttribute("aria-label", t("aria.board", { label: t("labels.sireShort") }));
+    els.damBoard.setAttribute("aria-label", t("aria.board", { label: t("labels.damShort") }));
+    els.currentTarget.textContent = t("labels.input");
     els.currentInput.textContent = round.currentInput || UI.placeholderInput;
     els.currentInput.classList.toggle("placeholder", !round.currentInput);
-    els.inputHint.textContent = `${inputLength}/${RHW.MAX_INPUT_LENGTH}文字 / ${RHW.getAttemptsUsed(round)}/${rules.attemptLimit}`;
+    els.inputHint.textContent = t("input.hint", {
+      inputLength,
+      maxLength: RHW.MAX_INPUT_LENGTH,
+      attemptsUsed: RHW.getAttemptsUsed(round),
+      attemptLimit: rules.attemptLimit
+    });
     renderSireHint(round, state.options);
 
     renderers.renderBoard(els.horseBoard, {
@@ -162,22 +179,22 @@
     const rules = RHW.getGameRules(state.options);
     const isResult = round.status !== "playing";
     els.modalTitle.textContent = isResult
-      ? round.status === "won" ? "正解" : "失敗"
-      : "統計";
+      ? round.status === "won" ? t("modal.wonTitle") : t("modal.lostTitle")
+      : t("modal.statsTitle");
     els.modalBody.innerHTML = `
       <div class="answer-card">
-        <span>馬名</span><strong>${escapeHtml(answers.horse.display)}</strong>
-        <span>父</span><strong>${escapeHtml(answers.sire.display)}</strong>
-        <span>母</span><strong>${escapeHtml(answers.dam.display)}</strong>
+        <span>${escapeHtml(t("labels.horseShort"))}</span><strong>${escapeHtml(answers.horse.display)}</strong>
+        <span>${escapeHtml(t("labels.sireShort"))}</span><strong>${escapeHtml(answers.sire.display)}</strong>
+        <span>${escapeHtml(t("labels.damShort"))}</span><strong>${escapeHtml(answers.dam.display)}</strong>
       </div>
       <div class="stat-grid modal-grid">
-        <div><span>挑戦</span><strong>${RHW.getAttemptsUsed(round)}/${rules.attemptLimit}</strong></div>
-        <div><span>父母</span><strong>${round.targets.sire.solved ? "父" : "-"} / ${round.targets.dam.solved ? "母" : "-"}</strong></div>
-        <div><span>正答率</span><strong>${summary.successRate}%</strong></div>
-        <div><span>失敗率</span><strong>${summary.failureRate}%</strong></div>
+        <div><span>${escapeHtml(t("labels.attempt"))}</span><strong>${RHW.getAttemptsUsed(round)}/${rules.attemptLimit}</strong></div>
+        <div><span>${escapeHtml(t("labels.pedigree"))}</span><strong>${round.targets.sire.solved ? escapeHtml(t("labels.sireShort")) : escapeHtml(t("status.empty"))} / ${round.targets.dam.solved ? escapeHtml(t("labels.damShort")) : escapeHtml(t("status.empty"))}</strong></div>
+        <div><span>${escapeHtml(t("labels.successRate"))}</span><strong>${summary.successRate}%</strong></div>
+        <div><span>${escapeHtml(t("labels.failureRate"))}</span><strong>${summary.failureRate}%</strong></div>
       </div>
       <div class="wins">
-        <h3>主な勝利</h3>
+        <h3>${escapeHtml(t("labels.mainWins"))}</h3>
         <ul>${question.wins.map((win) => `<li>${escapeHtml(win.year)} ${escapeHtml(win.raceNameJa)}</li>`).join("")}</ul>
       </div>
     `;
@@ -235,8 +252,10 @@
       button.setAttribute("aria-selected", String(selected));
       button.tabIndex = selected ? 0 : -1;
     });
-    const label = activeTarget === "sire" ? "父名" : activeTarget === "dam" ? "母名" : "馬名";
-    els.horseBoard.setAttribute("aria-label", `${label}ボード`);
+    const label = activeTarget === "sire"
+      ? t("labels.sireName")
+      : activeTarget === "dam" ? t("labels.damName") : t("labels.horseName");
+    els.horseBoard.setAttribute("aria-label", t("aria.board", { label }));
   }
 
   function getHistoryTarget(round) {
@@ -267,6 +286,20 @@
     if (els.sireHintRow) els.sireHintRow.hidden = !canUse;
     els.sireHintButton.hidden = !canUse;
     els.sireHintButton.disabled = !canUse;
+  }
+
+  function populateSelect(select, filters) {
+    if (!select || !Array.isArray(filters) || select.options.length) return;
+    filters.forEach((filter) => {
+      const option = document.createElement("option");
+      option.value = filter.value;
+      option.textContent = filter.label;
+      select.append(option);
+    });
+  }
+
+  function t(path, params) {
+    return text?.format(path, params) || "";
   }
 
   const api = {

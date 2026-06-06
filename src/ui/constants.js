@@ -1,16 +1,20 @@
 (function attachUiConstants(root) {
+  const RHW = root.RHW || {};
+  const text = RHW.TEXT || (typeof require !== "undefined" ? require("../text.js").TEXT : {});
+  const rules = RHW.CONFIG.rules;
+  const keyboard = text.keyboard || {};
   const UI_CONSTANTS = {
-    horseBoardCols: 9,
-    pedigreeBoardCols: 18,
-    placeholderInput: "キーボードで直接入力できます",
-    kanaRows: [
-      ["ワ", "ラ", "ヤ", "マ", "ハ", "ナ", "タ", "サ", "カ", "ア"],
-      ["ヲ", "リ", "", "ミ", "ヒ", "ニ", "チ", "シ", "キ", "イ"],
-      ["ン", "ル", "ユ", "ム", "フ", "ヌ", "ツ", "ス", "ク", "ウ"],
-      ["", "レ", "", "メ", "ヘ", "ネ", "テ", "セ", "ケ", "エ"],
-      ["", "ロ", "ヨ", "モ", "ホ", "ノ", "ト", "ソ", "コ", "オ"],
-      ["", "", "", "", "小", "゛", "゜", "ー", "消", "決定"]
-    ],
+    horseBoardCols: rules.boardColumns.horse,
+    pedigreeBoardCols: rules.boardColumns.pedigree,
+    placeholderInput: text.input?.placeholder || "",
+    kanaRows: keyboard.rows || [],
+    specialKeys: {
+      small: keyboard.small,
+      dakuten: keyboard.dakuten,
+      handakuten: keyboard.handakuten,
+      backspace: keyboard.backspace,
+      submit: keyboard.submit
+    },
     keyEquivalents: new Map(Object.entries({
       ァ: "ア", ィ: "イ", ゥ: "ウ", ェ: "エ", ォ: "オ",
       ャ: "ヤ", ュ: "ユ", ョ: "ヨ", ッ: "ツ", ヮ: "ワ",
@@ -24,7 +28,7 @@
     }))
   };
 
-  root.RHW = Object.assign(root.RHW || {}, { UI_CONSTANTS });
+  root.RHW = Object.assign(RHW, { UI_CONSTANTS });
   if (typeof module !== "undefined") {
     module.exports = UI_CONSTANTS;
   }

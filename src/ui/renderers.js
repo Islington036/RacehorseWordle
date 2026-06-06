@@ -1,6 +1,7 @@
 (function attachUiRenderers(root) {
   const RHW = root.RHW;
   const UI = RHW.UI_CONSTANTS;
+  const flipDelayMs = RHW.CONFIG.rules.tileFlipDelayMs;
 
   function createTile(char, state, delay) {
     const tile = document.createElement("span");
@@ -49,7 +50,7 @@
       const rowCols = padRows ? Math.max(row.cols || colCount, colCount) : Math.max(row.cols || colCount, 1);
       rowEl.style.setProperty("--cols", rowCols);
       for (let index = 0; index < rowCols; index += 1) {
-        rowEl.append(createTile(row.chars[index], row.states[index], index * 80));
+        rowEl.append(createTile(row.chars[index], row.states[index], index * flipDelayMs));
       }
       container.append(rowEl);
     });
@@ -61,7 +62,7 @@
     container.innerHTML = "";
     UI.kanaRows.forEach((row) => {
       const rowEl = document.createElement("div");
-      rowEl.className = row.includes("決定") ? "keyboard-row utility-row" : "keyboard-row kana-row";
+      rowEl.className = row.includes(UI.specialKeys.submit) ? "keyboard-row utility-row" : "keyboard-row kana-row";
       row.forEach((key) => {
         if (!key) {
           const spacer = document.createElement("span");
@@ -72,7 +73,7 @@
         }
         const button = document.createElement("button");
         button.type = "button";
-        button.className = `key${key.length > 1 ? " wide" : ""}${key === "決定" ? " submit" : ""}`;
+        button.className = `key${key.length > 1 ? " wide" : ""}${key === UI.specialKeys.submit ? " submit" : ""}`;
         button.textContent = key;
         button.dataset.key = key;
         rowEl.append(button);
@@ -115,7 +116,7 @@
   function toKeyboardKey(char) {
     if (!char) return "";
     const normalized = String(char).normalize("NFKC");
-    if (["小", "゛", "゜", "消", "決定"].includes(normalized)) return "";
+    if (Object.values(UI.specialKeys).includes(normalized)) return "";
     return UI.keyEquivalents.get(normalized) || normalized;
   }
 

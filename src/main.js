@@ -7,7 +7,7 @@
 
   function init() {
     if (!DATA || !Array.isArray(DATA.horses) || DATA.horses.length === 0) {
-      document.body.innerHTML = "<main class=\"fatal\">問題データを読み込めませんでした。</main>";
+      document.body.innerHTML = `<main class="fatal">${escapeHtml(RHW.text.format("app.fatalDataMessage"))}</main>`;
       return;
     }
 
@@ -71,9 +71,9 @@
       const button = event.target.closest("[data-key]");
       if (!button) return;
       const key = button.dataset.key;
-      if (key === "消") backspace();
-      else if (key === "決定") submit();
-      else if (key === "゛" || key === "゜" || key === "小") transformInput(key);
+      if (key === RHW.UI_CONSTANTS.specialKeys.backspace) backspace();
+      else if (key === RHW.UI_CONSTANTS.specialKeys.submit) submit();
+      else if (isTransformKey(key)) transformInput(key);
       else appendText(key);
       focusNativeInput();
     });
@@ -134,7 +134,7 @@
       && nextOptions.easyMode !== state.options.easyMode;
     state.options = nextOptions;
     RHW.ui.setToast(
-      easyModeChanged ? "簡単モード設定を保存しました。" : "オプションを保存しました。次の問題から反映されます。",
+      easyModeChanged ? text("messages.easyModeSaved") : text("messages.optionsSaved"),
       "neutral"
     );
     renderAndSave();
@@ -165,7 +165,7 @@
 
   function appendText(value) {
     if (!value || state.round.status !== "playing") return;
-    if (value === "゛" || value === "ﾞ" || value === "゜" || value === "ﾟ" || value === "小") {
+    if (isTransformKey(value) || value === "ﾞ" || value === "ﾟ") {
       transformInput(value);
       return;
     }
@@ -201,7 +201,7 @@
   function submit() {
     const guess = state.round.currentInput;
     if (guess && !RHW.isUsableKanaInput(guess)) {
-      showInputError("使用できない文字が含まれています");
+      showInputError(text("messages.invalidInput"));
       return renderAndSave();
     }
     const result = RHW.submitGuess(state.round, state.question, guess, state.options);
@@ -216,7 +216,9 @@
     }
 
     if (state.round.status === "lost") {
-      RHW.ui.setToast(`${RHW.getAttemptLimit(state.options)}回を使い切りました。`, "warn");
+      RHW.ui.setToast(text("messages.attemptsUsedUp", {
+        attemptLimit: RHW.getAttemptLimit(state.options)
+      }), "warn");
     } else {
       RHW.ui.setToast(result.message, result.correct ? "good" : "neutral");
     }
@@ -264,7 +266,7 @@
     }));
     RHW.ui.closeEasyModePrompt();
     renderAndSave();
-    RHW.ui.setToast(enabled ? "簡単モードで始めます。" : "通常モードで始めます。", "neutral");
+    RHW.ui.setToast(enabled ? text("messages.easyModeStarted") : text("messages.normalModeStarted"), "neutral");
     focusNativeInput();
   }
 
@@ -272,7 +274,7 @@
     state.stats = RHW.makeStats();
     state.recentQuestionIds = RHW.makeRecentQuestionIds([], state.question.id);
     renderAndSave();
-    RHW.ui.setToast("出題履歴をリセットしました。", "neutral");
+    RHW.ui.setToast(text("messages.historyCleared"), "neutral");
     focusNativeInput();
   }
 
@@ -338,6 +340,23 @@
     const nativeInput = document.querySelector("#native-input");
     if (!nativeInput || composing || nativeInput.value === state.round.currentInput) return;
     nativeInput.value = state.round.currentInput;
+  }
+
+  function isTransformKey(key) {
+    const special = RHW.UI_CONSTANTS.specialKeys;
+    return key === special.dakuten || key === special.handakuten || key === special.small;
+  }
+
+  function text(path, params) {
+    return RHW.text.format(path, params);
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
   }
 
   root.addEventListener("DOMContentLoaded", init);

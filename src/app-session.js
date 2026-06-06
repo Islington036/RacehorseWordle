@@ -1,6 +1,6 @@
 (function attachAppSession(root) {
   const RHW = root.RHW || {};
-  const RECENT_QUESTION_LIMIT = 8;
+  const RECENT_QUESTION_LIMIT = RHW.CONFIG.rules.recentQuestionLimit;
 
   function makeRecentQuestionIds(ids, currentId) {
     const uniqueIds = [];

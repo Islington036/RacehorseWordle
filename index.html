@@ -3,34 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Racehorse Wordle</title>
+  <title></title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="styles/base.css?v=20260607a">
-  <link rel="stylesheet" href="styles/layout.css?v=20260607a">
-  <link rel="stylesheet" href="styles/tiles.css?v=20260607a">
-  <script defer src="data/questions.embedded.js?v=20260607a"></script>
-  <script defer src="src/config.js?v=20260607a"></script>
-  <script defer src="src/normalize.js?v=20260607a"></script>
-  <script defer src="src/evaluator.js?v=20260607a"></script>
-  <script defer src="src/kana-input.js?v=20260607a"></script>
-  <script defer src="src/storage.js?v=20260607a"></script>
-  <script defer src="src/options.js?v=20260607a"></script>
-  <script defer src="src/question-picker.js?v=20260607a"></script>
-  <script defer src="src/game-state.js?v=20260607a"></script>
-  <script defer src="src/app-session.js?v=20260607a"></script>
-  <script defer src="src/ui/constants.js?v=20260607a"></script>
-  <script defer src="src/ui/renderers.js?v=20260607a"></script>
-  <script defer src="src/ui/coordinator.js?v=20260607a"></script>
-  <script defer src="src/main.js?v=20260607a"></script>
+  <link rel="stylesheet" href="styles/base.css?v=20260607b">
+  <link rel="stylesheet" href="styles/layout.css?v=20260607b">
+  <link rel="stylesheet" href="styles/tiles.css?v=20260607b">
+  <script defer src="data/questions.embedded.js?v=20260607b"></script>
+  <script defer src="src/config.js?v=20260607b"></script>
+  <script defer src="src/text.js?v=20260607b"></script>
+  <script defer src="src/normalize.js?v=20260607b"></script>
+  <script defer src="src/evaluator.js?v=20260607b"></script>
+  <script defer src="src/kana-input.js?v=20260607b"></script>
+  <script defer src="src/storage.js?v=20260607b"></script>
+  <script defer src="src/options.js?v=20260607b"></script>
+  <script defer src="src/question-picker.js?v=20260607b"></script>
+  <script defer src="src/game-state.js?v=20260607b"></script>
+  <script defer src="src/app-session.js?v=20260607b"></script>
+  <script defer src="src/ui/constants.js?v=20260607b"></script>
+  <script defer src="src/ui/renderers.js?v=20260607b"></script>
+  <script defer src="src/ui/coordinator.js?v=20260607b"></script>
+  <script defer src="src/main.js?v=20260607b"></script>
 </head>
 <body>
   <div id="app" class="app-shell">
     <header class="topbar">
-      <button id="options-button" class="icon-button" type="button" aria-label="オプションを表示" title="オプション">
+      <button id="options-button" class="icon-button" type="button" data-label="aria.optionsButton" data-title="title.optionsButton">
         <span aria-hidden="true">⚙</span>
       </button>
-      <h1>Racehorse Wordle</h1>
-      <button id="reset-button" class="icon-button" type="button" aria-label="別の問題を出題" title="別の問題">
+      <h1 data-text="app.title"></h1>
+      <button id="reset-button" class="icon-button" type="button" data-label="aria.resetButton" data-title="title.resetButton">
         <span aria-hidden="true">↻</span>
       </button>
     </header>
@@ -38,114 +39,102 @@
     <div id="toast" class="toast" hidden></div>
 
     <main class="game-layout">
-      <section class="play-area" aria-label="ゲーム">
+      <section class="play-area" data-label="aria.game">
         <div class="board-block horse-block">
           <div class="section-heading history-heading">
-            <div id="history-tabs" class="history-tabs" role="tablist" aria-label="判定履歴">
-              <button type="button" role="tab" data-history-target="horse" aria-selected="true">馬名</button>
-              <button type="button" role="tab" data-history-target="sire" aria-selected="false">父名</button>
-              <button type="button" role="tab" data-history-target="dam" aria-selected="false">母名</button>
+            <div id="history-tabs" class="history-tabs" role="tablist" data-label="aria.historyTabs">
+              <button type="button" role="tab" data-history-target="horse" data-text="labels.horseName" aria-selected="true"></button>
+              <button type="button" role="tab" data-history-target="sire" data-text="labels.sireName" aria-selected="false"></button>
+              <button type="button" role="tab" data-history-target="dam" data-text="labels.damName" aria-selected="false"></button>
             </div>
           </div>
-          <div id="horse-board" class="letter-board tall" aria-label="馬名ボード"></div>
+          <div id="horse-board" class="letter-board tall"></div>
         </div>
 
         <div class="input-strip" aria-live="polite">
-          <span id="current-target">入力</span>
-          <strong id="current-input" class="placeholder">キーボードで直接入力できます</strong>
-          <small id="input-hint">0/18文字 / 0/12</small>
-          <input id="native-input" class="native-input" type="text" inputmode="kana" enterkeyhint="done" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="カタカナ入力">
+          <span id="current-target" data-text="labels.input"></span>
+          <strong id="current-input" class="placeholder" data-text="input.placeholder"></strong>
+          <small id="input-hint"></small>
+          <input id="native-input" class="native-input" type="text" inputmode="kana" enterkeyhint="done" autocomplete="off" autocapitalize="off" spellcheck="false" data-label="aria.nativeInput">
         </div>
         <div class="hint-row" hidden>
-          <button id="sire-hint-button" class="hint-button" type="button" hidden>1回消費してヒントを表示</button>
+          <button id="sire-hint-button" class="hint-button" type="button" data-text="actions.sireHint" hidden></button>
         </div>
 
         <div class="board-block pedigree-block">
           <div class="section-heading">
-            <span>父</span>
+            <span data-text="labels.sireShort"></span>
           </div>
-          <div id="sire-board" class="letter-board compact" aria-label="父ボード"></div>
+          <div id="sire-board" class="letter-board compact"></div>
         </div>
 
         <div class="board-block pedigree-block">
           <div class="section-heading">
-            <span>母</span>
+            <span data-text="labels.damShort"></span>
           </div>
-          <div id="dam-board" class="letter-board compact" aria-label="母ボード"></div>
+          <div id="dam-board" class="letter-board compact"></div>
         </div>
 
-        <section id="keyboard" class="keyboard" aria-label="かなキーボード"></section>
+        <section id="keyboard" class="keyboard" data-label="aria.keyboard"></section>
       </section>
 
-      <aside id="stats-panel" class="stats-panel" aria-label="スコアと履歴"></aside>
+      <aside id="stats-panel" class="stats-panel" data-label="aria.statsPanel"></aside>
     </main>
   </div>
 
   <dialog id="result-modal" class="result-modal">
     <form method="dialog" class="modal-shell">
-      <button id="close-modal" class="icon-button close" type="button" aria-label="閉じる">×</button>
-      <h2 id="modal-title">統計</h2>
+      <button id="close-modal" class="icon-button close" type="button" data-label="aria.close">×</button>
+      <h2 id="modal-title" data-text="modal.statsTitle"></h2>
       <div id="modal-body"></div>
-      <button id="next-question" class="primary-button" type="button">次の問題へ</button>
+      <button id="next-question" class="primary-button" type="button" data-text="actions.nextQuestion"></button>
     </form>
   </dialog>
 
   <dialog id="options-modal" class="options-modal">
     <form method="dialog" class="modal-shell options-shell">
-      <button id="close-options" class="icon-button close" type="button" aria-label="閉じる">×</button>
-      <h2>オプション</h2>
+      <button id="close-options" class="icon-button close" type="button" data-label="aria.close">×</button>
+      <h2 data-text="options.title"></h2>
       <div class="options-panel">
         <label class="option-row switch-row">
-          <span>簡単モード</span>
+          <span data-text="options.easyMode"></span>
           <input id="easy-mode" type="checkbox">
         </label>
         <label class="option-row switch-row">
-          <span>ヒントを表示しない</span>
+          <span data-text="options.hideHints"></span>
           <input id="hide-hints" type="checkbox">
         </label>
         <label class="option-row">
-          <span>次の問題から出題する年代を制限</span>
-          <select id="decade-filter" class="option-select">
-            <option value="all">制限なし</option>
-            <option value="1990">1990年代以降</option>
-            <option value="2000">2000年代以降</option>
-            <option value="2010">2010年代以降</option>
-            <option value="2020">2020年代以降</option>
-          </select>
+          <span data-text="options.decadeFilter"></span>
+          <select id="decade-filter" class="option-select"></select>
         </label>
         <label class="option-row">
-          <span>G1勝利数</span>
-          <select id="win-count-filter" class="option-select">
-            <option value="all">制限無し</option>
-            <option value="2">2勝以上</option>
-            <option value="3">3勝以上</option>
-            <option value="4">4勝以上</option>
-            <option value="5plus">5勝以上</option>
-          </select>
+          <span data-text="options.winCountFilter"></span>
+          <select id="win-count-filter" class="option-select"></select>
         </label>
-        <button id="clear-history" class="secondary-button" type="button">履歴リセット</button>
+        <button id="clear-history" class="secondary-button" type="button" data-text="actions.clearHistory"></button>
       </div>
     </form>
   </dialog>
 
   <dialog id="easy-mode-prompt-modal" class="confirm-modal">
     <form method="dialog" class="confirm-shell">
-      <h2>簡単モードで始めますか？</h2>
-      <p>馬名の文字数が見えるようになり、挑戦回数は8回になります。父名ヒントは最初から使えます。</p>
+      <h2 data-text="easyModePrompt.title"></h2>
+      <p data-text="easyModePrompt.body"></p>
       <div class="confirm-actions">
-        <button id="decline-easy-mode" class="secondary-button" type="button">通常モード</button>
-        <button id="accept-easy-mode" class="primary-button" type="button">簡単モード</button>
+        <button id="decline-easy-mode" class="secondary-button" type="button" data-text="actions.normalMode"></button>
+        <button id="accept-easy-mode" class="primary-button" type="button" data-text="actions.easyMode"></button>
       </div>
     </form>
   </dialog>
 
   <dialog id="confirm-reset-modal" class="confirm-modal">
     <form method="dialog" class="confirm-shell">
-      <h2>本当にリセットしますか？</h2>
-      <p>現在の問題を失敗扱いにして、答えを表示します。</p>
+      <h2 data-text="resetConfirm.title"></h2>
+      <p data-text="resetConfirm.body"></p>
       <div class="confirm-actions">
-        <button id="cancel-reset-question" class="secondary-button" type="button">キャンセル</button>
-        <button id="confirm-reset-question" class="primary-button danger" type="button">リセットする</button>
+        <button id="cancel-reset-question" class="secondary-button" type="button" data-text="actions.cancel"></button>
+        <button id="confirm-reset-question" class="primary-button danger" type="button" data-text="actions.reset"></button>
       </div>
     </form>
   </dialog>
