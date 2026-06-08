@@ -74,13 +74,13 @@
 
 .tile.correct {
   border-color: var(--correct);
-  background: linear-gradient(180deg, #62a864, var(--correct));
+  background: linear-gradient(180deg, #50ba7e, var(--correct));
   color: #f8fff5;
 }
 
 .tile.present {
   border-color: var(--present);
-  background: linear-gradient(180deg, #d2b953, var(--present));
+  background: linear-gradient(180deg, #efc457, var(--present));
   color: #fff9df;
 }
 
@@ -117,7 +117,7 @@
   height: 46px;
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 7px;
-  background: linear-gradient(180deg, #8b8e8b, #666b67);
+  background: linear-gradient(180deg, #7f9293, #536567);
   color: #fff;
   cursor: pointer;
   font-weight: 800;
@@ -129,20 +129,20 @@
 
 .key.wide {
   max-width: none;
-  background: linear-gradient(180deg, #717a72, #566058);
+  background: linear-gradient(180deg, #617477, #46575a);
   font-size: 0.84rem;
 }
 
 .key.submit {
   border-color: rgba(255, 207, 116, 0.62);
-  background: linear-gradient(180deg, #ee913c, var(--orange));
+  background: linear-gradient(180deg, #ff9747, var(--orange));
   color: #fff;
 }
 
 .key.absent-known {
   border-color: rgba(255, 255, 255, 0.06);
-  background: linear-gradient(180deg, #363a37, #262927);
-  color: #c4c9c3;
+  background: linear-gradient(180deg, #323c3f, #20282a);
+  color: #bbcac8;
 }
 
 .key-spacer {

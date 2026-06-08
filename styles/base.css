@@ -1,23 +1,23 @@
 :root {
   color-scheme: dark;
-  --bg: #080c0a;
-  --bg-elevated: #101713;
-  --panel: #17211b;
-  --panel-soft: #0f1713;
-  --panel-glass: rgba(15, 23, 19, 0.84);
-  --text: #f4f6ef;
-  --muted: #aeb7aa;
-  --faint: #7b837a;
-  --border: #344039;
-  --border-soft: rgba(195, 172, 88, 0.24);
-  --correct: #4f9253;
-  --present: #bea33d;
-  --absent: #303331;
-  --accent: #77bf71;
-  --accent-strong: #91d782;
-  --gold: #d0ad54;
-  --gold-soft: #8f7638;
-  --orange: #d97724;
+  --bg: #060b0d;
+  --bg-elevated: #0d1618;
+  --panel: #132124;
+  --panel-soft: #0b1315;
+  --panel-glass: rgba(11, 19, 21, 0.86);
+  --text: #f2fbf9;
+  --muted: #a6bbb8;
+  --faint: #708482;
+  --border: #2e4446;
+  --border-soft: rgba(79, 216, 189, 0.28);
+  --correct: #3fa56b;
+  --present: #d8a93a;
+  --absent: #2b3436;
+  --accent: #4fd8bd;
+  --accent-strong: #8af3dd;
+  --gold: #7ee6d8;
+  --gold-soft: #3b9186;
+  --orange: #f0792d;
   --danger: #ce665b;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.44);
   --shadow-soft: 0 10px 26px rgba(0, 0, 0, 0.28);
@@ -38,9 +38,9 @@ body {
   position: relative;
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(209, 175, 83, 0.12) 0, rgba(209, 175, 83, 0) 82px),
-    linear-gradient(135deg, rgba(36, 72, 49, 0.32) 0, rgba(8, 12, 10, 0) 46%),
-    linear-gradient(180deg, #0e1712 0, var(--bg) 58rem);
+    linear-gradient(180deg, rgba(79, 216, 189, 0.16) 0, rgba(79, 216, 189, 0) 86px),
+    linear-gradient(135deg, rgba(23, 91, 98, 0.38) 0, rgba(6, 11, 13, 0) 48%),
+    linear-gradient(180deg, #0b171a 0, var(--bg) 58rem);
   color: var(--text);
 }
 
@@ -58,8 +58,8 @@ body::before {
       transparent 1px,
       transparent 4px
     ),
-    linear-gradient(90deg, rgba(5, 8, 6, 0.4), transparent 26%, transparent 74%, rgba(5, 8, 6, 0.42));
-  opacity: 0.38;
+    linear-gradient(90deg, rgba(6, 16, 18, 0.36), transparent 26%, transparent 74%, rgba(6, 16, 18, 0.4));
+  opacity: 0.34;
 }
 
 .app-shell {
