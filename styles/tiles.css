@@ -2,16 +2,17 @@
   display: grid;
   align-content: start;
   grid-auto-rows: max-content;
-  gap: 6px;
+  gap: 7px;
   width: 100%;
   overflow-x: auto;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
   justify-items: center;
+  scrollbar-color: rgba(208, 173, 84, 0.42) rgba(255, 255, 255, 0.08);
 }
 
 .letter-board.tall {
-  min-height: 226px;
-  max-height: 226px;
+  min-height: 238px;
+  max-height: 238px;
   overflow: auto;
   scrollbar-gutter: stable;
 }
@@ -21,19 +22,19 @@
 }
 
 .letter-board.compact {
-  min-height: 40px;
+  min-height: 44px;
   max-height: 132px;
   overflow: auto;
 }
 
 .tile-row {
   display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(24px, 38px));
+  grid-template-columns: repeat(var(--cols), minmax(25px, 40px));
   justify-content: center;
   gap: 5px;
   width: max-content;
   max-width: none;
-  min-width: min(100%, calc(var(--cols) * 29px));
+  min-width: min(100%, calc(var(--cols) * 30px));
 }
 
 .tile {
@@ -41,22 +42,26 @@
   min-width: 0;
   display: grid;
   place-items: center;
-  border: 2px solid var(--border);
-  background: transparent;
+  border: 2px solid rgba(174, 183, 170, 0.24);
+  background: rgba(10, 16, 13, 0.28);
   color: var(--text);
   font-size: 1rem;
   font-weight: 900;
   line-height: 1;
   text-align: center;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
 .compact .tile-row {
-  grid-template-columns: repeat(var(--cols), minmax(20px, 32px));
-  min-width: min(100%, calc(var(--cols) * 25px));
+  grid-template-columns: repeat(var(--cols), minmax(21px, 34px));
+  min-width: min(100%, calc(var(--cols) * 26px));
 }
 
 .tile-row.active .tile:not(.empty) {
-  border-color: #555c55;
+  border-color: rgba(208, 173, 84, 0.6);
+  background: rgba(22, 29, 24, 0.8);
   animation: pop 90ms ease-out;
 }
 
@@ -69,78 +74,88 @@
 
 .tile.correct {
   border-color: var(--correct);
-  background: var(--correct);
+  background: linear-gradient(180deg, #62a864, var(--correct));
+  color: #f8fff5;
 }
 
 .tile.present {
   border-color: var(--present);
-  background: var(--present);
+  background: linear-gradient(180deg, #d2b953, var(--present));
+  color: #fff9df;
 }
 
 .tile.absent {
   border-color: var(--absent);
-  background: var(--absent);
+  background: linear-gradient(180deg, #454846, var(--absent));
+  color: #e3e6e2;
 }
 
 .keyboard {
-  width: min(100%, 760px);
+  width: min(100%, 820px);
   display: grid;
-  gap: 7px;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 22px;
 }
 
 .keyboard-row {
   display: grid;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .keyboard-row.kana-row {
-  grid-template-columns: repeat(10, minmax(0, 48px));
+  grid-template-columns: repeat(10, minmax(0, 52px));
 }
 
 .keyboard-row.utility-row {
-  grid-template-columns: repeat(10, minmax(0, 48px));
+  grid-template-columns: repeat(10, minmax(0, 52px));
 }
 
 .key {
   min-width: 0;
   width: 100%;
-  height: 42px;
-  border: 0;
-  border-radius: 5px;
-  background: #818384;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 7px;
+  background: linear-gradient(180deg, #8b8e8b, #666b67);
   color: #fff;
   cursor: pointer;
   font-weight: 800;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: filter 120ms ease, transform 120ms ease, border-color 120ms ease;
 }
 
 .key.wide {
   max-width: none;
-  background: #5f6660;
+  background: linear-gradient(180deg, #717a72, #566058);
   font-size: 0.84rem;
 }
 
 .key.submit {
-  background: #d97724;
+  border-color: rgba(255, 207, 116, 0.62);
+  background: linear-gradient(180deg, #ee913c, var(--orange));
   color: #fff;
 }
 
 .key.absent-known {
-  background: #3a3a3c;
-  color: #d7dadc;
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, #363a37, #262927);
+  color: #c4c9c3;
 }
 
 .key-spacer {
   min-width: 0;
   width: 100%;
-  height: 42px;
+  height: 46px;
 }
 
 .key:hover,
 .key:focus-visible {
-  filter: brightness(1.15);
+  filter: brightness(1.13);
   outline: none;
+  transform: translateY(-1px);
 }
 
 .shake {
@@ -206,19 +221,22 @@
   }
 
   .key {
-    height: 38px;
+    height: 42px;
+    border-radius: 6px;
   }
 
   .keyboard-row {
-    gap: 4px;
+    gap: 5px;
+    justify-content: stretch;
   }
 
+  .keyboard-row.kana-row,
   .keyboard-row.utility-row {
-    grid-template-columns: repeat(10, minmax(0, 40px));
+    grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 
   .letter-board.tall {
-    min-height: 204px;
-    max-height: 204px;
+    min-height: 214px;
+    max-height: 214px;
   }
 }
