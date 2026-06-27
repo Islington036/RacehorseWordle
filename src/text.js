@@ -62,8 +62,13 @@
       title: "オプション",
       easyMode: "簡単モード",
       hideHints: "ヒントを表示しない",
+      themeMode: "デザインテーマ",
       decadeFilter: "次の問題から出題する年代を制限",
       winCountFilter: "G1勝利数",
+      themeModes: {
+        light: "Racing Form Console",
+        dark: "Racing Form Console Dark"
+      },
       decadeFilters: {
         all: "制限なし",
         "1990": "1990年代以降",

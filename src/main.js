@@ -119,6 +119,9 @@
     document.querySelector("#hide-hints").addEventListener("change", (event) => {
       updateOptions({ hideHints: event.target.checked });
     });
+    document.querySelector("#theme-mode").addEventListener("change", (event) => {
+      updateOptions({ themeMode: event.target.value });
+    });
     document.querySelector("#decade-filter").addEventListener("change", (event) => {
       updateOptions({ decadeFilter: event.target.value });
     });

@@ -15,9 +15,14 @@
     { value: "4", label: text("options.winCountFilters.4"), minWins: 4, maxWins: null },
     { value: "5plus", label: text("options.winCountFilters.5plus"), minWins: 5, maxWins: null }
   ];
+  const OPTION_THEME_MODES = [
+    { value: "light", label: text("options.themeModes.light") },
+    { value: "dark", label: text("options.themeModes.dark") }
+  ];
   const DEFAULT_OPTIONS = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     hideHints: false,
+    themeMode: "light",
     decadeFilter: "all",
     winCountFilter: "all",
     easyMode: false,
@@ -31,6 +36,9 @@
     }
     if (!OPTION_WIN_COUNT_FILTERS.some((filter) => filter.value === next.winCountFilter)) {
       next.winCountFilter = DEFAULT_OPTIONS.winCountFilter;
+    }
+    if (!OPTION_THEME_MODES.some((theme) => theme.value === next.themeMode)) {
+      next.themeMode = DEFAULT_OPTIONS.themeMode;
     }
     next.hideHints = Boolean(next.hideHints);
     next.easyMode = Boolean(next.easyMode);
@@ -65,6 +73,7 @@
   const api = {
     OPTION_DECADE_FILTERS,
     OPTION_WIN_COUNT_FILTERS,
+    OPTION_THEME_MODES,
     makeOptions,
     filterQuestions,
     questionMatchesDecade,
