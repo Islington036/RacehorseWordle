@@ -26,7 +26,7 @@
       optionsModal: document.querySelector("#options-modal"),
       easyModeInput: document.querySelector("#easy-mode"),
       hideHintsInput: document.querySelector("#hide-hints"),
-      themeMode: document.querySelector("#theme-mode"),
+      darkModeInput: document.querySelector("#dark-mode"),
       decadeFilter: document.querySelector("#decade-filter"),
       winCountFilter: document.querySelector("#win-count-filter"),
       clearHistoryButton: document.querySelector("#clear-history"),
@@ -35,7 +35,6 @@
       nextButton: document.querySelector("#next-question")
     });
     text.applyDocumentText(document);
-    populateSelect(els.themeMode, RHW.OPTION_THEME_MODES);
     populateSelect(els.decadeFilter, RHW.OPTION_DECADE_FILTERS);
     populateSelect(els.winCountFilter, RHW.OPTION_WIN_COUNT_FILTERS);
   }
@@ -215,11 +214,11 @@
   }
 
   function renderOptions(options, stats) {
-    if (!els.easyModeInput || !els.hideHintsInput || !els.themeMode || !els.decadeFilter || !els.winCountFilter || !els.clearHistoryButton) return;
+    if (!els.easyModeInput || !els.hideHintsInput || !els.darkModeInput || !els.decadeFilter || !els.winCountFilter || !els.clearHistoryButton) return;
     const nextOptions = RHW.makeOptions(options);
     els.easyModeInput.checked = nextOptions.easyMode;
     els.hideHintsInput.checked = nextOptions.hideHints;
-    els.themeMode.value = nextOptions.themeMode;
+    els.darkModeInput.checked = nextOptions.themeMode === "dark";
     els.decadeFilter.value = nextOptions.decadeFilter;
     els.winCountFilter.value = nextOptions.winCountFilter;
     els.clearHistoryButton.disabled = !RHW.summarizeStats(stats).total;
